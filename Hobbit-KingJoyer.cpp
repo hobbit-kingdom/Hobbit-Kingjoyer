@@ -105,6 +105,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
     
 }
 int main() {
+	int a;
 	setlocale(LC_ALL, "RUSSIAN"); //Русский язык
 	   // регистрируем класс окна
     WNDCLASS wc = {};
