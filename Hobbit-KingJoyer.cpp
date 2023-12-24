@@ -34,7 +34,93 @@
 #define minusFOV01_BUTTON 28
 #define plusFOV01_BUTTON 29
 #define InvulBilbo_BUTTON 30
+#define SpeedBilbo 31
+#define SpeedBilbo_BUTTON 32
+#define WayPoint_BUTTON 33
+#define Teleport_BUTTON 34
 using namespace std;
+LPDWORD ukazatel_hobbit(LPVOID Address){
+	DWORD pid = 0;     //переменная айди процесса
+    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    PROCESSENTRY32 pe32;
+    pe32.dwSize = sizeof(PROCESSENTRY32);
+    if (Process32First(snapshot, &pe32)) {
+        while (Process32Next(snapshot, &pe32)) { //ищет айди процесса
+            if (strcmp(pe32.szExeFile, "Meridian.exe") == 0) {
+                pid = pe32.th32ProcessID; //переменная айди процесса
+                break;
+            }
+        }
+    }
+    CloseHandle(snapshot);
+    DWORD Prava = PROCESS_ALL_ACCESS; //это права доступа
+	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач 
+    LPDWORD value,ukazatel;  //переменная значения байта по адресу
+    if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
+        CloseHandle(Process);
+        return ukazatel;
+    }
+    ukazatel=value;
+
+	return ukazatel;
+}
+int save_float_hobbit(LPVOID Address)
+{ 
+	DWORD pid = 0;     //переменная айди процесса
+    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    PROCESSENTRY32 pe32;
+    pe32.dwSize = sizeof(PROCESSENTRY32);
+    if (Process32First(snapshot, &pe32)) {
+        while (Process32Next(snapshot, &pe32)) { //ищет айди процесса
+            if (strcmp(pe32.szExeFile, "Meridian.exe") == 0) {
+                pid = pe32.th32ProcessID; //переменная айди процесса
+                break;
+            }
+        }
+    }
+    CloseHandle(snapshot);
+    DWORD Prava = PROCESS_ALL_ACCESS; //это права доступа
+	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач 
+    float value,x,y,z;  //переменная значения байта по адресу
+    if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
+        CloseHandle(Process);
+        return 1;
+    }
+    x=value;
+	return x;
+}
+int change_float_hobbit(LPVOID Address, float a)
+{ 
+	DWORD pid = 0;     //переменная айди процесса
+    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    PROCESSENTRY32 pe32;
+    pe32.dwSize = sizeof(PROCESSENTRY32);
+    if (Process32First(snapshot, &pe32)) {
+        while (Process32Next(snapshot, &pe32)) { //ищет айди процесса
+            if (strcmp(pe32.szExeFile, "Meridian.exe") == 0) {
+                pid = pe32.th32ProcessID; //переменная айди процесса
+                break;
+            }
+        }
+    }
+    CloseHandle(snapshot);
+    DWORD Prava = PROCESS_ALL_ACCESS; //это права доступа
+	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач 
+	//LPVOID Address = (LPVOID)0x007600E9; //это адрес в чит енжине
+    float value;  //переменная значения байта по адресу
+    if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
+        CloseHandle(Process);
+        return 1;
+    }
+    DWORD oldProtect;
+    float Znachenie;
+    Znachenie=a;
+    SIZE_T dwSize = sizeof(Znachenie);
+    VirtualProtectEx(Process, Address, dwSize, PAGE_EXECUTE_READWRITE, &oldProtect); 
+    BOOL bWriteSuccess = WriteProcessMemory(Process, Address, &Znachenie, dwSize, NULL);
+    VirtualProtectEx(Process, Address, dwSize, oldProtect, &oldProtect);
+	if(bWriteSuccess ) return 0;
+}
 int plusA_float_hobbit(LPVOID Address, float a)
 { 
 	DWORD pid = 0;     //переменная айди процесса
@@ -144,9 +230,17 @@ int change_1Byte_hobbit(LPVOID Address, BYTE Znachenie, BYTE Iznachalnoe)
     VirtualProtectEx(Process, Address, dwSize, oldProtect, &oldProtect);
     if(bWriteSuccess ) return 0;
 }}
+struct Point {
+    float x;
+    float y;
+    float z;
+    LPDWORD ukazatel;
+};
+Point savedPoint;
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
-    	
+    	float x,y,z;
+    	LPDWORD ukazatel;
         case WM_DESTROY:
             PostQuitMessage(0);
             return 0;
@@ -275,9 +369,41 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 			return 0;			
 			}		
 			else if(LOWORD(wParam)==InvulBilbo_BUTTON){
-			change_1Byte_hobbit((LPVOID)0x0075FBF4,0x01,0x00); //функция отдаления камеры на 0.1
+			change_1Byte_hobbit((LPVOID)0x0075FBF4,0x01,0x00); //функция бессмертия
 			return 0;			
-			}																			
+			}	
+			else if(LOWORD(wParam)==SpeedBilbo_BUTTON){
+			HWND hwndTextbox = GetDlgItem(hwnd, SpeedBilbo);
+			char buffer[256];
+			GetWindowText(hwndTextbox, buffer, 256);
+			int speed = atoi(buffer);
+			change_float_hobbit((LPVOID)0x0075B850,speed); //функция изменения скорости Бильбо
+			return 0;			
+			}	
+			else if(LOWORD(wParam)==WayPoint_BUTTON){
+			savedPoint.ukazatel=ukazatel_hobbit((LPVOID)0x0075BA3C);
+			ukazatel=savedPoint.ukazatel;
+			savedPoint.x=save_float_hobbit(ukazatel+5);
+			savedPoint.y=save_float_hobbit(ukazatel+6);
+			savedPoint.z=save_float_hobbit(ukazatel+7);//функция изменения скорости Бильбо
+
+			return x,y,z;		
+			}	
+			else if(LOWORD(wParam)==Teleport_BUTTON){
+			x=savedPoint.x;
+			y=savedPoint.y;
+			z=savedPoint.z;
+			ukazatel=savedPoint.ukazatel;
+			if (x){
+				change_float_hobbit(ukazatel+5,x);
+				change_float_hobbit(ukazatel+281,x);
+				change_float_hobbit(ukazatel+6,y);
+				change_float_hobbit(ukazatel+282,y);
+				change_float_hobbit(ukazatel+7,z);
+				change_float_hobbit(ukazatel+283,z);
+			}
+			return 0;			
+			}																						
 		}
         default:
 
@@ -573,7 +699,7 @@ int main() {
 	180, 
 	110, 
 	150, 
-	100, 
+	500, 
 	hwnd, 
 	(HMENU)QuestItem, 
 	(HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), 
@@ -798,16 +924,63 @@ int main() {
     (HMENU)InvulBilbo_BUTTON,      // айди кнопки
     (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), 
     NULL);      // Pointer not needed
-			  		                               
+			  		         
+    HWND hTextbox=CreateWindow(TEXT("EDIT"), TEXT(""),
+    WS_VISIBLE | WS_CHILD | WS_BORDER | ES_NUMBER,
+    170, 
+	460, 
+	100, 
+	20,
+    hwnd, 
+	(HMENU)SpeedBilbo, 
+	GetModuleHandle(NULL), NULL);						                        
     // отображение окна
     ShowWindow(hwnd, SW_SHOWDEFAULT);
 	
+    HWND hwndButton1D = CreateWindow( 
+    "BUTTON",  // Predefined class; Unicode assumed 
+    "Изменить скорость Бильбо",      // текст кнопки
+    WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // стиль
+    85,         // x позиция
+    450,         // y позиция 
+    75,        // ширина кнопки
+    40,        // длина кнопки
+    hwnd,     // родительское окно
+    (HMENU)SpeedBilbo_BUTTON,      // айди кнопки
+    (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), 
+    NULL);      // Pointer not needed
+		
+    HWND hwndButton1E = CreateWindow( 
+    "BUTTON",  // Predefined class; Unicode assumed 
+    "Установить точку телепортации",      // текст кнопки
+    WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // стиль
+    85,         // x позиция
+    490,         // y позиция 
+    75,        // ширина кнопки
+    40,        // длина кнопки
+    hwnd,     // родительское окно
+    (HMENU)WayPoint_BUTTON,      // айди кнопки
+    (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), 
+    NULL);      // Pointer not needed
+		
+    HWND hwndButton1F = CreateWindow( 
+    "BUTTON",  // Predefined class; Unicode assumed 
+    "Телепортироваться",      // текст кнопки
+    WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // стиль
+    85,         // x позиция
+    530,         // y позиция 
+    75,        // ширина кнопки
+    40,        // длина кнопки
+    hwnd,     // родительское окно
+    (HMENU)Teleport_BUTTON,      // айди кнопки
+    (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), 
+    NULL);      // Pointer not needed
+		
     // запускаем цикл окна
     MSG msg = {};
     while (GetMessage(&msg, 0, 0, 0)) {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
-
     return 0;
 }
