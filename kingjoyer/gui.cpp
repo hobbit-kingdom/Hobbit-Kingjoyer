@@ -300,67 +300,67 @@ void gui::Render() noexcept
 	{
 		lang = !lang;
 	}
-	ImGui::Text("This is some useful text.");
+	ImGui::Text("Official Hobbit KingJoyer");
 
 
-	if (ImGui::Checkbox((const char*)u8"Режим Разработчик", &developerMode)) {
+	if (ImGui::Checkbox(lang ? "Developer mode" : (const char*)u8"Режим Разработчик", &developerMode)) {
 		change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00); //функция включения режима разработчика
 	}
-	if (ImGui::Checkbox((const char*)u8"Волумы", &renderVolumes)) {
+	if (ImGui::Checkbox(lang ? "Volumes" : (const char*)u8"Волумы", &renderVolumes)) {
 		change_1Byte_hobbit((LPVOID)0x00777B04, 0x01, 0x00); //функция рендера волумов
 	}
-	if (ImGui::Checkbox((const char*)u8"Триггеры Загрузки", &renderLoadTriggers)) {
+	if (ImGui::Checkbox(lang ? "Load Triggers" : (const char*)u8"Триггеры Загрузки", &renderLoadTriggers)) {
 		change_1Byte_hobbit((LPVOID)0x00777B18, 0x01, 0x00); //функция рендера загрузочных триггеров
 	}
-	if (ImGui::Checkbox((const char*)u8"Триггеры", &renderTriggers)) {
+	if (ImGui::Checkbox(lang ? "Triggers" : (const char*)u8"Триггеры", &renderTriggers)) {
 		change_1Byte_hobbit((LPVOID)0x00777B1C, 0x01, 0x00); //функция рендера триггеров
 	}
-	if (ImGui::Checkbox((const char*)u8"Вода", &renderWater)) {
+	if (ImGui::Checkbox(lang ? "Water" : (const char*)u8"Вода", &renderWater)) {
 		change_1Byte_hobbit((LPVOID)0x00777B10, 0x01, 0x00); //функция рендера воды
 	}
-	if (ImGui::Checkbox((const char*)u8"Паутина", &renderWeb)) {
+	if (ImGui::Checkbox(lang ? "Web" : (const char*)u8"Паутина", &renderWeb)) {
 		change_1Byte_hobbit((LPVOID)0x00777B90, 0x01, 0x00); //функция рендера паутины
 	}
-	if (ImGui::Checkbox((const char*)u8"Веревка", &renderRopes)) {
+	if (ImGui::Checkbox(lang ? "Ropes" : (const char*)u8"Веревка", &renderRopes)) {
 		change_1Byte_hobbit((LPVOID)0x00777B24, 0x01, 0x00); //функция рендера веревок
 	}
-	if (ImGui::Checkbox((const char*)u8"Листа", &renderLeaves)) {
+	if (ImGui::Checkbox(lang ? "Leaves" : (const char*)u8"Листва", &renderLeaves)) {
 		change_1Byte_hobbit((LPVOID)0x00777B80, 0x01, 0x00); //функция рендер кластеров листвы деревьев
 	}
-	if (ImGui::Checkbox((const char*)u8"Сундуки", &renderChests)) {
+	if (ImGui::Checkbox(lang ? "Chests" : (const char*)u8"Сундуки", &renderChests)) {
 		change_1Byte_hobbit((LPVOID)0x00777AF0, 0x01, 0x00); //функция рендер сундуков
 	}
-	if (ImGui::Checkbox((const char*)u8"Рычаги", &renderLevers)) {
+	if (ImGui::Checkbox(lang ? "Levers" : (const char*)u8"Рычаги", &renderLevers)) {
 		change_1Byte_hobbit((LPVOID)0x00777AEC, 0x01, 0x00); //функция рендер рычагов
 	}
-	if (ImGui::Checkbox((const char*)u8"Бильбо", &renderBilbo)) {
+	if (ImGui::Checkbox(lang ? "Bilbo" : (const char*)u8"Бильбо", &renderBilbo)) {
 		change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x00); //функция рендер Бильбо
 	}
-	if (ImGui::Checkbox((const char*)u8"Свет", &renderLights)) {
+	if (ImGui::Checkbox(lang ? "Lights" : (const char*)u8"Свет", &renderLights)) {
 		change_1Byte_hobbit((LPVOID)0x00777AA4, 0x01, 0x00); //функция рендер света
 	}
-	if (ImGui::Checkbox((const char*)u8"Эффекты", &renderEffects)) {
+	if (ImGui::Checkbox(lang ? "Effects" : (const char*)u8"Эффекты", &renderEffects)) {
 		change_1Byte_hobbit((LPVOID)0x00777B88, 0x01, 0x00); //функция рендер эффектов
 	}
-	if (ImGui::Checkbox((const char*)u8"Падающий путь", &breakway)) {
+	if (ImGui::Checkbox(lang ? "Breakway" : (const char*)u8"Падающий путь", &breakway)) {
 		change_1Byte_hobbit((LPVOID)0x00777B0C, 0x01, 0x00); //функция рендера падающего пути
 	}
-	if (ImGui::Checkbox((const char*)u8"Болдер ран", &boulderRun)) {
+	if (ImGui::Checkbox(lang ? "Falling boulders" : (const char*)u8"Падающие булыжники", &boulderRun)) {
 		change_1Byte_hobbit((LPVOID)0x00777AFC, 0x01, 0x00); //функция рендер болдер рана
 	}
-	if (ImGui::Checkbox((const char*)u8"60 фпс", &fps60)) {
+	if (ImGui::Checkbox(lang ? "60 FPS" : (const char*)u8"60 фпс", &fps60)) {
 		change_2Byte_hobbit((LPVOID)0x006EFBDA, 0x4180, 0x4204); //функция FPS
 	}
-	if (ImGui::Checkbox((const char*)u8"Скайбокс", &renderSkybox)) {
+	if (ImGui::Checkbox(lang ? "Skybox" : (const char*)u8"Небо", &renderSkybox)) {
 		change_1Byte_hobbit((LPVOID)0x00777B5C, 0x01, 0x00); //функция рендера скайбокса
 	}
-	if (ImGui::Checkbox((const char*)u8"Пьедестал сохранения", &renderSavePedestal)) {
+	if (ImGui::Checkbox(lang ? "Save Pedestal" : (const char*)u8"Пьедестал сохранения", &renderSavePedestal)) {
 		change_1Byte_hobbit((LPVOID)0x00777AF8, 0x01, 0x00); //функция рендера сохранялок
 	}
-	if (ImGui::Checkbox((const char*)u8"Пуш бокс", &renderPushBoxes)) {
+	if (ImGui::Checkbox(lang ? "Push boxes" : (const char*)u8"Двигающиеся коробки", &renderPushBoxes)) {
 		change_1Byte_hobbit((LPVOID)0x00777AF4, 0x01, 0x00); //функция рендера пушбоксов
 	}
-	if (ImGui::Button((const char*)u8"Камни")) {
+	if (ImGui::Button(lang ? "Add 1 stone" : (const char*)u8"Выдать 1 камень")) {
 		plusA_float_hobbit((LPVOID)0x0075BDB4, 1); //функция прибавки на 1 камней
 	}
 	const char* questItems[] = { (const char*)u8"Ключ тролля" ,(const char*)u8"Камень Короля-Чародея" ,(const char*)u8"Шиполист" ,(const char*)u8"Синяя урна" ,(const char*)u8"Красная урна" ,(const char*)u8"Желтая урна" ,(const char*)u8"Незаженный факел",
@@ -400,49 +400,49 @@ void gui::Render() noexcept
 	(const char*)u8"Золотое блюдо" ,(const char*)u8"Кексы" ,(const char*)u8"Ингридиенты для кексов" ,(const char*)u8"Ключ от сарая" ,(const char*)u8"Яблоко" ,(const char*)u8"Молоток" ,(const char*)u8"Гвозди" ,(const char*)u8"Посох" ,(const char*)u8"Яйцо" ,(const char*)u8"Ягоды" ,(const char*)u8"Мешок пшеницы" ,(const char*)u8"Сахар" ,(const char*)u8"Специи" ,(const char*)u8"Колбаски" ,(const char*)u8"Пшеница" ,(const char*)u8"Одеяло" ,(const char*)u8"Иголка" ,(const char*)u8"1 ключ-кристалл" ,(const char*)u8"2 ключ-кристалл" ,(const char*)u8"3 ключ-кристалл" ,(const char*)u8"4 ключ-кристалл" ,(const char*)u8"Эльфийское зелье исцеления" ,(const char*)u8"1 ключ от Подземелья" ,(const char*)u8"2 ключ от Подземелья" ,(const char*)u8"3 ключ от Подземелья" ,(const char*)u8"4 ключ от Подземелья" ,(const char*)u8"Пещерный кристалл" ,(const char*)u8"Сон-трава" ,(const char*)u8"Луннолист" ,(const char*)u8"Паутинник" ,(const char*)u8"Паутинное зелье" ,(const char*)u8"Приводной ремень" ,(const char*)u8"Цепь из сокровищницы" ,(const char*)u8"Форма для ключа" ,(const char*)u8"1 форма для ключа" ,(const char*)u8"2 форма для ключа" ,(const char*)u8"Ключ от сокровищницы" ,(const char*)u8"1 ключ от Тронного зала" ,(const char*)u8"2 ключ от Тронного зала" ,(const char*)u8"Аркенстон" ,(const char*)u8"Ключ от городского склада" ,(const char*)u8"Черная стрела" ,(const char*)u8"Золотой кинжал Мэллока" ,(const char*)u8"Черная бутылка" ,(const char*)u8"Синяя бутылка" ,(const char*)u8"Фиолетовая бутылка" ,(const char*)u8"Красная бутылка" ,(const char*)u8"Желтая бутылка" ,(const char*)u8"Послание Гендольфа" ,(const char*)u8"Лекарство" ,(const char*)u8"Ключ троллей" ,(const char*)u8"Рукоятка для лестницы" ,(const char*)u8"Ключ Реннара" };
 
 	static int questItem = -1;
-	ImGui::Combo((const char*)u8"Кветовые предметы", &questItem, questItems, IM_ARRAYSIZE(questItems));
+	ImGui::Combo(lang ? "Quest Items" : (const char*)u8"Квестовые предметы", &questItem, questItems, IM_ARRAYSIZE(questItems));
 
-	if (ImGui::Button((const char*)u8"Выдать квестовый предмет")) {
+	if (ImGui::Button(lang ? "Give quest item" : (const char*)u8"Выдать квестовый предмет")) {
 		plusA_float_hobbit((LPBYTE)0x0075BE98 + questItem * 4, 1); //функция выдачи квестового предмета
 	}
-	if (ImGui::Button((const char*)u8"Удалить квестовый предмет")) {
+	if (ImGui::Button(lang ? "Delete quest item" : (const char*)u8"Удалить квестовый предмет")) {
 		change_2Byte_hobbit((LPBYTE)0x0075BE9A + questItem * 4, 0x00, 0x00); //функция выдачи квестового предмета
 	}
-	if (ImGui::Button((const char*)u8"1 доп хп")) {
+	if (ImGui::Button(lang ? "Add 1 extra HP" : (const char*)u8"1 доп хп")) {
 		plusA_float_hobbit((LPVOID)0x0075BDC4, 1); //функция прибавки на 1 доп хп
 	}
-	if (ImGui::Button((const char*)u8"10 доп хп")) {
+	if (ImGui::Button(lang ? "Add 10 extra HP" : (const char*)u8"10 доп хп")) {
 		plusA_float_hobbit((LPVOID)0x0075BDC4, 10); //функция прибавки на 10 доп хп
 	}
-	if (ImGui::Button((const char*)u8"1 макс хп")) {
+	if (ImGui::Button(lang ? "Add 1 Max HP" : (const char*)u8"1 макс хп")) {
 		plusA_float_hobbit((LPVOID)0x0075BE14, 1); //функция прибавки на 1 макс хп
 	}
-	if (ImGui::Button((const char*)u8"10 макс хп")) {
+	if (ImGui::Button(lang ? "Add 10 Max HP" : (const char*)u8"10 макс хп")) {
 		plusA_float_hobbit((LPVOID)0x0075BE14, 10); //функция прибавки на 10 макс хп
 	}
-	if (ImGui::Button((const char*)u8"Приблизить")) {
+	if (ImGui::Button(lang ? "Decrease FOV" : (const char*)u8"Уменьшить FOV")) {
 		plusA_float_hobbit((LPVOID)0x00772BF0, -0.1); //функция приближения камеры на 0.1
 	}
-	if (ImGui::Button((const char*)u8"Отдалить")) {
+	if (ImGui::Button(lang ? "Increase FOV" : (const char*)u8"Увеличить FOV")) {
 		plusA_float_hobbit((LPVOID)0x00772BF0, +0.1); //функция отдаления камеры на 0.1
 	}
-	if (ImGui::Checkbox((const char*)u8"Бессмертие", &invulBilbo)) {
+	if (ImGui::Checkbox(lang ? "Invulnerability" : (const char*)u8"Бессмертие", &invulBilbo)) {
 		change_1Byte_hobbit((LPVOID)0x0075FBF4, 0x01, 0x00); //функция бессмертия
 	}
 	static int speed = 300;
-	ImGui::InputInt((const char*)u8"Скорость Бильбо", &speed);
+	ImGui::InputInt(lang ? "Bilbos' speed" : (const char*)u8"Скорость Бильбо", &speed);
 
-	if (ImGui::Button((const char*)u8"Применить")) {
+	if (ImGui::Button(lang ? "Apply" : (const char*)u8"Применить")) {
 		change_float_hobbit((LPVOID)0x0075B850, speed); //функция изменения скорости Бильбо
 	}
-	if (ImGui::Button((const char*)u8"Установить Точку Телепортации")) {
+	if (ImGui::Button(lang ? "Set Teleportation Waypoint" : (const char*)u8"Установить Точку Телепортации")) {
 		savedPoint.ukazatel = ukazatel_hobbit((LPVOID)0x0075BA3C);
 		ukazatel = savedPoint.ukazatel;
 		savedPoint.x = save_float_hobbit(ukazatel + 5);
 		savedPoint.y = save_float_hobbit(ukazatel + 6);
 		savedPoint.z = save_float_hobbit(ukazatel + 7);//функция установки точки телепортации
 	}
-	if (ImGui::Button((const char*)u8"Телепортироваться")) {
+	if (ImGui::Button(lang ? "Teleport!" : (const char*)u8"Телепортироваться")) {
 		x = savedPoint.x;
 		y = savedPoint.y;
 		z = savedPoint.z;
@@ -515,18 +515,18 @@ void gui::Render() noexcept
 	,(const char*)u8"Ядовитые камни",
 	(const char*)u8"Магические камни" };
 	static int item = -1;
-	ImGui::Combo((const char*)u8"Предметы", &item, items, IM_ARRAYSIZE(items));
+	ImGui::Combo(lang ? "Items" : (const char*)u8"Предметы", &item, items, IM_ARRAYSIZE(items));
 
-	if (ImGui::Button((const char*)u8"Выдать предмет")) {
+	if (ImGui::Button(lang ? "Give item" : (const char*)u8"Выдать предмет")) {
 		plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //функция выдачи предмета
 	}
-	if (ImGui::Button((const char*)u8"Удалить предмет")) {
+	if (ImGui::Button(lang ? "Remove item" : (const char*)u8"Удалить предмет")) {
 		change_2Byte_hobbit((LPBYTE)0x0075BDB2 + item * 4, 0x00, 0x00); //функция удаления предмета
 	}
-	if (ImGui::Button((const char*)u8"Показать предмет")) {
+	if (ImGui::Button(lang ? "Show item" : (const char*)u8"Показать предмет")) {
 		change_1Byte_hobbit((LPBYTE)0x007212BC + item * 4, 0x01, 0x01); //функция показа предмета
 	}
-	if (ImGui::Button((const char*)u8"Спрятать предмет")) {
+	if (ImGui::Button(lang ? "Hide item" : (const char*)u8"Спрятать предмет")) {
 		change_2Byte_hobbit((LPBYTE)0x007212BC + item * 4, 0x00, 0x00); //функция убирания предмета
 	}
 
