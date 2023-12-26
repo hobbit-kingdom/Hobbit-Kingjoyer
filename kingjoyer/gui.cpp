@@ -373,7 +373,7 @@ void gui::Render() noexcept
 (const char*)u8"Ожерелье Гириона" ,(const char*)u8"Рубин Гроина" ,(const char*)u8"Копье короля Дортина",
 (const char*)u8"Золотое блюдо" ,(const char*)u8"Кексы" ,(const char*)u8"Ингридиенты для кексов" ,(const char*)u8"Ключ от сарая" ,(const char*)u8"Яблоко" ,(const char*)u8"Молоток" ,(const char*)u8"Гвозди" ,(const char*)u8"Посох" ,(const char*)u8"Яйцо" ,(const char*)u8"Ягоды" ,(const char*)u8"Мешок пшеницы" ,(const char*)u8"Сахар" ,(const char*)u8"Специи" ,(const char*)u8"Колбаски" ,(const char*)u8"Пшеница" ,(const char*)u8"Одеяло" ,(const char*)u8"Иголка" ,(const char*)u8"1 ключ-кристалл" ,(const char*)u8"2 ключ-кристалл" ,(const char*)u8"3 ключ-кристалл" ,(const char*)u8"4 ключ-кристалл" ,(const char*)u8"Эльфийское зелье исцеления" ,(const char*)u8"1 ключ от Подземелья" ,(const char*)u8"2 ключ от Подземелья" ,(const char*)u8"3 ключ от Подземелья" ,(const char*)u8"4 ключ от Подземелья" ,(const char*)u8"Пещерный кристалл" ,(const char*)u8"Сон-трава" ,(const char*)u8"Луннолист" ,(const char*)u8"Паутинник" ,(const char*)u8"Паутинное зелье" ,(const char*)u8"Приводной ремень" ,(const char*)u8"Цепь из сокровищницы" ,(const char*)u8"Форма для ключа" ,(const char*)u8"1 форма для ключа" ,(const char*)u8"2 форма для ключа" ,(const char*)u8"Ключ от сокровищницы" ,(const char*)u8"1 ключ от Тронного зала" ,(const char*)u8"2 ключ от Тронного зала" ,(const char*)u8"Аркенстон" ,(const char*)u8"Ключ от городского склада" ,(const char*)u8"Черная стрела" ,(const char*)u8"Золотой кинжал Мэллока" ,(const char*)u8"Черная бутылка" ,(const char*)u8"Синяя бутылка" ,(const char*)u8"Фиолетовая бутылка" ,(const char*)u8"Красная бутылка" ,(const char*)u8"Желтая бутылка" ,(const char*)u8"Послание Гендольфа" ,(const char*)u8"Лекарство" ,(const char*)u8"Ключ троллей" ,(const char*)u8"Рукоятка для лестницы" ,(const char*)u8"Ключ Реннара" };
 		static int questItem = -1;
-		ImGui::Combo("Кветовые предметы", &questItem, questItems, IM_ARRAYSIZE(questItems));
+		ImGui::Combo((const char*)u8"Кветовые предметы", &questItem, questItems, IM_ARRAYSIZE(questItems));
 		ImGui::SameLine();
 		if (ImGui::Button((const char*)u8"Выдать квестовый предмет")) {
 		plusA_float_hobbit((LPBYTE)0x0075BE98 + questItem * 4, 1); //функция выдачи квестового предмета
@@ -487,7 +487,7 @@ void gui::Render() noexcept
 ,(const char*)u8"Замороженные камни"
 ,(const char*)u8"Ядовитые камни",(const char*)u8"Магические камни" };
 		static int item = -1;
-		ImGui::Combo("Предметы", &item, items, IM_ARRAYSIZE(items));
+		ImGui::Combo((const char*)u8"Предметы", &item, items, IM_ARRAYSIZE(items));
 
 		ImGui::SameLine();
 		if (ImGui::Button((const char*)u8"Выдать предмет")) {
