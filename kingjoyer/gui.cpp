@@ -363,9 +363,17 @@ void gui::Render() noexcept
 		if (ImGui::Button((const char*)u8"Камни")) {
 			plusA_float_hobbit((LPVOID)0x0075BDB4, 1); //функция прибавки на 1 камней
 	}
-		const char* questItems[] = { "AAAA", "BBBB", "CCCC", "DDDD" };
+		const char* questItems[] = { (const char*)u8"Ключ тролля" ,(const char*)u8"Камень Короля-Чародея" ,(const char*)u8"Шиполист" ,(const char*)u8"Синяя урна" ,(const char*)u8"Красная урна" ,(const char*)u8"Желтая урна" ,(const char*)u8"Незаженный факел",
+(const char*)u8"Горящий факел",
+(const char*)u8"Мехи",(const char*)u8"Перстень",(const char*)u8"Масло",(const char*)u8"Железная звездочка", (const char*)u8"Серебряная звездочка",(const char*)u8"Золотая звездочка",
+(const char*)u8"Медная звездочка",(const char*)u8"Стальная звездочка", (const char*)u8"Железная шестеренка", (const char*)u8"Серебряная шестеренка", (const char*)u8"Золотая шестеренка", (const char*)u8"Медная шестеренка", (const char*)u8"Стальная шестеренка", (const char*)u8"Железная шестерня", (const char*)u8"Серебряная шестерня", (const char*)u8"Золотая шестерня", (const char*)u8"Медная шестерня", (const char*)u8"Стальная шестерня", (const char*)u8"Железный толкатель", (const char*)u8"Серебряный толкатель", (const char*)u8"Золотой толкатель", (const char*)u8"Медный толкатель", (const char*)u8"Стальной толкатель", (const char*)u8"Железная шпага", (const char*)u8"Серебряная шпага", (const char*)u8"Золотая шпага", (const char*)u8"Медная шпага", (const char*)u8"Стальная шпага", (const char*)u8"Дрова",
+(const char*)u8"Ключ Грит",
+(const char*)u8"Ключ Дим",
+(const char*)u8"Ключ Мугг" ,(const char*)u8"Ключ от тюрьмы" ,(const char*)u8"Ключ от последнего моста" ,(const char*)u8"Шестеренка Гандолы №1" ,(const char*)u8"Шестеренка Гандолы №2" ,(const char*)u8"Рычаг Варт" ,(const char*)u8"Камень Варт" ,(const char*)u8"Золотая чаша Трора",
+(const char*)u8"Ожерелье Гириона" ,(const char*)u8"Рубин Гроина" ,(const char*)u8"Копье короля Дортина",
+(const char*)u8"Золотое блюдо" ,(const char*)u8"Кексы" ,(const char*)u8"Ингридиенты для кексов" ,(const char*)u8"Ключ от сарая" ,(const char*)u8"Яблоко" ,(const char*)u8"Молоток" ,(const char*)u8"Гвозди" ,(const char*)u8"Посох" ,(const char*)u8"Яйцо" ,(const char*)u8"Ягоды" ,(const char*)u8"Мешок пшеницы" ,(const char*)u8"Сахар" ,(const char*)u8"Специи" ,(const char*)u8"Колбаски" ,(const char*)u8"Пшеница" ,(const char*)u8"Одеяло" ,(const char*)u8"Иголка" ,(const char*)u8"1 ключ-кристалл" ,(const char*)u8"2 ключ-кристалл" ,(const char*)u8"3 ключ-кристалл" ,(const char*)u8"4 ключ-кристалл" ,(const char*)u8"Эльфийское зелье исцеления" ,(const char*)u8"1 ключ от Подземелья" ,(const char*)u8"2 ключ от Подземелья" ,(const char*)u8"3 ключ от Подземелья" ,(const char*)u8"4 ключ от Подземелья" ,(const char*)u8"Пещерный кристалл" ,(const char*)u8"Сон-трава" ,(const char*)u8"Луннолист" ,(const char*)u8"Паутинник" ,(const char*)u8"Паутинное зелье" ,(const char*)u8"Приводной ремень" ,(const char*)u8"Цепь из сокровищницы" ,(const char*)u8"Форма для ключа" ,(const char*)u8"1 форма для ключа" ,(const char*)u8"2 форма для ключа" ,(const char*)u8"Ключ от сокровищницы" ,(const char*)u8"1 ключ от Тронного зала" ,(const char*)u8"2 ключ от Тронного зала" ,(const char*)u8"Аркенстон" ,(const char*)u8"Ключ от городского склада" ,(const char*)u8"Черная стрела" ,(const char*)u8"Золотой кинжал Мэллока" ,(const char*)u8"Черная бутылка" ,(const char*)u8"Синяя бутылка" ,(const char*)u8"Фиолетовая бутылка" ,(const char*)u8"Красная бутылка" ,(const char*)u8"Желтая бутылка" ,(const char*)u8"Послание Гендольфа" ,(const char*)u8"Лекарство" ,(const char*)u8"Ключ троллей" ,(const char*)u8"Рукоятка для лестницы" ,(const char*)u8"Ключ Реннара" };
 		static int questItem = -1;
-		ImGui::Combo("Combo", &questItem, questItems, IM_ARRAYSIZE(questItems));
+		ImGui::Combo("Кветовые предметы", &questItem, questItems, IM_ARRAYSIZE(questItems));
 		ImGui::SameLine();
 		if (ImGui::Button((const char*)u8"Выдать квестовый предмет")) {
 		plusA_float_hobbit((LPBYTE)0x0075BE98 + questItem * 4, 1); //функция выдачи квестового предмета
@@ -421,9 +429,65 @@ void gui::Render() noexcept
 			change_float_hobbit(ukazatel + 283, z);
 		}
 	}
-		const char* items[] = { "AAAA", "BBBB", "CCCC", "DDDD" };
+		const char* items[] = {(const char*)u8"Монета"	
+,(const char*)u8"Камень"
+,(const char*)u8"Ihavehadstones"
+,(const char*)u8"Здоровье"
+,(const char*)u8"GreaterHealth"
+,(const char*)u8"Выносливость"
+ ,(const char*)u8"CPTOTAL"	
+,(const char*)u8"LevelingCP"
+,(const char*)u8"Синий кристалл"
+,(const char*)u8"Голубой кристалл"
+,(const char*)u8"Красный кристалл"
+,(const char*)u8"Зеленный кристалл"
+ ,(const char*)u8"Фиолетовый кристалл"	
+,(const char*)u8"Белый кристалл"
+,(const char*)u8"Coinbag"
+,(const char*)u8"Coinbag5"
+,(const char*)u8"Coinbag10"
+,(const char*)u8"Coinbag25"
+ ,(const char*)u8"Coinbag50"	
+,(const char*)u8"Coinbag100"
+,(const char*)u8"Сумка для камней"
+,(const char*)u8"Сумка для зелей"
+,(const char*)u8"Отмычка"
+,(const char*)u8"CLevelCP"		
+,(const char*)u8"ChestCount"	
+,(const char*)u8"BilboLevel"
+,(const char*)u8"BilbosPoisoned"
+,(const char*)u8"BilboPoisonTimer"
+,(const char*)u8"Bilbo_Staff_Swing"
+,(const char*)u8"Bilbo_Staff_Swing2"
+ ,(const char*)u8"Bilbo_Staff_Swing3"	
+,(const char*)u8"Bilbo_Staff_Jump"
+,(const char*)u8"Bilbo_Staff_Jump2"
+,(const char*)u8"Bilbo_Staff_Jump3"
+,(const char*)u8"Bilbo_Staff_AE_Jump"
+,(const char*)u8"Bilbo_Staff_AE_Jump2"
+ ,(const char*)u8"Bilbo_Staff_AE_Jump3"	
+,(const char*)u8"Bilbo_Sting_Swing"
+,(const char*)u8"Bilbo_Sting_Swing2"
+,(const char*)u8"Bilbo_Sting_Swing3"
+,(const char*)u8"Bilbo_Sting_Jump"
+,(const char*)u8"Bilbo_Sting_Jump2"
+ ,(const char*)u8"Bilbo_Sting_Jump3"	
+,(const char*)u8"Bilbo_Stone_Throw"
+,(const char*)u8"Bilbo_Stone_Throw2"
+,(const char*)u8"Bilbo_Stone_Throw3"
+,(const char*)u8"Зелье уровня"
+,(const char*)u8"Лечебное зелье"	
+,(const char*)u8"Противоядие"
+,(const char*)u8"Живая вода"
+,(const char*)u8"Жало"
+ ,(const char*)u8"Кольцо"	
+,(const char*)u8"Посох"
+,(const char*)u8"Взрывные камни"
+,(const char*)u8"Огненные камни"
+,(const char*)u8"Замороженные камни"
+,(const char*)u8"Ядовитые камни",(const char*)u8"Магические камни" };
 		static int item = -1;
-		ImGui::Combo("Combo", &item, items, IM_ARRAYSIZE(items));
+		ImGui::Combo("Предметы", &item, items, IM_ARRAYSIZE(items));
 
 		ImGui::SameLine();
 		if (ImGui::Button((const char*)u8"Выдать предмет")) {
