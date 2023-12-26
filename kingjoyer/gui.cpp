@@ -6,6 +6,7 @@
 #include "../imgui/imgui_impl_win32.h"
 
 #include "iostream"
+#include "string"
 
 
 
@@ -267,13 +268,11 @@ bool boulderRun = false;
 
 bool fps60 = false;
 
+bool debug = false;
+int lang = 0; // 0 - RUS , 1 - ENG
+
 void gui::Render() noexcept
 {
-	bool debug = false;
-
-	int lang = 0; // 0 - RUS , 1 - ENG
-
-	
 
 
 	ImGui::SetNextWindowPos({ 0, 0 });
@@ -287,7 +286,10 @@ void gui::Render() noexcept
 		ImGuiWindowFlags_NoMove
 	);
 
-	ImGui::Button("Button");
+	if  (ImGui::Button("Change Language")) 
+	{
+		lang = !lang;
+	}
 	ImGui::Text("This is some useful text.");
 	
 	const char* items[] = { "AAAA", "BBBB", "CCCC", "DDDD" };
@@ -300,11 +302,12 @@ void gui::Render() noexcept
 	if (ImGui::Button("Button1"))
 	{
 		std::cout << item << " ";
+		
 	}
 
 	{
 		
-		if (ImGui::Checkbox( lang ? "Developer Mode" : "Режим разработчика", &developerMode))
+		if (ImGui::Checkbox( lang ? "Developer Mode" : (const char*)u8"КИНГ лох", &developerMode))
 		{
 			if ( debug ) std::cout << developerMode << " ";
 
