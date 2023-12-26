@@ -5,8 +5,8 @@
 #include "../imgui/imgui_impl_dx9.h"
 #include "../imgui/imgui_impl_win32.h"
 
-#include "iostream"
-
+#include <iostream>
+using namespace std;
 
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(
@@ -266,12 +266,22 @@ bool boulderRun = false;
 
 
 bool fps60 = false;
+bool invulBilbo = false;
+struct Point {
+	float x = 0;
+	float y = 0;
+	float z = 0;
+	LPDWORD ukazatel = 0x00;
+};
+Point savedPoint;
+float x, y, z;
+LPDWORD ukazatel;
 
 void gui::Render() noexcept
 {
 	bool debug = false;
 
-	int lang = 0; // 0 - RUS , 1 - ENG
+	bool lang = false; // 0 - RUS , 1 - ENG
 
 	
 
@@ -290,131 +300,143 @@ void gui::Render() noexcept
 	ImGui::Button("Button");
 	ImGui::Text("This is some useful text.");
 	
-	const char* items[] = { "AAAA", "BBBB", "CCCC", "DDDD" };
-	static int item = -1;
-	ImGui::Combo("Combo", &item, items, IM_ARRAYSIZE(items));
 
-	
-	ImGui::SameLine();
+		if (ImGui::Checkbox("Режим Разработчик",&developerMode)) {
+		change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00); //функция включения режима разработчика
+	}
+		if (ImGui::Checkbox("Волумы", &renderVolumes)) {
+		change_1Byte_hobbit((LPVOID)0x00777B04, 0x01, 0x00); //функция рендера волумов
+	}
+		if (ImGui::Checkbox("Триггеры Загрузки", &renderLoadTriggers)) {
+		change_1Byte_hobbit((LPVOID)0x00777B18, 0x01, 0x00); //функция рендера загрузочных триггеров
+	}
+		if (ImGui::Checkbox("Триггеры", &renderTriggers)) {
+		change_1Byte_hobbit((LPVOID)0x00777B1C, 0x01, 0x00); //функция рендера триггеров
+	}
+		if (ImGui::Checkbox("Вода", &renderWater)) {
+		change_1Byte_hobbit((LPVOID)0x00777B10, 0x01, 0x00); //функция рендера воды
+	}
+		if (ImGui::Checkbox("Паутина", &renderWeb)) {
+		change_1Byte_hobbit((LPVOID)0x00777B90, 0x01, 0x00); //функция рендера паутины
+	}
+		if (ImGui::Checkbox("Веревка", &renderRopes)) {
+		change_1Byte_hobbit((LPVOID)0x00777B24, 0x01, 0x00); //функция рендера веревок
+	}
+		if (ImGui::Checkbox("Листа", &renderLeaves)) {
+		change_1Byte_hobbit((LPVOID)0x00777B80, 0x01, 0x00); //функция рендер кластеров листвы деревьев
+	}
+		if (ImGui::Checkbox("Сундуки", &renderChests)) {
+		change_1Byte_hobbit((LPVOID)0x00777AF0, 0x01, 0x00); //функция рендер сундуков
+	}
+		if (ImGui::Checkbox("Рычаги", &renderLevers)) {
+		change_1Byte_hobbit((LPVOID)0x00777AEC, 0x01, 0x00); //функция рендер рычагов
+	}
+		if (ImGui::Checkbox("Бильбо", &renderBilbo)) {
+		change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x00); //функция рендер Бильбо
+	}
+		if (ImGui::Checkbox("Свет", &renderLights)) {
+		change_1Byte_hobbit((LPVOID)0x00777AA4, 0x01, 0x00); //функция рендер света
+	}
+		if (ImGui::Checkbox("Эффекты", &renderEffects)) {
+		change_1Byte_hobbit((LPVOID)0x00777B88, 0x01, 0x00); //функция рендер эффектов
+	}
+		if (ImGui::Checkbox("Падающий путь", &breakway)) {
+		change_1Byte_hobbit((LPVOID)0x00777B0C, 0x01, 0x00); //функция рендера падающего пути
+	}
+		if (ImGui::Checkbox("Болдер ран", &boulderRun)) {
+		change_1Byte_hobbit((LPVOID)0x00777AFC, 0x01, 0x00); //функция рендер болдер рана
+	}
+		if (ImGui::Checkbox("60 фпс", &fps60)) {
+		change_2Byte_hobbit((LPVOID)0x006EFBDA, 0x4180, 0x4204); //функция FPS
+	}
+		if (ImGui::Checkbox("Скайбокс", &renderSkybox)) {
+		change_1Byte_hobbit((LPVOID)0x00777B5C, 0x01, 0x00); //функция рендера скайбокса
+	}
+		if (ImGui::Checkbox("Пьедестал сохранения", &renderSavePedestal)) {
+		change_1Byte_hobbit((LPVOID)0x00777AF8, 0x01, 0x00); //функция рендера сохранялок
+	}
+		if (ImGui::Checkbox("Пуш бокс", &renderPushBoxes)) {
+		change_1Byte_hobbit((LPVOID)0x00777AF4, 0x01, 0x00); //функция рендера пушбоксов
+	}
+		if (ImGui::Button("Камни")) {
+			plusA_float_hobbit((LPVOID)0x0075BDB4, 1); //функция прибавки на 1 камней
+	}
+		const char* questItems[] = { "AAAA", "BBBB", "CCCC", "DDDD" };
+		static int questItem = -1;
+		ImGui::Combo("Combo", &questItem, questItems, IM_ARRAYSIZE(questItems));
+		ImGui::SameLine();
+		if (ImGui::Button("Выдать квестовый предмет")) {
+		plusA_float_hobbit((LPBYTE)0x0075BE98 + questItem * 4, 1); //функция выдачи квестового предмета
+	}
+		if (ImGui::Button("Удалить квестовый предмет")) {
+		change_2Byte_hobbit((LPBYTE)0x0075BE9A + questItem * 4, 0x00, 0x00); //функция выдачи квестового предмета
+	}
+		if (ImGui::Button("1 доп хп")) {
+		plusA_float_hobbit((LPVOID)0x0075BDC4, 1); //функция прибавки на 1 доп хп
+	}
+		if (ImGui::Button("10 доп хп")) {
+		plusA_float_hobbit((LPVOID)0x0075BDC4, 10); //функция прибавки на 10 доп хп
+	}
+		if (ImGui::Button("1 макс хп")) {
+		plusA_float_hobbit((LPVOID)0x0075BE14, 1); //функция прибавки на 1 макс хп
+	}
+		if (ImGui::Button("10 макс хп")) {
+		plusA_float_hobbit((LPVOID)0x0075BE14, 10); //функция прибавки на 10 макс хп
+	}
+		if (ImGui::Button("Приблизить")) {
+		plusA_float_hobbit((LPVOID)0x00772BF0, -0.1); //функция приближения камеры на 0.1
+	}
+		if (ImGui::Button("Отдалить")) {
+		plusA_float_hobbit((LPVOID)0x00772BF0, +0.1); //функция отдаления камеры на 0.1
+	}
+		if (ImGui::Checkbox("Бессмертие", &invulBilbo)) {
+		change_1Byte_hobbit((LPVOID)0x0075FBF4, 0x01, 0x00); //функция бессмертия
+	}
+		static int speed = 300;
+		ImGui::InputInt("Скорость Бильбо", &speed);
+		ImGui::SameLine();
+		if (ImGui::Button("Применить")) {
+		change_float_hobbit((LPVOID)0x0075B850, speed); //функция изменения скорости Бильбо
+	}
+		if (ImGui::Button("Установить Точку Телепортации")) {
+		savedPoint.ukazatel = ukazatel_hobbit((LPVOID)0x0075BA3C);
+		ukazatel = savedPoint.ukazatel;
+		savedPoint.x = save_float_hobbit(ukazatel + 5);
+		savedPoint.y = save_float_hobbit(ukazatel + 6);
+		savedPoint.z = save_float_hobbit(ukazatel + 7);//функция установки точки телепортации
+	}
+		if (ImGui::Button("Телепортироваться")) {
+		x = savedPoint.x;
+		y = savedPoint.y;
+		z = savedPoint.z;
+		ukazatel = savedPoint.ukazatel;
+		if (x) {
+			change_float_hobbit(ukazatel + 5, x);
+			change_float_hobbit(ukazatel + 281, x);
+			change_float_hobbit(ukazatel + 6, y);
+			change_float_hobbit(ukazatel + 282, y);
+			change_float_hobbit(ukazatel + 7, z);
+			change_float_hobbit(ukazatel + 283, z);
+		}
+	}
+		const char* items[] = { "AAAA", "BBBB", "CCCC", "DDDD" };
+		static int item = -1;
+		ImGui::Combo("Combo", &item, items, IM_ARRAYSIZE(items));
 
-	if (ImGui::Button("Button1"))
-	{
-		std::cout << item << " ";
+		ImGui::SameLine();
+		if (ImGui::Button("Выдать предмет")) {
+		plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //функция выдачи предмета
+	}
+		if (ImGui::Button("Удалить предмет")) {
+		change_2Byte_hobbit((LPBYTE)0x0075BDB2 + item * 4, 0x00, 0x00); //функция удаления предмета
+	}
+		if (ImGui::Button("Показать предмет")) {
+		change_1Byte_hobbit((LPBYTE)0x007212BC + item * 4, 0x01, 0x01); //функция показа предмета
+	}
+		if (ImGui::Button("Спрятать предмет")) {
+		change_2Byte_hobbit((LPBYTE)0x007212BC + item * 4, 0x00, 0x00); //функция убирания предмета
 	}
 
-	{
-		
-		if (ImGui::Checkbox( lang ? "Developer Mode" : "Режим разработчика", &developerMode))
-		{
-			if ( debug ) std::cout << developerMode << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-
-		if (ImGui::Checkbox("Developer mode", &renderVolumes))
-		{
-			if (debug) std::cout << renderVolumes << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderLoadTriggers))
-		{
-			if (debug) std::cout << renderLoadTriggers << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderTriggers))
-		{
-			if (debug) std::cout << renderTriggers << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderWater))
-		{
-			if (debug) std::cout << renderWater << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderWeb))
-		{
-			if (debug) std::cout << renderWeb << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderRopes))
-		{
-			if (debug) std::cout << renderRopes << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderLeaves))
-		{
-			if (debug) std::cout << renderLeaves << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderChests))
-		{
-			if (debug) std::cout << renderChests << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderLevers))
-		{
-			if (debug) std::cout << renderLevers << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderBilbo))
-		{
-			if (debug) std::cout << renderBilbo << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderLights))
-		{
-			if (debug) std::cout << renderLights << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderEffects))
-		{
-			if (debug) std::cout << renderEffects << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderSkybox))
-		{
-			if (debug) std::cout << renderSkybox << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderSavePedestal))
-		{
-			if (debug) std::cout << renderSavePedestal << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &renderPushBoxes))
-		{
-			if (debug) std::cout << renderPushBoxes << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &breakway))
-		{
-			if (debug) std::cout << breakway << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		if (ImGui::Checkbox("Developer mode", &boulderRun))
-		{
-			if (debug) std::cout << boulderRun << " ";
-
-			change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00);
-		}
-		
-	}
 
 	
 

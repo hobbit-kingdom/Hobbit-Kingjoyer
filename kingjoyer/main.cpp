@@ -1,19 +1,19 @@
 #include "gui.h"
-
+#include<iostream>
 #include <thread>
-
+using namespace gui;
 int main (  //__stdcall wWinMain
 	HINSTANCE instance,
 	HINSTANCE previousInstance,
 	PWSTR arguments,
 	int commandShow )
 {
-
+	setlocale(LC_ALL, "RUSSIAN");
 
 	// create gui
-	gui::CreateHWindow("Cheat Menu");
-	gui::CreateDevice();
-	gui::CreateImGui();
+	CreateHWindow("Cheat Menu");
+	CreateDevice();
+	CreateImGui();
 
 	while (gui::isRunning)
 	{
