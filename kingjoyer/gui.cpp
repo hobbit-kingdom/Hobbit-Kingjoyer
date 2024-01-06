@@ -566,7 +566,19 @@ void gui::Render() noexcept
 		ImGui::Text("Y: %g", yPos);
 		ImGui::Text("Z: %g", zPos);
 
+		float HideStats = read_float_value((LPVOID)(0x0075C034));
+		ImGui::Text(lang ? "Number Of Attacks: %g" : (const char*)u8"Количество Атак: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 4));
+		ImGui::Text(lang ? "Number Of Jumps: %g" : (const char*)u8"Количество Прыжков: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 8));
+		ImGui::Text(lang ? "Distance Traveled: %g" : (const char*)u8"Пройденное Расстояние: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 12));
+		ImGui::Text(lang ? "Damage Taken From Poison: %g" : (const char*)u8"Урон Полученный От Яда: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 16));
+		ImGui::Text(lang ? "Distance Traveled: %g" : (const char*)u8"Пройденное Расстояние: %g", HideStats);
 		ImGui::Unindent();
+
+
 	}
 
 	if (ImGui::CollapsingHeader(lang ? "Quest Items" : (const char*)u8"Квестовые предметы"))

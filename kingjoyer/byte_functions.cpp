@@ -130,7 +130,6 @@ int change_1Byte_hobbit(LPVOID Address, BYTE Znachenie, BYTE Iznachalnoe)
 {
 	HANDLE Process;
 	Process = read_process_hobbit();
-	//LPVOID Address = (LPVOID)0x007600E9; //это адрес в чит енжине
 	BYTE value;  //переменная значения байта по адресу
 	if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
 		CloseHandle(Process);
