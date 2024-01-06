@@ -264,6 +264,13 @@ bool renderSavePedestal = false;
 bool renderPushBoxes = false;
 bool breakway = false;
 bool boulderRun = false;
+bool polyCache = false;
+bool bilboPos = false;
+bool cutsceneInfo = false;
+bool objInfo = false;
+bool maxobjInfo = false;
+bool objInView = false;
+bool trianglesInView = false;
 
 
 bool fps60 = false;
@@ -318,6 +325,9 @@ void gui::Render() noexcept
 
 		if (ImGui::Checkbox(lang ? "Volumes" : (const char*)u8"Волумы", &renderVolumes)) {
 			change_1Byte_hobbit((LPVOID)0x00777B04, 0x01, 0x00); //функция рендера волумов
+		}
+		if (ImGui::Checkbox(lang ? "PolyCache" : (const char*)u8"Полигоны", &polyCache)) {
+			change_1Byte_hobbit((LPVOID)0x00778078, 0x01, 0x00); //функция рендера волумов
 		}
 		if (ImGui::Checkbox(lang ? "Load Triggers" : (const char*)u8"Триггеры Загрузки", &renderLoadTriggers)) {
 			change_1Byte_hobbit((LPVOID)0x00777B18, 0x01, 0x00); //функция рендера загрузочных триггеров
@@ -401,6 +411,40 @@ void gui::Render() noexcept
 
 		ImGui::Unindent();
 	}
+
+	if (ImGui::CollapsingHeader(lang ? "Statistics" : (const char*)u8"Статистика"))
+	{
+		ImGui::Indent();
+
+		ImGui::Text(lang ? "Statistics" : (const char*)u8"Статистика");
+		ImGui::Separator();
+		if (ImGui::Checkbox(lang ? "Bilbo Positon" : (const char*)u8"Позиция Бильбо", &bilboPos)) {
+			change_1Byte_hobbit((LPVOID)0x0075FBD4, 0x01, 0x00);
+		}
+
+		if (ImGui::Checkbox(lang ? "Cinema Debug" : (const char*)u8"Информация в катсценах", &cutsceneInfo)) {
+			change_1Byte_hobbit((LPVOID)0x0075FBF8, 0x01, 0x00);
+		}
+
+		if (ImGui::Checkbox(lang ? "Objects stats" : (const char*)u8"Информация об объектах", &objInfo)) {
+			change_1Byte_hobbit((LPVOID)0x0075FBC4, 0x01, 0x00);
+		}
+
+		if (ImGui::Checkbox(lang ? "Big Objects stats" : (const char*)u8"Много информации об объектах", &maxobjInfo)) {
+			change_1Byte_hobbit((LPVOID)0x00778054, 0x01, 0x00);
+		}
+
+		if (ImGui::Checkbox(lang ? "Objects in view" : (const char*)u8"Объекты в зоне видимости", &objInView)) {
+			change_1Byte_hobbit((LPVOID)0x00778070, 0x01, 0x00);
+		}
+
+		if (ImGui::Checkbox(lang ? "Triangles in view" : (const char*)u8"Треугольники в зоне видимости", &trianglesInView)) {
+			change_1Byte_hobbit((LPVOID)0x00778058, 0x01, 0x00);
+		}
+
+		ImGui::Unindent();
+	}
+
 	if (ImGui::CollapsingHeader(lang ? "Cheats" : (const char*)u8"Читы"))
 	{
 		ImGui::Indent();
@@ -413,6 +457,9 @@ void gui::Render() noexcept
 		}
 		if (ImGui::Button(lang ? "Add 1 stone" : (const char*)u8"Выдать 1 камень")) {
 			plusA_float_hobbit((LPVOID)0x0075BDB4, 1); //функция прибавки на 1 камней
+		}
+		if (ImGui::Button(lang ? "Add 5 stones" : (const char*)u8"Выдать 5 каменей")) {
+			plusA_float_hobbit((LPVOID)0x0075BDB4, 5); //функция прибавки на 5 камней
 		}
 		if (ImGui::Button(lang ? "Add 1 extra HP" : (const char*)u8"1 доп хп")) {
 			plusA_float_hobbit((LPVOID)0x0075BDC4, 1); //функция прибавки на 1 доп хп
