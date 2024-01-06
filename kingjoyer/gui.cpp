@@ -493,9 +493,21 @@ void gui::Render() noexcept
 		static int speed = 300;
 		ImGui::InputInt(lang ? "Bilbos' speed" : (const char*)u8"Скорость Бильбо", &speed, 50);
 
-		if (ImGui::Button(lang ? "Apply" : (const char*)u8"Применить")) {
+		if (ImGui::Button(lang ? "Apply speed" : (const char*)u8"Применить скорость")) {
 			change_float_hobbit((LPVOID)0x0075B850, speed); //функция изменения скорости Бильбо
 		}
+
+		ImGui::Text("");
+		ImGui::Text(lang ? "Jump" : (const char*)u8"Прыжок");
+		ImGui::Separator();
+
+		static int jumpPower = 3000;
+		ImGui::InputInt(lang ? "Jump power (lower = better)" : (const char*)u8"Сила прыжка (меньше = лучше)", &jumpPower, 500);
+
+		if (ImGui::Button(lang ? "Apply power" : (const char*)u8"Применить прыжок")) {
+			change_float_hobbit((LPVOID)0x0075B888, jumpPower); //функция изменения скорости Бильбо
+		}
+
 		ImGui::Text("");
 		ImGui::Text(lang ? "Teleportation" : (const char*)u8"Телепортация");
 		ImGui::Separator();
