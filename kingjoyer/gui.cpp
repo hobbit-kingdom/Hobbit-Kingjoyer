@@ -711,7 +711,7 @@ void gui::Render() noexcept
 	ImGui::Text("");
 	ImGui::Text("");
 	ImGui::Text("");
-	ImGui::Text("");
+
 
 	ImGui::Text(lang ? "Our links" : (const char*)u8"Наши ссылки");
 	ImGui::Separator();
