@@ -7,3 +7,4 @@ int change_float_hobbit(LPVOID Address, float a) noexcept;
 int save_float_hobbit(LPVOID Address) noexcept;
 float read_float_value(LPVOID Address) noexcept;
 LPDWORD ukazatel_hobbit(LPVOID Address) noexcept;
+HANDLE read_process_hobbit() noexcept;
