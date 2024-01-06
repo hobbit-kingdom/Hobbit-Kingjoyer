@@ -5,4 +5,5 @@ int change_2Byte_hobbit(LPVOID Address, WORD Znachenie, WORD Iznachalnoe) noexce
 int plusA_float_hobbit(LPVOID Address, float a) noexcept;
 int change_float_hobbit(LPVOID Address, float a) noexcept;
 int save_float_hobbit(LPVOID Address) noexcept;
+float read_float_value(LPVOID Address) noexcept;
 LPDWORD ukazatel_hobbit(LPVOID Address) noexcept;

@@ -288,6 +288,8 @@ LPDWORD ukazatel;
 bool debug = false;
 int lang = 0; // 0 - RUS , 1 - ENG
 
+Point currentBilboPos;
+
 void gui::Render() noexcept
 {
 
@@ -441,6 +443,16 @@ void gui::Render() noexcept
 		if (ImGui::Checkbox(lang ? "Triangles in view" : (const char*)u8"Треугольники в зоне видимости", &trianglesInView)) {
 			change_1Byte_hobbit((LPVOID)0x00778058, 0x01, 0x00);
 		}
+
+		//laggy a bit, should save xPointer and then read
+		LPDWORD xPointer = ukazatel_hobbit((LPVOID)0x0075BA3C);
+		float xPos = read_float_value((LPVOID)(xPointer + 497));
+		float yPos = read_float_value((LPVOID)(xPointer + 498));
+		float zPos = read_float_value((LPVOID)(xPointer + 499));
+
+		ImGui::Text("X: %g", xPos);
+		ImGui::Text("Y: %g", yPos);
+		ImGui::Text("Z: %g", zPos);
 
 		ImGui::Unindent();
 	}
