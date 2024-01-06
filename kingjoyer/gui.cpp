@@ -474,7 +474,7 @@ void gui::Render() noexcept
 
 		ImGui::Text(lang ? "Jump power (lower = better)" : (const char*)u8"Сила прыжка (меньше = лучше)");
 		static int jumpPower = 3000;
-		ImGui::InputInt("", &jumpPower, 500);
+		ImGui::InputInt(" ", &jumpPower, 500);
 
 		if (ImGui::Button(lang ? "Apply power" : (const char*)u8"Применить прыжок")) {
 			change_float_hobbit((LPVOID)0x0075B888, jumpPower);
@@ -483,7 +483,7 @@ void gui::Render() noexcept
 		ImGui::Text(lang ? "Speed in jump" : (const char*)u8"Скорость в прыжке");
 
 		static int speedInJump = 350;
-		ImGui::InputInt("", &speedInJump, 100);
+		ImGui::InputInt("  ", &speedInJump, 100);
 
 		if (ImGui::Button(lang ? "Apply speed in jump" : (const char*)u8"Применить скорсоть в прыжке")) {
 			change_float_hobbit((LPVOID)0x0075B868, speedInJump);
@@ -565,15 +565,57 @@ void gui::Render() noexcept
 		ImGui::Text("Z: %g", zPos);
 
 		float HideStats = read_float_value((LPVOID)(0x0075C034));
-		ImGui::Text(lang ? "Number Of Attacks: %g" : (const char*)u8"Количество Атак: %g", HideStats);
+		ImGui::Text(lang ? "Number Of Attacks: %g" : (const char*)u8"Количество Ударов: %g", HideStats);
 		HideStats = read_float_value((LPVOID)(0x0075C034 + 4));
 		ImGui::Text(lang ? "Number Of Jumps: %g" : (const char*)u8"Количество Прыжков: %g", HideStats);
 		HideStats = read_float_value((LPVOID)(0x0075C034 + 8));
 		ImGui::Text(lang ? "Distance Traveled: %g" : (const char*)u8"Пройденное Расстояние: %g", HideStats);
 		HideStats = read_float_value((LPVOID)(0x0075C034 + 12));
-		ImGui::Text(lang ? "Damage Taken From Poison: %g" : (const char*)u8"Урон Полученный От Яда: %g", HideStats);
+		ImGui::Text(lang ? "Damage Taken From Poison: %g" : (const char*)u8"Урон От Яда: %g", HideStats);
 		HideStats = read_float_value((LPVOID)(0x0075C034 + 16));
-		ImGui::Text(lang ? "Distance Traveled: %g" : (const char*)u8"Пройденное Расстояние: %g", HideStats);
+		ImGui::Text(lang ? "Time Spent Hiding: %g" : (const char*)u8"Время Спрятавшись: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 20));
+		ImGui::Text(lang ? "Number Of Stones Thrown: %g" : (const char*)u8"Количество Брошенных Камней: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 24));
+		ImGui::Text(lang ? "Missed Jumps: %g" : (const char*)u8"Неудачные Прыжки: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 28));
+		ImGui::Text(lang ? "Number Of Pole Jumps: %g" : (const char*)u8"Количество Прыжков С Посохом: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 32));
+		ImGui::Text(lang ? "Damage Taken: %g" : (const char*)u8"Полученный Урон: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 36));
+		ImGui::Text(lang ? "Vigor Health Used: %g" : (const char*)u8"Использованные Лечебные Зелья: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 40));
+		ImGui::Text(lang ? "Swings from Mine Cart: %g" : (const char*)u8"Количество Ударов С Вагонетки: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 44));
+		ImGui::Text(lang ? "Rides In Mine Cart: %g" : (const char*)u8"Количество Поездок В Вагонетке: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 48));
+		ImGui::Text(lang ? "SP Spent in Vendor: %g" : (const char*)u8"Монет Потраченно: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 52));
+		ImGui::Text(lang ? "Health Potions Purchased: %g" : (const char*)u8"Зелий Куплено: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 56));
+		ImGui::Text(lang ? "Jumps Almost Missed: %g" : (const char*)u8"Количество Рискованных Прыжков: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 60));
+		ImGui::Text(lang ? "Distance in Mine Cart: %g" : (const char*)u8"Расстояние На Вагонетке: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 64));
+		ImGui::Text(lang ? "Enemies Killed: %g" : (const char*)u8"Врагов Убито: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 68));
+		ImGui::Text(lang ? "Deaths Due to Sting: %g" : (const char*)u8"Убито Жалом: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 72));
+		ImGui::Text(lang ? "Deaths Due to Staff: %g" : (const char*)u8"Убито Посохом: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 76));
+		ImGui::Text(lang ? "Deaths Due to Stones: %g" : (const char*)u8"Убито Камнями: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 80));
+		ImGui::Text(lang ? "Missed Courage from Kills: %g" : (const char*)u8"Кристаллов Потеряно: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 84));
+		ImGui::Text(lang ? "Total SP Missed: %g" : (const char*)u8"Пропущено Монет: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 88));
+		ImGui::Text(lang ? "Total Courage Missed: %g" : (const char*)u8"Пропущено Кристаллов: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 92));
+		ImGui::Text(lang ? "Total Chests Missed: %g" : (const char*)u8"Пропущено Сундуков: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 96));
+		ImGui::Text(lang ? "Total Quests Missed: %g" : (const char*)u8"Пропущено Квестов: %g", HideStats);
+		HideStats = read_float_value((LPVOID)(0x0075C034 + 100));
+		ImGui::Text(lang ? "Blocks: %g" : (const char*)u8"Количество Блоков: %g", HideStats);
 		ImGui::Unindent();
 
 
@@ -737,7 +779,7 @@ void gui::Render() noexcept
 	}
 	ImGui::SameLine(); ImGui::Text(" "); ImGui::SameLine();
 	if (ImGui::Button(lang ? "Hobbit Technical Discord" : (const char*)u8"Технический канал Хоббита в Дискорде")) {
-		ShellExecute(NULL, "open", "https://discord.gg/4eM6cZdYG8", 0, 0, SW_SHOWNORMAL);
+		ShellExecute(NULL, "open", "https://discord.gg/hvzB3maxQ3", 0, 0, SW_SHOWNORMAL);
 	}
 
 	ImGui::End();
