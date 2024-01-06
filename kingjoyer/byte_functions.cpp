@@ -5,7 +5,8 @@
 #include <memoryapi.h>
 #include <tlhelp32.h>
 
-LPDWORD ukazatel_hobbit(LPVOID Address) {
+HANDLE read_process_hobbit()
+{
 	DWORD pid = 0;     //переменная айди процесса
 	HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 	PROCESSENTRY32 pe32;
@@ -20,7 +21,12 @@ LPDWORD ukazatel_hobbit(LPVOID Address) {
 	}
 	CloseHandle(snapshot);
 	DWORD Prava = PROCESS_ALL_ACCESS; //это права доступа
-	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач 
+	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач
+	return Process;
+}
+LPDWORD ukazatel_hobbit(LPVOID Address) {
+	HANDLE Process;
+	Process = read_process_hobbit();
 	LPDWORD value, ukazatel = 0x00;  //переменная значения байта по адресу
 	if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
 		CloseHandle(Process);
@@ -34,22 +40,9 @@ LPDWORD ukazatel_hobbit(LPVOID Address) {
 
 int save_float_hobbit(LPVOID Address)
 {
-	DWORD pid = 0;     //переменная айди процесса
-	HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-	PROCESSENTRY32 pe32;
-	pe32.dwSize = sizeof(PROCESSENTRY32);
-	if (Process32First(snapshot, &pe32)) {
-		while (Process32Next(snapshot, &pe32)) { //ищет айди процесса
-			if (strcmp(pe32.szExeFile, "Meridian.exe") == 0) {
-				pid = pe32.th32ProcessID; //переменная айди процесса
-				break;
-			}
-		}
-	}
-	CloseHandle(snapshot);
-	DWORD Prava = PROCESS_ALL_ACCESS; //это права доступа
-	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач 
-	float value, x, y, z;  //переменная значения байта по адресу
+	HANDLE Process;
+	Process = read_process_hobbit();
+	float value, x;  //переменная значения байта по адресу
 	if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
 		CloseHandle(Process);
 		return 1;
@@ -60,22 +53,8 @@ int save_float_hobbit(LPVOID Address)
 
 float read_float_value(LPVOID Address)
 {
-	DWORD pid = 0;     //переменная айди процесса
-	HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-	PROCESSENTRY32 pe32;
-	pe32.dwSize = sizeof(PROCESSENTRY32);
-	if (Process32First(snapshot, &pe32)) {
-		while (Process32Next(snapshot, &pe32)) { //ищет айди процесса
-			if (strcmp(pe32.szExeFile, "Meridian.exe") == 0) {
-				pid = pe32.th32ProcessID; //переменная айди процесса
-				break;
-			}
-		}
-	}
-	CloseHandle(snapshot);
-	DWORD Prava = PROCESS_ALL_ACCESS; //это права доступа
-	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач 
-	//LPVOID Address = (LPVOID)0x007600E9; //это адрес в чит енжине
+	HANDLE Process;
+	Process = read_process_hobbit();
 	float value;  //переменная значения байта по адресу
 	if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
 		CloseHandle(Process);
@@ -86,22 +65,8 @@ float read_float_value(LPVOID Address)
 
 int change_float_hobbit(LPVOID Address, float a)
 {
-	DWORD pid = 0;     //переменная айди процесса
-	HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-	PROCESSENTRY32 pe32;
-	pe32.dwSize = sizeof(PROCESSENTRY32);
-	if (Process32First(snapshot, &pe32)) {
-		while (Process32Next(snapshot, &pe32)) { //ищет айди процесса
-			if (strcmp(pe32.szExeFile, "Meridian.exe") == 0) {
-				pid = pe32.th32ProcessID; //переменная айди процесса
-				break;
-			}
-		}
-	}
-	CloseHandle(snapshot);
-	DWORD Prava = PROCESS_ALL_ACCESS; //это права доступа
-	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач 
-	//LPVOID Address = (LPVOID)0x007600E9; //это адрес в чит енжине
+	HANDLE Process;
+	Process = read_process_hobbit();
 	float value;  //переменная значения байта по адресу
 	if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
 		CloseHandle(Process);
@@ -119,22 +84,8 @@ int change_float_hobbit(LPVOID Address, float a)
 }
 int plusA_float_hobbit(LPVOID Address, float a)
 {
-	DWORD pid = 0;     //переменная айди процесса
-	HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-	PROCESSENTRY32 pe32;
-	pe32.dwSize = sizeof(PROCESSENTRY32);
-	if (Process32First(snapshot, &pe32)) {
-		while (Process32Next(snapshot, &pe32)) { //ищет айди процесса
-			if (strcmp(pe32.szExeFile, "Meridian.exe") == 0) {
-				pid = pe32.th32ProcessID; //переменная айди процесса
-				break;
-			}
-		}
-	}
-	CloseHandle(snapshot);
-	DWORD Prava = PROCESS_ALL_ACCESS; //это права доступа
-	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач 
-	//LPVOID Address = (LPVOID)0x007600E9; //это адрес в чит енжине
+	HANDLE Process;
+	Process = read_process_hobbit();
 	float value;  //переменная значения байта по адресу
 	if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
 		CloseHandle(Process);
@@ -152,22 +103,8 @@ int plusA_float_hobbit(LPVOID Address, float a)
 }
 int change_2Byte_hobbit(LPVOID Address, WORD Znachenie, WORD Iznachalnoe)
 {
-	DWORD pid = 0;     //переменная айди процесса
-	HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-	PROCESSENTRY32 pe32;
-	pe32.dwSize = sizeof(PROCESSENTRY32);
-	if (Process32First(snapshot, &pe32)) {
-		while (Process32Next(snapshot, &pe32)) { //ищет айди процесса
-			if (strcmp(pe32.szExeFile, "Meridian.exe") == 0) {
-				pid = pe32.th32ProcessID; //переменная айди процесса
-				break;
-			}
-		}
-	}
-	CloseHandle(snapshot);
-	DWORD Prava = PROCESS_ALL_ACCESS; //это права доступа
-	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач 
-	//LPVOID Address = (LPVOID)0x007600E9; //это адрес в чит енжине
+	HANDLE Process;
+	Process = read_process_hobbit();
 	WORD value;  //переменная значения байта по адресу
 	if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
 		CloseHandle(Process);
@@ -191,21 +128,8 @@ int change_2Byte_hobbit(LPVOID Address, WORD Znachenie, WORD Iznachalnoe)
 }
 int change_1Byte_hobbit(LPVOID Address, BYTE Znachenie, BYTE Iznachalnoe)
 {
-	DWORD pid = 0;     //переменная айди процесса
-	HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-	PROCESSENTRY32 pe32;
-	pe32.dwSize = sizeof(PROCESSENTRY32);
-	if (Process32First(snapshot, &pe32)) {
-		while (Process32Next(snapshot, &pe32)) { //ищет айди процесса
-			if (strcmp(pe32.szExeFile, "Meridian.exe") == 0) {
-				pid = pe32.th32ProcessID; //переменная айди процесса
-				break;
-			}
-		}
-	}
-	CloseHandle(snapshot);
-	DWORD Prava = PROCESS_ALL_ACCESS; //это права доступа
-	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач 
+	HANDLE Process;
+	Process = read_process_hobbit();
 	//LPVOID Address = (LPVOID)0x007600E9; //это адрес в чит енжине
 	BYTE value;  //переменная значения байта по адресу
 	if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
