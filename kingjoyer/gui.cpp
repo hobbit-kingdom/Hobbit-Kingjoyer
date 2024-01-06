@@ -290,6 +290,7 @@ int lang = 0; // 0 - RUS , 1 - ENG
 
 Point currentBilboPos;
 
+
 void gui::Render() noexcept
 {
 
@@ -297,7 +298,7 @@ void gui::Render() noexcept
 	ImGui::SetNextWindowPos({ 0, 0 });
 	ImGui::SetNextWindowSize({ WIDTH, HEIGHT });
 	ImGui::Begin(
-		"The KingJoyer v1.0 by King174rus",
+		"The KingJoyer v1.0 by king174rus and Mr_Kliff",
 		&isRunning,
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoSavedSettings |
@@ -305,13 +306,15 @@ void gui::Render() noexcept
 		ImGuiWindowFlags_NoMove
 	);
 
-	if (ImGui::Button("Change Language"))
+
+	ImGui::Text("                                                                               The Hobbit KingJoyer                  ");
+	ImGui::Text("");
+	if (ImGui::Button(!lang ? "Change Language" : (const char*)u8"Поменять язык"))
 	{
 		lang = !lang;
 	}
-
-	ImGui::Text("Official Hobbit KingJoyer");
 	ImGui::Separator();
+	ImGui::Text("");
 
 	if (ImGui::Checkbox(lang ? "Developer mode" : (const char*)u8"Режим Разработчика", &developerMode)) {
 		change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00); //функция включения режима разработчика
@@ -387,8 +390,6 @@ void gui::Render() noexcept
 			ImGui::EndTable();
 		}
 
-
-
 		ImGui::Unindent();
 
 	}
@@ -396,9 +397,6 @@ void gui::Render() noexcept
 	if (ImGui::CollapsingHeader(lang ? "Cheats" : (const char*)u8"Читы"))
 	{
 		ImGui::Indent();
-
-
-
 
 		ImGui::Text(lang ? "Teleportation" : (const char*)u8"Телепортация");
 		ImGui::Separator();
@@ -705,6 +703,29 @@ void gui::Render() noexcept
 			change_2Byte_hobbit((LPBYTE)0x007212BC + item * 4, 0x00, 0x00); //функция убирания предмета
 		}
 		ImGui::Unindent();
+	}
+
+	ImGui::Text("");
+	ImGui::Text("");
+	ImGui::Text("");
+	ImGui::Text("");
+	ImGui::Text("");
+	ImGui::Text("");
+	ImGui::Text("");
+
+	ImGui::Text(lang ? "Our links" : (const char*)u8"Наши ссылки");
+	ImGui::Separator();
+
+	if (ImGui::Button("king174rus")) {
+		ShellExecute(NULL, "open", "https://www.youtube.com/c/@king174rus", 0, 0, SW_SHOWNORMAL);
+	}
+	ImGui::SameLine(); ImGui::Text(" "); ImGui::SameLine();
+	if (ImGui::Button("Mr_Kliff")) {
+		ShellExecute(NULL, "open", "https://youtube.com/c/@YKliffa", 0, 0, SW_SHOWNORMAL);
+	}
+	ImGui::SameLine(); ImGui::Text(" "); ImGui::SameLine();
+	if (ImGui::Button(lang ? "Hobbit Technical Discord" : (const char*)u8"Технический канал Хоббита в Дискорде")) {
+		ShellExecute(NULL, "open", "https://discord.gg/4eM6cZdYG8", 0, 0, SW_SHOWNORMAL);
 	}
 
 	ImGui::End();
