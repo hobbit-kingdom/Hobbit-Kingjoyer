@@ -616,15 +616,47 @@ void gui::Render() noexcept
 		ImGui::Text(lang ? "Total Quests Missed: %g" : (const char*)u8"Пропущено Квестов: %g", HideStats);
 		HideStats = read_float_value((LPVOID)(0x0075C034 + 100));
 		ImGui::Text(lang ? "Blocks: %g" : (const char*)u8"Количество Блоков: %g", HideStats);
+	
+		const char* Stats[] = { lang ? "Number Of Attacks" : (const char*)u8"Количество Ударов",
+		lang ? "Distance Traveled" : (const char*)u8"Пройденное Расстояние",
+		lang ? "Damage Taken From Poison" : (const char*)u8"Урон От Яда",
+		lang ? "Time Spent Hiding" : (const char*)u8"Время Спрятавшись",
+		lang ? "Number Of Stones Thrown" : (const char*)u8"Количество Брошенных Камней",
+		lang ? "Missed Jumps" : (const char*)u8"Неудачные Прыжки",
+		lang ? "Number Of Pole Jumps" : (const char*)u8"Количество Прыжков С Посохом",
+		lang ? "Damage Taken" : (const char*)u8"Полученный Урон",
+		lang ? "Vigor Health Used" : (const char*)u8"Использованные Лечебные Зелья",
+		lang ? "Swings from Mine Cart" : (const char*)u8"Количество Ударов С Вагонетки",
+		lang ? "Rides In Mine Cart" : (const char*)u8"Количество Поездок В Вагонетке",
+		lang ? "SP Spent in Vendor" : (const char*)u8"Монет Потраченно",
+		lang ? "Health Potions Purchased" : (const char*)u8"Зелий Куплено",
+		lang ? "Jumps Almost Missed" : (const char*)u8"Количество Рискованных Прыжков",
+		lang ? "Distance in Mine Cart" : (const char*)u8"Расстояние На Вагонетке",
+		lang ? "Enemies Killed" : (const char*)u8"Врагов Убито",
+		lang ? "Deaths Due to Sting" : (const char*)u8"Убито Жалом",
+		lang ? "Deaths Due to Staff" : (const char*)u8"Убито Посохом",
+		lang ? "Deaths Due to Stones" : (const char*)u8"Убито Камнями",
+		lang ? "Missed Courage from Kills" : (const char*)u8"Кристаллов Потеряно",
+		lang ? "Total SP Missed" : (const char*)u8"Пропущено Монет",
+		lang ? "Total Courage Missed" : (const char*)u8"Пропущено Кристаллов",
+		lang ? "Total Chests Missed" : (const char*)u8"Пропущено Сундуков",
+		lang ? "Total Quests Missed" : (const char*)u8"Пропущено Квестов",
+		lang ? "Blocks" : (const char*)u8"Количество Блоков" };
+
+		static int NumberStat = -1;
+		ImGui::Combo(lang ? "Select Statistics" : (const char*)u8"Выбрать Статистику", & NumberStat, Stats, IM_ARRAYSIZE(Stats));
+		static int Stat = 0;
+		ImGui::InputInt(" ", &Stat);
+		if (ImGui::Button(lang ? "Change Statistics" : (const char*)u8"Изменить Статистику")) {
+			change_float_hobbit((LPDWORD)0x0075C034 + NumberStat, Stat);
+		}
 		ImGui::Unindent();
-
-
 	}
 
 	if (ImGui::CollapsingHeader(lang ? "Quest Items" : (const char*)u8"Квестовые предметы"))
 	{
 		ImGui::Indent();
-		const char* questItems[] = { (const char*)u8"Ключ тролля" ,(const char*)u8"Камень Короля-Чародея" ,(const char*)u8"Шиполист" ,(const char*)u8"Синяя урна" ,(const char*)u8"Красная урна" ,(const char*)u8"Желтая урна" ,(const char*)u8"Незаженный факел",
+		const char* questItems[ ] = { (const char*)u8"Ключ тролля" ,(const char*)u8"Камень Короля-Чародея" ,(const char*)u8"Шиполист" ,(const char*)u8"Синяя урна" ,(const char*)u8"Красная урна" ,(const char*)u8"Желтая урна" ,(const char*)u8"Незаженный факел",
 		(const char*)u8"Горящий факел",
 		(const char*)u8"Мехи",
 		(const char*)u8"Перстень",
@@ -665,7 +697,7 @@ void gui::Render() noexcept
 		ImGui::Separator();
 
 		static int questItem = -1;
-		ImGui::Combo("", &questItem, questItems, IM_ARRAYSIZE(questItems));
+		ImGui::Combo("   ", &questItem, questItems, IM_ARRAYSIZE(questItems));
 
 		if (ImGui::Button(lang ? "Give quest item" : (const char*)u8"Выдать квестовый предмет")) {
 			plusA_float_hobbit((LPBYTE)0x0075BE98 + questItem * 4, 1); //функция выдачи квестового предмета
