@@ -72,7 +72,6 @@ int change_float_hobbit(LPVOID Address, float a)
 		CloseHandle(Process);
 		return 1;
 	}
-	std::cout << value;
 	DWORD oldProtect;
 	float Znachenie;
 	Znachenie = a;

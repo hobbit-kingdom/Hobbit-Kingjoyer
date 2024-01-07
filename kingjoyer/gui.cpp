@@ -591,9 +591,7 @@ void gui::Render() noexcept
 
 		if (tim > 2)
 		{
-			cout << tim << " ";
 			start = high_resolution_clock::now();
-
 
 			numberOfAttacks = read_float_value((LPVOID)(0x0075C034));
 			numberOfJumps = read_float_value((LPVOID)(0x0075C034 + 4));
@@ -622,17 +620,11 @@ void gui::Render() noexcept
 			totalQuestsMissed = read_float_value((LPVOID)(0x0075C034 + 96));
 			amountOfBlocks = read_float_value((LPVOID)(0x0075C034 + 100));
 
-
-
-
 			xPointer = ukazatel_hobbit((LPVOID)0x0075BA3C);
 			xPos = read_float_value((LPVOID)(xPointer + 497));
 			yPos = read_float_value((LPVOID)(xPointer + 498));
 			zPos = read_float_value((LPVOID)(xPointer + 499));
-
 		}
-
-
 
 		ImGui::Text("X: %g", xPos); ImGui::SameLine();
 		ImGui::Text("Y: %g", yPos); ImGui::SameLine();
@@ -699,7 +691,6 @@ void gui::Render() noexcept
 		if (ImGui::Button(lang ? "Change Statistics" : (const char*)u8"Изменить Статистику")) {
 			change_float_hobbit((LPDWORD)0x0075C034 + NumberStat, Stat);
 		}
-
 
 		ImGui::Unindent();
 	}
