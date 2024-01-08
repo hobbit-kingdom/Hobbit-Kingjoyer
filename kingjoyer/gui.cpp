@@ -275,17 +275,23 @@ bool objInView = false;
 bool trianglesInView = false;
 
 
+
 bool fps60 = false;
 bool invulBilbo = false;
+bool stamina = false;
+
+bool poison_chance = false;
 struct Point {
 	float x = 0;
 	float y = 0;
 	float z = 0;
 	LPDWORD ukazatel = 0x00;
+	LPDWORD ukazatel_stamina = 0x00;
 };
 Point savedPoint;
 float x, y, z;
 LPDWORD ukazatel;
+LPDWORD ukazatel_stamina;
 
 bool debug = false;
 int lang = 0; // 0 - RUS , 1 - ENG
@@ -326,7 +332,6 @@ float totalCouragePointsMissed = 0;
 float totalChestsMissed = 0;
 float totalQuestsMissed = 0;
 float amountOfBlocks = 0;
-
 
 void gui::Render() noexcept
 {
@@ -467,6 +472,10 @@ void gui::Render() noexcept
 		ImGui::Text(lang ? "Cheats" : (const char*)u8"Читы");
 		ImGui::Separator();
 
+		if (ImGui::Checkbox(lang ? "Full stamina" : (const char*)u8"Бесконечная выносливость", &stamina)) {
+			savedPoint.ukazatel_stamina = ukazatel_hobbit((LPDWORD)0x0075BA3C);
+			ukazatel_stamina = savedPoint.ukazatel_stamina; //функция беконечной стамины
+		}
 		if (ImGui::Checkbox(lang ? "Invulnerability" : (const char*)u8"Бессмертие", &invulBilbo)) {
 			change_1Byte_hobbit((LPVOID)0x0075FBF4, 0x01, 0x00); //функция бессмертия
 		}
@@ -832,7 +841,18 @@ void gui::Render() noexcept
 		}
 		ImGui::Unindent();
 	}
+	if (ImGui::CollapsingHeader(lang ? "Special option" : (const char*)u8"Специальные опции"))
+	{
+		ImGui::Indent();
+		if (ImGui::Checkbox(lang ? "Can be poisoned" : (const char*)u8"Возможно ли отравиться", &poison_chance)) {
+			change_1Byte_hobbit((LPVOID)0x0042132C, 0x00, 0x01); //функция возможности отравиться у Бильбо
+		}
 
+		ImGui::Unindent();
+
+	}
+	if (stamina == true)
+		change_float_hobbit(ukazatel_stamina + 641, 10);
 	ImGui::Text("");
 	ImGui::Text("");
 	ImGui::Text("");
