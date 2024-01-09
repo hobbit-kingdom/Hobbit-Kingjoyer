@@ -150,3 +150,33 @@ int change_1Byte_hobbit(LPVOID Address, BYTE Znachenie, BYTE Iznachalnoe)
 		if (bWriteSuccess) return 0;
 	}
 }
+int plusA_int_hobbit(LPVOID Address, int a)
+{
+	HANDLE Process;
+	Process = read_process_hobbit();
+	int value;  //переменная значения байта по адресу
+	if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
+		CloseHandle(Process);
+		return 1;
+	}
+	DWORD oldProtect;
+	int Znachenie;
+	Znachenie = value;
+	Znachenie += a;
+	SIZE_T dwSize = sizeof(Znachenie);
+	VirtualProtectEx(Process, Address, dwSize, PAGE_EXECUTE_READWRITE, &oldProtect);
+	BOOL bWriteSuccess = WriteProcessMemory(Process, Address, &Znachenie, dwSize, NULL);
+	VirtualProtectEx(Process, Address, dwSize, oldProtect, &oldProtect);
+	if (bWriteSuccess) return 0;
+}
+int read_int_value(LPVOID Address)
+{
+	HANDLE Process;
+	Process = read_process_hobbit();
+	int value;  //переменная значения байта по адресу
+	if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
+		CloseHandle(Process);
+		return 1.0;
+	}
+	return value;
+}

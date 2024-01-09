@@ -333,6 +333,7 @@ float totalChestsMissed = 0;
 float totalQuestsMissed = 0;
 float amountOfBlocks = 0;
 
+int HUD_HP = 98615574-22+6;
 void gui::Render() noexcept
 {
 	ImGui::SetNextWindowPos({ 0, 0 });
@@ -847,9 +848,26 @@ void gui::Render() noexcept
 		if (ImGui::Checkbox(lang ? "Can be poisoned" : (const char*)u8"Возможно ли отравиться", &poison_chance)) {
 			change_1Byte_hobbit((LPVOID)0x0042132C, 0x00, 0x01); //функция возможности отравиться у Бильбо
 		}
-
+		ImGui::Text(lang ? "Change HUD HP (max 22)" : (const char*)u8"Изменение HUD ХП (макс 22)");
+		if (ImGui::Button("<")) {
+			HUD_HP = read_int_value((LPBYTE)0x004F5BB8);
+			if (HUD_HP == 98615552) {
+				change_1Byte_hobbit((LPBYTE)0x004F5BB8, 0x16, 0x00);
+			}
+			else plusA_int_hobbit((LPBYTE)0x004F5BB8, -1); //функция изменения худа хп
+		}
+		ImGui::SameLine();
+		if (ImGui::Button(">")) {
+			HUD_HP = read_int_value((LPBYTE)0x004F5BB8);
+			if (HUD_HP == 98615574) {
+				change_1Byte_hobbit((LPBYTE)0x004F5BB8, 0x00, 0x00);
+			}
+			else plusA_int_hobbit((LPBYTE)0x004F5BB8, 1); //функция изменения худа хп
+		}
+		HUD_HP = read_int_value((LPBYTE)0x004F5BB8);
+		ImGui::Text((const char*)to_string(HUD_HP-98615552).c_str());
 		ImGui::Unindent();
-
+		
 	}
 	if (stamina == true)
 		change_float_hobbit(ukazatel_stamina + 641, 10);
