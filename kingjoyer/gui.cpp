@@ -708,41 +708,109 @@ void gui::Render() noexcept
 	if (ImGui::CollapsingHeader(lang ? "Quest Items" : (const char*)u8"Квестовые предметы"))
 	{
 		ImGui::Indent();
-		const char* questItems[] = { (const char*)u8"Ключ тролля" ,(const char*)u8"Камень Короля-Чародея" ,(const char*)u8"Шиполист" ,(const char*)u8"Синяя урна" ,(const char*)u8"Красная урна" ,(const char*)u8"Желтая урна" ,(const char*)u8"Незаженный факел",
-		(const char*)u8"Горящий факел",
-		(const char*)u8"Мехи",
-		(const char*)u8"Перстень",
-		(const char*)u8"Масло",
-		(const char*)u8"Железная звездочка",
-		(const char*)u8"Серебряная звездочка",
-		(const char*)u8"Золотая звездочка",
-		(const char*)u8"Медная звездочка",
-		(const char*)u8"Стальная звездочка",
-		(const char*)u8"Железная шестеренка",
-		(const char*)u8"Серебряная шестеренка",
-		(const char*)u8"Золотая шестеренка",
-		(const char*)u8"Медная шестеренка",
-		(const char*)u8"Стальная шестеренка",
-		(const char*)u8"Железная шестерня",
-		(const char*)u8"Серебряная шестерня",
-		(const char*)u8"Золотая шестерня",
-		(const char*)u8"Медная шестерня",
-		(const char*)u8"Стальная шестерня",
-		(const char*)u8"Железный толкатель",
-		(const char*)u8"Серебряный толкатель",
-		(const char*)u8"Золотой толкатель",
-		(const char*)u8"Медный толкатель",
-		(const char*)u8"Стальной толкатель",
-		(const char*)u8"Железная шпага",
-		(const char*)u8"Серебряная шпага",
-		(const char*)u8"Золотая шпага",
-		(const char*)u8"Медная шпага",
-		(const char*)u8"Стальная шпага",
-		(const char*)u8"Дрова",
-		(const char*)u8"Ключ Грит",
-		(const char*)u8"Ключ Дим",
-		(const char*)u8"Ключ Мугг" ,(const char*)u8"Ключ от тюрьмы" ,(const char*)u8"Ключ от последнего моста" ,(const char*)u8"Шестеренка Гандолы №1" ,(const char*)u8"Шестеренка Гандолы №2" ,(const char*)u8"Рычаг Варт" ,(const char*)u8"Камень Варт" ,(const char*)u8"Золотая чаша Трора",(const char*)u8"Ожерелье Гириона" ,(const char*)u8"Рубин Гроина" ,(const char*)u8"Копье короля Дортина",
-		(const char*)u8"Золотое блюдо" ,(const char*)u8"Кексы" ,(const char*)u8"Ингридиенты для кексов" ,(const char*)u8"Ключ от сарая" ,(const char*)u8"Яблоко" ,(const char*)u8"Молоток" ,(const char*)u8"Гвозди" ,(const char*)u8"Посох" ,(const char*)u8"Яйцо" ,(const char*)u8"Ягоды" ,(const char*)u8"Мешок пшеницы" ,(const char*)u8"Сахар" ,(const char*)u8"Специи" ,(const char*)u8"Колбаски" ,(const char*)u8"Пшеница" ,(const char*)u8"Одеяло" ,(const char*)u8"Иголка" ,(const char*)u8"1 ключ-кристалл" ,(const char*)u8"2 ключ-кристалл" ,(const char*)u8"3 ключ-кристалл" ,(const char*)u8"4 ключ-кристалл" ,(const char*)u8"Эльфийское зелье исцеления" ,(const char*)u8"1 ключ от Подземелья" ,(const char*)u8"2 ключ от Подземелья" ,(const char*)u8"3 ключ от Подземелья" ,(const char*)u8"4 ключ от Подземелья" ,(const char*)u8"Пещерный кристалл" ,(const char*)u8"Сон-трава" ,(const char*)u8"Луннолист" ,(const char*)u8"Паутинник" ,(const char*)u8"Паутинное зелье" ,(const char*)u8"Приводной ремень" ,(const char*)u8"Цепь из сокровищницы" ,(const char*)u8"Форма для ключа" ,(const char*)u8"1 форма для ключа" ,(const char*)u8"2 форма для ключа" ,(const char*)u8"Ключ от сокровищницы" ,(const char*)u8"1 ключ от Тронного зала" ,(const char*)u8"2 ключ от Тронного зала" ,(const char*)u8"Аркенстон" ,(const char*)u8"Ключ от городского склада" ,(const char*)u8"Черная стрела" ,(const char*)u8"Золотой кинжал Мэллока" ,(const char*)u8"Черная бутылка" ,(const char*)u8"Синяя бутылка" ,(const char*)u8"Фиолетовая бутылка" ,(const char*)u8"Красная бутылка" ,(const char*)u8"Желтая бутылка" ,(const char*)u8"Послание Гендольфа" ,(const char*)u8"Лекарство" ,(const char*)u8"Ключ троллей" ,(const char*)u8"Рукоятка для лестницы" ,(const char*)u8"Ключ Реннара" };
+		const char* questItems[] = { lang ? "Troll key(OHUH)" : (const char*)u8"Ключ тролля",
+		lang ? "Witch King Crystal" : (const char*)u8"Камень Короля-Чародея",
+		lang ? "Burberry plant" : (const char*)u8"Шиполист",
+		lang ? "Blue urn" : (const char*)u8"Синяя урна",
+		lang ? "Red urn" : (const char*)u8"Красная урна",
+		lang ? "Yellow urn" : (const char*)u8"Желтая урна",
+		lang ? "Unlit torch" : (const char*)u8"Незаженный факел",
+		lang ? "Lit torch" : (const char*)u8"Горящий факел",
+		lang ? "Bellows" : (const char*)u8"Мехи",
+		lang ? "Signet ring" : (const char*)u8"Перстень",
+		lang ? "Can of oil" : (const char*)u8"Масло",
+		lang ? "Small iron gear" : (const char*)u8"Железная звездочка",
+		lang ? "Small silver gear" : (const char*)u8"Серебряная звездочка",
+		lang ? "Small golden gear" : (const char*)u8"Золотая звездочка",
+		lang ? "Small copper gear" : (const char*)u8"Медная звездочка",
+		lang ? "Small metallic" : (const char*)u8"Стальная звездочка",
+		lang ? "Iron gear" : (const char*)u8"Железная шестеренка",
+		lang ? "Silver gear" : (const char*)u8"Серебряная шестеренка",
+		lang ? "Golden gear" : (const char*)u8"Золотая шестеренка",
+		lang ? "Copper gear" : (const char*)u8"Медная шестеренка",
+		lang ? "Metallic gear" : (const char*)u8"Стальная шестеренка",
+		lang ? "Large iron gear" : (const char*)u8"Железная шестерня",
+		lang ? "Large silver gear" : (const char*)u8"Серебряная шестерня",
+		lang ? "Large golden gear" : (const char*)u8"Золотая шестерня",
+		lang ? "Large copper gear" : (const char*)u8"Медная шестерня",
+		lang ? "Large metallic gear" : (const char*)u8"Стальная шестерня",
+		lang ? "Iron shank head" : (const char*)u8"Железный толкатель",
+		lang ? "Silver shank head" : (const char*)u8"Серебряный толкатель",
+		lang ? "Golden shank head" : (const char*)u8"Золотой толкатель",
+		lang ? "Copper shank head" : (const char*)u8"Медный толкатель",
+		lang ? "Metallic shank head" : (const char*)u8"Стальной толкатель",
+		lang ? "Iron shank arm" : (const char*)u8"Железная шпага",
+		lang ? "Silver shank arm" : (const char*)u8"Серебряная шпага",
+		lang ? "Golden shank arm" : (const char*)u8"Золотая шпага",
+		lang ? "Copper shank arm" : (const char*)u8"Медная шпага",
+		lang ? "Metallic shank arm" : (const char*)u8"Стальная шпага",
+		lang ? "Firewood" : (const char*)u8"Дрова",
+		lang ? "Grit-lift key" : (const char*)u8"Ключ Грит",
+		lang ? "Dim-lift key" : (const char*)u8"Ключ Дим",
+		lang ? "Mugg-lift key" : (const char*)u8"Ключ Мугг",
+		lang ? "Jail Exit Key" : (const char*)u8"Ключ от тюрьмы",
+		lang ? "Final Bridge Key" : (const char*)u8"Ключ от последнего моста",
+		lang ? "Gandola gear 1" : (const char*)u8"Шестеренка Гандолы №1",
+		lang ? "Gandola gear 2" : (const char*)u8"Шестеренка Гандолы №2",
+		lang ? "Wart-lift lever" : (const char*)u8"Рычаг Варт",
+		lang ? "Wart-stone" : (const char*)u8"Камень Варт",
+		lang ? "Thror`s golden cup" : (const char*)u8"Золотая чаша Трора",
+		lang ? "Necklace of Girion" : (const char*)u8"Ожерелье Гириона",
+		lang ? "Groin`s ruby" : (const char*)u8"Рубин Гроина",
+		lang ? "King Bladorthin`s spears" : (const char*)u8"Копье короля Дортина",
+		lang ? "Golden serving dish" : (const char*)u8"Золотое блюдо",
+		lang ? "Tea-cakes" : (const char*)u8"Кексы",
+		lang ? "Tea-cakes ingredients" : (const char*)u8"Ингридиенты для кексов",
+		lang ? "Shed key" : (const char*)u8"Ключ от сарая",
+		lang ? "Apple" : (const char*)u8"Яблоко",
+		lang ? "Hammer" : (const char*)u8"Молоток",
+		lang ? "Nails" : (const char*)u8"Гвозди",
+		lang ? "Walking stick" : (const char*)u8"Посох",
+		lang ? "Egg" : (const char*)u8"Яйцо",
+		lang ? "Berries" : (const char*)u8"Ягоды",
+		lang ? "Sack of Wheat" : (const char*)u8"Мешок пшеницы",
+		lang ? "Sugar" : (const char*)u8"Сахар",
+		lang ? "Spice" : (const char*)u8"Специи",
+		lang ? "Sausage" : (const char*)u8"Колбаски",
+		lang ? "Wheat" : (const char*)u8"Пшеница",
+		lang ? "Quilt" : (const char*)u8"Одеяло",
+		lang ? "Quilting needle" : (const char*)u8"Иголка",
+		lang ? "Elvish opening crystal 1" : (const char*)u8"1 ключ-кристалл",
+		lang ? "Elvish opening crystal 2" : (const char*)u8"2 ключ-кристалл",
+		lang ? "Elvish opening crystal 3" : (const char*)u8"3 ключ-кристалл",
+		lang ? "Elvish opening crystal 4" : (const char*)u8"4 ключ-кристалл",
+		lang ? "Elvish healing potion" : (const char*)u8"Эльфийское зелье исцеления",
+		lang ? "Deep cellar key 1" : (const char*)u8"1 ключ от Подземелья",
+		lang ? "Deep cellar key 2" : (const char*)u8"2 ключ от Подземелья",
+		lang ? "Deep cellar key 3" : (const char*)u8"3 ключ от Подземелья",
+		lang ? "Deep cellar key 4" : (const char*)u8"4 ключ от Подземелья",
+		lang ? "Cavern crystal" : (const char*)u8"Пещерный кристалл",
+		lang ? "Wilowweed" : (const char*)u8"Сон-трава",
+		lang ? "Moonleaf" : (const char*)u8"Луннолист",
+		lang ? "Spidersbane" : (const char*)u8"Паутинник",
+		lang ? "Web potion" : (const char*)u8"Паутинное зелье",
+		lang ? "Gear belt" : (const char*)u8"Приводной ремень",
+		lang ? "Treasury Chain" : (const char*)u8"Цепь из сокровищницы",
+		lang ? "Treasury key mold" : (const char*)u8"Форма для ключа",
+		lang ? "Throne key mold 1" : (const char*)u8"1 форма для ключа",
+		lang ? "Throne key mold 2" : (const char*)u8"2 форма для ключа",
+		lang ? "Treasury key" : (const char*)u8"Ключ от сокровищницы",
+		lang ? "Throne key 1" : (const char*)u8"1 ключ от Тронного зала",
+		lang ? "Throne key 2" : (const char*)u8"2 ключ от Тронного зала",
+		lang ? "Arkenstone" : (const char*)u8"Аркенстон",
+		lang ? "City warehouse key" : (const char*)u8"Ключ от городского склада",
+		lang ? "Black arrow" : (const char*)u8"Черная стрела",
+		lang ? "Malloc`s golden dagger" : (const char*)u8"Золотой кинжал Мэллока",
+		lang ? "Black wine bottle" : (const char*)u8"Черная бутылка",
+		lang ? "Blue wine bottle" : (const char*)u8"Синяя бутылка",
+		lang ? "Purple wine bottle" : (const char*)u8"Фиолетовая бутылка",
+		lang ? "Red wine bottle" : (const char*)u8"Красная бутылка",
+		lang ? "Yellow wine bottle" : (const char*)u8"Желтая бутылка",
+		lang ? "Gandalf`s Message" : (const char*)u8"Послание Гендольфа",
+		lang ? "Healing Draught" : (const char*)u8"Лекарство",
+		lang ? "Troll key(TH)" : (const char*)u8"Ключ троллей",
+		lang ? "Ladder switch lever" : (const char*)u8"Рукоятка для лестницы",
+		lang ? "Rennar`s key" : (const char*)u8"Ключ Реннара"};
 
 
 		ImGui::Text(lang ? "Quest Items" : (const char*)u8"Квестовые предметы");
@@ -763,64 +831,64 @@ void gui::Render() noexcept
 	if (ImGui::CollapsingHeader(lang ? "Items" : (const char*)u8"Предметы"))
 	{
 		ImGui::Indent();
-		const char* items[] = { (const char*)u8"Монета"
-			,(const char*)u8"Камень"
-			,(const char*)u8"Ihavehadstones"
-			,(const char*)u8"Здоровье"
-			,(const char*)u8"GreaterHealth"
-			,(const char*)u8"Выносливость"
-			 ,(const char*)u8"CPTOTAL"
-			,(const char*)u8"LevelingCP"
-			,(const char*)u8"Синий кристалл"
-			,(const char*)u8"Голубой кристалл"
-			,(const char*)u8"Красный кристалл"
-			,(const char*)u8"Зеленный кристалл"
-			 ,(const char*)u8"Фиолетовый кристалл"
-			,(const char*)u8"Белый кристалл"
-			,(const char*)u8"Coinbag"
-			,(const char*)u8"Coinbag5"
-			,(const char*)u8"Coinbag10"
-			,(const char*)u8"Coinbag25"
-			 ,(const char*)u8"Coinbag50"
-			,(const char*)u8"Coinbag100"
-			,(const char*)u8"Сумка для камней"
-			,(const char*)u8"Сумка для зелей"
-			,(const char*)u8"Отмычка"
-			,(const char*)u8"CLevelCP"
-			,(const char*)u8"ChestCount"
-			,(const char*)u8"BilboLevel"
-			,(const char*)u8"BilbosPoisoned"
-			,(const char*)u8"BilboPoisonTimer"
-			,(const char*)u8"Bilbo_Staff_Swing"
-			,(const char*)u8"Bilbo_Staff_Swing2"
-			 ,(const char*)u8"Bilbo_Staff_Swing3"
-			,(const char*)u8"Bilbo_Staff_Jump"
-			,(const char*)u8"Bilbo_Staff_Jump2"
-			,(const char*)u8"Bilbo_Staff_Jump3"
-			,(const char*)u8"Bilbo_Staff_AE_Jump"
-			,(const char*)u8"Bilbo_Staff_AE_Jump2"
-			 ,(const char*)u8"Bilbo_Staff_AE_Jump3"
-			,(const char*)u8"Bilbo_Sting_Swing"
-			,(const char*)u8"Bilbo_Sting_Swing2"
-			,(const char*)u8"Bilbo_Sting_Swing3"
-			,(const char*)u8"Bilbo_Sting_Jump"
-			,(const char*)u8"Bilbo_Sting_Jump2"
-			 ,(const char*)u8"Bilbo_Sting_Jump3"
-			,(const char*)u8"Bilbo_Stone_Throw"
-			,(const char*)u8"Bilbo_Stone_Throw2"
-			,(const char*)u8"Bilbo_Stone_Throw3"
-			,(const char*)u8"Зелье уровня"
-			,(const char*)u8"Лечебное зелье"
-			,(const char*)u8"Противоядие"
-			,(const char*)u8"Живая вода"
-			,(const char*)u8"Жало"
-			 ,(const char*)u8"Кольцо"
-			,(const char*)u8"Посох"
-			,(const char*)u8"Взрывные камни"
-			,(const char*)u8"Огненные камни"
-			,(const char*)u8"Замороженные камни"
-			,(const char*)u8"Ядовитые камни",
-			(const char*)u8"Магические камни" };
+		const char* items[] = { lang ? "Coin" : (const char*)u8"Монета",
+			lang ? "Stones" : (const char*)u8"Камень",
+			(const char*)u8"Ihavehadstones",
+			lang ? "Health" : (const char*)u8"Здоровье",
+			(const char*)u8"GreaterHealth",
+			lang ? "Vigor Health" : (const char*)u8"Выносливость",
+			(const char*)u8"CPTOTAL",
+			(const char*)u8"LevelingCP",
+			lang ? "Courage" : (const char*)u8"Синий кристалл",
+			lang ? "Courage1" : (const char*)u8"Голубой кристалл",
+			lang ? "Courage5" : (const char*)u8"Красный кристалл",
+			lang ? "Courage10" : (const char*)u8"Зеленный кристалл",
+			lang ? "Courage25" : (const char*)u8"Фиолетовый кристалл",
+			lang ? "Courage50" : (const char*)u8"Белый кристалл",
+			(const char*)u8"Coinbag",
+			(const char*)u8"Coinbag5",
+			(const char*)u8"Coinbag10",
+			(const char*)u8"Coinbag25",
+			(const char*)u8"Coinbag50",
+			(const char*)u8"Coinbag100",
+			lang ? "Rock Bag" : (const char*)u8"Сумка для камней",
+			lang ? "Med Bag" : (const char*)u8"Сумка для зелей",
+			lang ? "Skeleton key" : (const char*)u8"Отмычка",
+			(const char*)u8"CLevelCP",
+			(const char*)u8"ChestCount",
+			(const char*)u8"BilboLevel",
+			(const char*)u8"BilbosPoisoned",
+			(const char*)u8"BilboPoisonTimer",
+			(const char*)u8"Bilbo_Staff_Swing",
+			(const char*)u8"Bilbo_Staff_Swing2",
+			(const char*)u8"Bilbo_Staff_Swing3",
+			(const char*)u8"Bilbo_Staff_Jump",
+			(const char*)u8"Bilbo_Staff_Jump2",
+			(const char*)u8"Bilbo_Staff_Jump3",
+			(const char*)u8"Bilbo_Staff_AE_Jump",
+			(const char*)u8"Bilbo_Staff_AE_Jump2",
+			(const char*)u8"Bilbo_Staff_AE_Jump3",
+			(const char*)u8"Bilbo_Sting_Swing",
+			(const char*)u8"Bilbo_Sting_Swing2",
+			(const char*)u8"Bilbo_Sting_Swing3",
+			(const char*)u8"Bilbo_Sting_Jump",
+			(const char*)u8"Bilbo_Sting_Jump2",
+			(const char*)u8"Bilbo_Sting_Jump3",
+			(const char*)u8"Bilbo_Stone_Throw",
+			(const char*)u8"Bilbo_Stone_Throw2",
+			(const char*)u8"Bilbo_Stone_Throw3",
+			lang ? "Level Potion" : (const char*)u8"Зелье уровня",
+			lang ? "Health Potion" : (const char*)u8"Лечебное зелье",
+			lang ? "Antidote" : (const char*)u8"Противоядие",
+			lang ? "Water of Vigor" : (const char*)u8"Живая вода",
+			lang ? "Sword Sting" : (const char*)u8"Жало",
+			lang ? "Ring" : (const char*)u8"Кольцо",
+			lang ? "Staff" : (const char*)u8"Посох",
+			lang ? "Explosive Stone" : (const char*)u8"Взрывные камни",
+			lang ? "Fire Stone" : (const char*)u8"Огненные камни",
+			lang ? "Freeze Stone" : (const char*)u8"Замороженные камни",
+			lang ? "Poison Stone" : (const char*)u8"Ядовитые камни",
+			lang ? "Magic Stone" : (const char*)u8"Магические камни"};
 		static int item = -1;
 
 		ImGui::Text(lang ? "Items" : (const char*)u8"Предметы");
