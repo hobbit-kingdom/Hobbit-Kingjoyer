@@ -2,7 +2,7 @@
 #include<iostream>
 #include <thread>
 using namespace gui;
-int main (  //__stdcall wWinMain
+int __stdcall wWinMain(  //__stdcall wWinMain
 	HINSTANCE instance,
 	HINSTANCE previousInstance,
 	PWSTR arguments,
@@ -14,7 +14,6 @@ int main (  //__stdcall wWinMain
 	CreateHWindow("Cheat Menu");
 	CreateDevice();
 	CreateImGui();
-
 	while (gui::isRunning)
 	{
 		gui::BeginRender();
