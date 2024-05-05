@@ -1,6 +1,6 @@
 #include "gui.h"
 #include "byte_functions.h"
-
+#include "Randommod.h"
 #include "../imgui/imgui.h"
 #include "../imgui/imgui_impl_dx9.h"
 #include "../imgui/imgui_impl_win32.h"
@@ -8,6 +8,8 @@
 #include <iostream>
 #include "string"
 #include <chrono>
+#include <random>
+#include <thread>
 
 using namespace std::chrono;
 using namespace std;
@@ -273,7 +275,9 @@ bool objInfo = false;
 bool maxobjInfo = false;
 bool objInView = false;
 bool trianglesInView = false;
-
+bool randommod = false;
+bool renderRigidInstances = false;
+bool renderPlaySurface = false;
 
 
 bool fps60 = false;
@@ -332,8 +336,10 @@ float totalCouragePointsMissed = 0;
 float totalChestsMissed = 0;
 float totalQuestsMissed = 0;
 float amountOfBlocks = 0;
+float timer = 0;
 
 int HUD_HP = 98615574-22+6;
+
 void gui::Render() noexcept
 {
 	ImGui::SetNextWindowPos({ 0, 0 });
@@ -376,7 +382,7 @@ void gui::Render() noexcept
 				change_1Byte_hobbit((LPVOID)0x00777B04, 0x01, 0x00); //функция рендера волумов
 			}
 			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "PolyCache" : (const char*)u8"Полигоны", &polyCache)) {
-				change_1Byte_hobbit((LPVOID)0x00778078, 0x01, 0x00); //функция рендера волумов
+				change_1Byte_hobbit((LPVOID)0x00778078, 0x01, 0x00); //функция рендера полигонов
 			}
 			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Load Triggers" : (const char*)u8"Триггеры Загрузки", &renderLoadTriggers)) {
 				change_1Byte_hobbit((LPVOID)0x00777B18, 0x01, 0x00); //функция рендера загрузочных триггеров
@@ -425,6 +431,12 @@ void gui::Render() noexcept
 			}
 			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Push boxes" : (const char*)u8"Двигающиеся коробки", &renderPushBoxes)) {
 				change_1Byte_hobbit((LPVOID)0x00777AF4, 0x01, 0x00); //функция рендера пушбоксов
+			}
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Rigid Instances" : (const char*)u8"Объекты", &renderRigidInstances)) {
+				change_1Byte_hobbit((LPVOID)0x00777A8C, 0x01, 0x00); //функция рендера rigidInstances
+			}
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Play surfaces" : (const char*)u8"Ландшафт", &renderPlaySurface)) {
+				change_1Byte_hobbit((LPVOID)0x00777A98, 0x01, 0x00); //функция рендера ландшафта
 			}
 			ImGui::EndTable();
 		}
@@ -894,7 +906,7 @@ void gui::Render() noexcept
 		ImGui::Text(lang ? "Items" : (const char*)u8"Предметы");
 		ImGui::Separator();
 
-		ImGui::Combo("", &item, items, IM_ARRAYSIZE(items));
+		ImGui::Combo("     ", &item, items, IM_ARRAYSIZE(items));
 
 		if (ImGui::Button(lang ? "Give item" : (const char*)u8"Выдать предмет")) {
 			plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //функция выдачи предмета
@@ -936,6 +948,17 @@ void gui::Render() noexcept
 		ImGui::Text((const char*)to_string(HUD_HP-98615552).c_str());
 		ImGui::Unindent();
 		
+	}
+	if (ImGui::CollapsingHeader(lang ? "Special option" : (const char*)u8"Сложные опции"))
+	{
+		ImGui::Indent();
+		if (ImGui::Checkbox(lang ? "Random mod" : (const char*)u8"Рандом мод", &randommod)) {
+			// Create a random number generator engine
+		}
+		ImGui::Unindent();
+	}
+	if (randommod == true) {
+		RandomMod();
 	}
 	if (stamina == true)
 		change_float_hobbit(ukazatel_stamina + 641, 10);
