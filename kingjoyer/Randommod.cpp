@@ -13,7 +13,7 @@
 float timer2 = 0;
 std::random_device rd;
 std::mt19937 gen(rd());
-std::uniform_int_distribution<> distrib(0, 4);
+std::uniform_int_distribution<> distrib(0, 6);
 int random_number = distrib(gen);
 void RandomMod() {
 	if (timer2 == 0 ) {
@@ -26,10 +26,11 @@ void RandomMod() {
 			change_1Byte_hobbit((LPVOID)0x00777A8C, 0x01, 0x00); //рендер объектов
 			change_1Byte_hobbit((LPVOID)0x00777A98, 0x01, 0x00); //рендер ландшафта
 		}
+		if (random_number == 5) change_float_hobbit((LPVOID)0x0075B888, 1000);
+		if (random_number == 6) change_float_hobbit((LPVOID)0x0075B888, 100);
 	}
 	timer2 += ImGui::GetIO().DeltaTime;
 	if (timer2 > 10.0f) {
-		timer2 = 0;
 		if (random_number == 0) change_1Byte_hobbit((LPVOID)0x00777AA0, 0x00, 0x00); //отключение невидимого Бильбо
 		if (random_number == 1) change_float_hobbit((LPVOID)0x0075B850, 300); //стандартна скорость
 		if (random_number == 2) change_float_hobbit((LPVOID)0x0075B850, 300);
@@ -38,6 +39,9 @@ void RandomMod() {
 			change_1Byte_hobbit((LPVOID)0x00777A8C, 0x00, 0x00); //рендер объектов
 			change_1Byte_hobbit((LPVOID)0x00777A98, 0x00, 0x00); //рендер ландшафта
 		}
+		if (random_number == 5) change_float_hobbit((LPVOID)0x0075B888, 3000);
+		if (random_number == 6) change_float_hobbit((LPVOID)0x0075B888, 3000);
+		timer2 = 0;
 	}
 	return ;
 }
