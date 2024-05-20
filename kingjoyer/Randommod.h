@@ -1,3 +1,3 @@
 #pragma once
-void RandomMod();
+void RandomMod(float vremaeffectof); 
 

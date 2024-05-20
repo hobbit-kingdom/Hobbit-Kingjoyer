@@ -2,8 +2,8 @@
 #include<iostream>
 #include <thread>
 using namespace gui;
-//int __stdcall wWinMain(  //__stdcall wWinMain
-int main(
+int __stdcall wWinMain(  //__stdcall wWinMain
+//int main(
 HINSTANCE instance,
 	HINSTANCE previousInstance,
 	PWSTR arguments,

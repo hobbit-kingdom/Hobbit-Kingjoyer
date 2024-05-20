@@ -337,6 +337,7 @@ float totalChestsMissed = 0;
 float totalQuestsMissed = 0;
 float amountOfBlocks = 0;
 float timer = 0;
+float vremaeffectof = 10;
 
 int HUD_HP = 98615574-22+6;
 
@@ -952,13 +953,15 @@ void gui::Render() noexcept
 	if (ImGui::CollapsingHeader(lang ? "Special option" : (const char*)u8"Сложные опции"))
 	{
 		ImGui::Indent();
+		ImGui::Text(lang ? "Effect change time" : (const char*)u8"Время смены эффектов");
+		ImGui::InputFloat(" ", &vremaeffectof, 10);
 		if (ImGui::Checkbox(lang ? "Random mod" : (const char*)u8"Рандом мод", &randommod)) {
 			// Create a random number generator engine
 		}
 		ImGui::Unindent();
 	}
 	if (randommod == true) {
-		RandomMod();
+		RandomMod(vremaeffectof);
 	}
 	if (stamina == true)
 		change_float_hobbit(ukazatel_stamina + 641, 10);
