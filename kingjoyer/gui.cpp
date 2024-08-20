@@ -580,16 +580,21 @@ void gui::Render() noexcept
 		if (ImGui::Button(lang ? "Apply Max Distance" : (const char*)u8"Применить макс. расстояние")) {
 			change_float_hobbit((LPVOID)0x00772B3C, maxCameraDistance);
 		}
-
-		if (ImGui::Checkbox(lang ? "First persone" : (const char*)u8"Первое лицо", &face1)) { 
-			change_4Byte_hobbit((LPVOID)0x00772A70, 0x3F800000,0x42C80000);
-			change_4Byte_hobbit((LPVOID)0x00772B38, 0x3F800000,0x42C80000);  //первое лицо
-			change_4Byte_hobbit((LPVOID)0x00772B3C, 0x3F800000,0x43960000);
+		
+		if (ImGui::Button(lang ? "First persone" : (const char*)u8"Первое лицо")) { 
+			change_float_hobbit((LPVOID)0x00772A70, 1);
+			change_float_hobbit((LPVOID)0x00772B38, 1);  //первое лицо
+			change_float_hobbit((LPVOID)0x00772B3C, 1);
 		}
-		if (ImGui::Checkbox(lang ? "Second persone" : (const char*)u8"Второе лицо", &face2)) { 
-			change_4Byte_hobbit((LPVOID)0x00772A70, 0xC3960000, 0x42C80000);
-			change_4Byte_hobbit((LPVOID)0x00772B38, 0xC3960000, 0x42C80000);  //второе лицо
-			change_4Byte_hobbit((LPVOID)0x00772B3C, 0xC3960000, 0x43960000);
+		if (ImGui::Button(lang ? "Second persone" : (const char*)u8"Второе лицо")) { 
+			change_float_hobbit((LPVOID)0x00772A70, -300);
+			change_float_hobbit((LPVOID)0x00772B38, -300);  //второе лицо
+			change_float_hobbit((LPVOID)0x00772B3C, -300);
+		}
+		if (ImGui::Button(lang ? "Third persone" : (const char*)u8"Третье лицо")) {
+			change_float_hobbit((LPVOID)0x00772A70, 100);
+			change_float_hobbit((LPVOID)0x00772B38, 100);  //третье лицо
+			change_float_hobbit((LPVOID)0x00772B3C, 300);
 		}
 		ImGui::Unindent();
 	}
