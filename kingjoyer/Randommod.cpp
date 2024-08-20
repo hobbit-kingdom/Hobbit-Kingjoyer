@@ -38,15 +38,15 @@ void RandomMod(float vremaeffectof)
 		else if (random_number == 10) change_4Byte_hobbit((LPVOID)0x00772BF0, 0x40866666 ,0x3F99999A); //перевернутая камера
 		else if (random_number == 11)
 		{
-			change_float_hobbit((LPVOID)0x00772A70, 1);
-			change_float_hobbit((LPVOID)0x00772B38, 1);  //первое лицо
-			change_float_hobbit((LPVOID)0x00772B3C, 1);
+			change_4Byte_hobbit((LPVOID)0x00772A70, 0x3F800000, 0x42C80000);
+			change_4Byte_hobbit((LPVOID)0x00772B38, 0x3F800000, 0x42C80000);  //первое лицо
+			change_4Byte_hobbit((LPVOID)0x00772B3C, 0x3F800000, 0x43960000);
 		}
 		else if (random_number == 12)
 		{
-			change_float_hobbit((LPVOID)0x00772A70, -300);
-			change_float_hobbit((LPVOID)0x00772B38, -300);  //второе лицо
-			change_float_hobbit((LPVOID)0x00772B3C, -300);
+			change_4Byte_hobbit((LPVOID)0x00772A70, 0xC3960000, 0x42C80000);
+			change_4Byte_hobbit((LPVOID)0x00772B38, 0xC3960000, 0x42C80000);  //второе лицо
+			change_4Byte_hobbit((LPVOID)0x00772B3C, 0xC3960000, 0x43960000);
 		}
 		vkl = !vkl;
 	}

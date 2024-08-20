@@ -283,7 +283,9 @@ bool renderPlaySurface = false;
 bool fps60 = false;
 bool invulBilbo = false;
 bool stamina = false;
-
+bool stones = false;
+bool face1 = false;
+bool face2 = false;
 bool poison_chance = false;
 struct Point {
 	float x = 0;
@@ -490,6 +492,8 @@ void gui::Render() noexcept
 			savedPoint.ukazatel_stamina = ukazatel_hobbit((LPDWORD)0x0075BA3C);
 			ukazatel_stamina = savedPoint.ukazatel_stamina; //функция беконечной стамины
 		}
+		if (ImGui::Checkbox(lang ? "Full stones" : (const char*)u8"Бесконечные камни", &stones)) { //бесконечные камни
+		}
 		if (ImGui::Checkbox(lang ? "Invulnerability" : (const char*)u8"Бессмертие", &invulBilbo)) {
 			change_1Byte_hobbit((LPVOID)0x0075FBF4, 0x01, 0x00); //функция бессмертия
 		}
@@ -577,6 +581,16 @@ void gui::Render() noexcept
 			change_float_hobbit((LPVOID)0x00772B3C, maxCameraDistance);
 		}
 
+		if (ImGui::Checkbox(lang ? "First persone" : (const char*)u8"Первое лицо", &face1)) { 
+			change_4Byte_hobbit((LPVOID)0x00772A70, 0x3F800000,0x42C80000);
+			change_4Byte_hobbit((LPVOID)0x00772B38, 0x3F800000,0x42C80000);  //первое лицо
+			change_4Byte_hobbit((LPVOID)0x00772B3C, 0x3F800000,0x43960000);
+		}
+		if (ImGui::Checkbox(lang ? "Second persone" : (const char*)u8"Второе лицо", &face2)) { 
+			change_4Byte_hobbit((LPVOID)0x00772A70, 0xC3960000, 0x42C80000);
+			change_4Byte_hobbit((LPVOID)0x00772B38, 0xC3960000, 0x42C80000);  //второе лицо
+			change_4Byte_hobbit((LPVOID)0x00772B3C, 0xC3960000, 0x43960000);
+		}
 		ImGui::Unindent();
 	}
 
@@ -956,7 +970,6 @@ void gui::Render() noexcept
 		ImGui::Text(lang ? "Effect change time" : (const char*)u8"Время смены эффектов");
 		ImGui::InputFloat(" ", &vremaeffectof, 10);
 		if (ImGui::Checkbox(lang ? "Random mod" : (const char*)u8"Рандом мод", &randommod)) {
-			// Create a random number generator engine
 		}
 		ImGui::Unindent();
 	}
@@ -965,6 +978,8 @@ void gui::Render() noexcept
 	}
 	if (stamina == true)
 		change_float_hobbit(ukazatel_stamina + 641, 10);
+	if (stones == true)
+		change_float_hobbit((LPVOID)0x0075BDB4, 10);
 	ImGui::Text("");
 	ImGui::Text("");
 	ImGui::Text("");
