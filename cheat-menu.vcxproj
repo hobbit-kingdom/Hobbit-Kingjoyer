@@ -155,6 +155,9 @@
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="kingjoyer\byte_functions.h" />
     <ClInclude Include="kingjoyer\gui.h" />
+    <ClInclude Include="kingjoyer\HobbitMemoryAccess.h" />
+    <ClInclude Include="kingjoyer\MemoryAccess.h" />
+    <ClInclude Include="kingjoyer\PickupAll.h" />
     <ClInclude Include="kingjoyer\Randommod.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -168,7 +171,10 @@
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="kingjoyer\byte_functions.cpp" />
     <ClCompile Include="kingjoyer\gui.cpp" />
+    <ClCompile Include="kingjoyer\HobbitMemoryAccess.cpp" />
     <ClCompile Include="kingjoyer\main.cpp" />
+    <ClCompile Include="kingjoyer\MemoryAccess.cpp" />
+    <ClCompile Include="kingjoyer\PickupAll.cpp" />
     <ClCompile Include="kingjoyer\Randommod.cpp" />
   </ItemGroup>
   <ItemGroup>

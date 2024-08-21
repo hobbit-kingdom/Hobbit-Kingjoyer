@@ -1,6 +1,8 @@
 #include "gui.h"
 #include "byte_functions.h"
 #include "Randommod.h"
+#include "PickupAll.h"
+
 #include "../imgui/imgui.h"
 #include "../imgui/imgui_impl_dx9.h"
 #include "../imgui/imgui_impl_win32.h"
@@ -276,6 +278,7 @@ bool maxobjInfo = false;
 bool objInView = false;
 bool trianglesInView = false;
 bool randommod = false;
+bool pickupall = false;
 bool renderRigidInstances = false;
 bool renderPlaySurface = false;
 
@@ -976,10 +979,15 @@ void gui::Render() noexcept
 		ImGui::InputFloat(" ", &vremaeffectof, 10);
 		if (ImGui::Checkbox(lang ? "Random mod" : (const char*)u8"Рандом мод", &randommod)) {
 		}
+		if (ImGui::Checkbox(lang ? "PickupAll mod" : (const char*)u8"Все поднять мод", &pickupall)) {
+		}
 		ImGui::Unindent();
 	}
 	if (randommod == true) {
 		RandomMod(vremaeffectof);
+	}
+	if (pickupall == true) {
+		PickupAll();
 	}
 	if (stamina == true)
 		change_float_hobbit(ukazatel_stamina + 641, 10);
