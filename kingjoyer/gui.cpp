@@ -588,16 +588,19 @@ void gui::Render() noexcept
 			change_float_hobbit((LPVOID)0x00772A70, 1);
 			change_float_hobbit((LPVOID)0x00772B38, 1);  //первое лицо
 			change_float_hobbit((LPVOID)0x00772B3C, 1);
+			change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x00);
 		}
 		if (ImGui::Button(lang ? "Second persone" : (const char*)u8"Второе лицо")) { 
 			change_float_hobbit((LPVOID)0x00772A70, -300);
 			change_float_hobbit((LPVOID)0x00772B38, -300);  //второе лицо
 			change_float_hobbit((LPVOID)0x00772B3C, -300);
+			change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x01);
 		}
 		if (ImGui::Button(lang ? "Third persone" : (const char*)u8"Третье лицо")) {
 			change_float_hobbit((LPVOID)0x00772A70, 100);
 			change_float_hobbit((LPVOID)0x00772B38, 100);  //третье лицо
 			change_float_hobbit((LPVOID)0x00772B3C, 300);
+			change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x01);
 		}
 		ImGui::Unindent();
 	}
@@ -977,6 +980,9 @@ void gui::Render() noexcept
 		ImGui::Indent();
 		ImGui::Text(lang ? "Effect change time" : (const char*)u8"Время смены эффектов");
 		ImGui::InputFloat(" ", &vremaeffectof, 10);
+		if (vremaeffectof < 0.0f) {
+			vremaeffectof = 0.0f;
+		}
 		if (ImGui::Checkbox(lang ? "Random mod" : (const char*)u8"Рандом мод", &randommod)) {
 		}
 		if (ImGui::Checkbox(lang ? "PickupAll mod" : (const char*)u8"Все поднять мод", &pickupall)) {
