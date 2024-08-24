@@ -588,7 +588,7 @@ void gui::Render() noexcept
 			change_float_hobbit((LPVOID)0x00772A70, 1);
 			change_float_hobbit((LPVOID)0x00772B38, 1);  //первое лицо
 			change_float_hobbit((LPVOID)0x00772B3C, 1);
-			change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x00);
+			change_1Byte_hobbit((LPVOID)0x00777AA0, 0x00, 0x00);
 		}
 		if (ImGui::Button(lang ? "Second persone" : (const char*)u8"Второе лицо")) { 
 			change_float_hobbit((LPVOID)0x00772A70, -300);
@@ -989,6 +989,7 @@ void gui::Render() noexcept
 		}
 		ImGui::Unindent();
 	}
+
 	if (randommod == true) {
 		RandomMod(vremaeffectof);
 	}
@@ -999,6 +1000,7 @@ void gui::Render() noexcept
 		change_float_hobbit(ukazatel_stamina + 641, 10);
 	if (stones == true)
 		change_float_hobbit((LPVOID)0x0075BDB4, 10);
+
 	ImGui::Text("");
 	ImGui::Text("");
 	ImGui::Text("");
