@@ -290,6 +290,9 @@ bool stones = false;
 bool face1 = false;
 bool face2 = false;
 bool poison_chance = false;
+bool sliding_wall = false;
+bool finish_game = false;
+bool finish_demo = false;
 struct Point {
 	float x = 0;
 	float y = 0;
@@ -951,8 +954,17 @@ void gui::Render() noexcept
 	if (ImGui::CollapsingHeader(lang ? "Special option" : (const char*)u8"Специальные опции"))
 	{
 		ImGui::Indent();
-		if (ImGui::Checkbox(lang ? "Can be poisoned" : (const char*)u8"Возможно ли отравиться", &poison_chance)) {
+		if (ImGui::Checkbox(lang ? "Disable the possibility of poisoning" : (const char*)u8"Отключить возможность отравиться", &poison_chance)) {
 			change_1Byte_hobbit((LPVOID)0x0042132C, 0x00, 0x01); //функция возможности отравиться у Бильбо
+		}
+		if (ImGui::Checkbox(lang ? "Disable wall sliding" : (const char*)u8"Отключить скольжение по стене", &sliding_wall)) {
+			change_1Byte_hobbit((LPVOID)0x0044342F, 0xEB, 0x74); //функция отключения скольжения по стене (если скольже с анимацие, то скольжение всё равно сработает)
+		}
+		if (ImGui::Checkbox(lang ? "Finish the game after completing a level" : (const char*)u8"Закончить игру после окончания уровня", &finish_game)) {
+			change_1Byte_hobbit((LPVOID)0x0052ACDF, 0x75, 0x74); //функция окончания игры после окончания уровня
+		}
+		if (ImGui::Checkbox(lang ? "Finish the demo after completing a level" : (const char*)u8"Закончить демо после окончания уровня", &finish_demo)) {
+			change_1Byte_hobbit((LPVOID)0x0052ACC2, 0x75, 0x74); //функция окончания беты после окончания уровня
 		}
 		ImGui::Text(lang ? "Change HUD HP (max 22)" : (const char*)u8"Изменение HUD ХП (макс 22)");
 		if (ImGui::Button("<")) {
