@@ -281,6 +281,7 @@ bool randommod = false;
 bool pickupall = false;
 bool renderRigidInstances = false;
 bool renderPlaySurface = false;
+bool renderGeometry = false;
 
 
 bool fps60 = false;
@@ -446,6 +447,9 @@ void gui::Render() noexcept
 			}
 			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Play surfaces" : (const char*)u8"Ландшафт", &renderPlaySurface)) {
 				change_1Byte_hobbit((LPVOID)0x00777A98, 0x01, 0x00); //функция рендера ландшафта
+			}
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Geometry" : (const char*)u8"Геометрия", &renderGeometry)) {
+				change_1Byte_hobbit((LPVOID)0x0075D2CC, 0x01, 0x00); //функция рендера геометрии
 			}
 			ImGui::EndTable();
 		}
