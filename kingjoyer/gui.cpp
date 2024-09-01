@@ -294,17 +294,23 @@ bool poison_chance = false;
 bool sliding_wall = false;
 bool finish_game = false;
 bool finish_demo = false;
+bool slide = false;
+bool lock_animation = false;
 struct Point {
 	float x = 0;
 	float y = 0;
 	float z = 0;
+	float frame_animation = 0;
 	LPDWORD ukazatel = 0x00;
 	LPDWORD ukazatel_stamina = 0x00;
+	LPDWORD ukazatel_animation = 0x00;
 };
 Point savedPoint;
 float x, y, z;
+float frame_animation;
 LPDWORD ukazatel;
 LPDWORD ukazatel_stamina;
+LPDWORD ukazatel_animation;
 
 bool debug = false;
 int lang = 0; // 0 - RUS , 1 - ENG
@@ -317,7 +323,7 @@ LPDWORD xPointer = 0x00;
 float xPos = 0;
 float yPos = 0;
 float zPos = 0;
-
+float timer_animation = 0;
 
 float numberOfAttacks = 0;
 float numberOfJumps = 0;
@@ -355,7 +361,7 @@ void gui::Render() noexcept
 	ImGui::SetNextWindowPos({ 0, 0 });
 	ImGui::SetNextWindowSize({ WIDTH, HEIGHT });
 	ImGui::Begin(
-		"The KingJoyer v1.0 by king174rus and Mr_Kliff",
+		"The KingJoyer v1.1 by king174rus and Mr_Kliff",
 		&isRunning,
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoSavedSettings |
@@ -590,14 +596,14 @@ void gui::Render() noexcept
 		if (ImGui::Button(lang ? "Apply Max Distance" : (const char*)u8"Применить макс. расстояние")) {
 			change_float_hobbit((LPVOID)0x00772B3C, maxCameraDistance);
 		}
-		
-		if (ImGui::Button(lang ? "First persone" : (const char*)u8"Первое лицо")) { 
+
+		if (ImGui::Button(lang ? "First persone" : (const char*)u8"Первое лицо")) {
 			change_float_hobbit((LPVOID)0x00772A70, 1);
 			change_float_hobbit((LPVOID)0x00772B38, 1);  //первое лицо
 			change_float_hobbit((LPVOID)0x00772B3C, 1);
 			change_1Byte_hobbit((LPVOID)0x00777AA0, 0x00, 0x00);
 		}
-		if (ImGui::Button(lang ? "Second persone" : (const char*)u8"Второе лицо")) { 
+		if (ImGui::Button(lang ? "Second persone" : (const char*)u8"Второе лицо")) {
 			change_float_hobbit((LPVOID)0x00772A70, -300);
 			change_float_hobbit((LPVOID)0x00772B38, -300);  //второе лицо
 			change_float_hobbit((LPVOID)0x00772B3C, -300);
@@ -855,7 +861,7 @@ void gui::Render() noexcept
 		lang ? "Healing Draught" : (const char*)u8"Лекарство",
 		lang ? "Troll key(TH)" : (const char*)u8"Ключ троллей",
 		lang ? "Ladder switch lever" : (const char*)u8"Рукоятка для лестницы",
-		lang ? "Rennar`s key" : (const char*)u8"Ключ Реннара"};
+		lang ? "Rennar`s key" : (const char*)u8"Ключ Реннара" };
 
 
 		ImGui::Text(lang ? "Quest Items" : (const char*)u8"Квестовые предметы");
@@ -933,7 +939,7 @@ void gui::Render() noexcept
 			lang ? "Fire Stone" : (const char*)u8"Огненные камни",
 			lang ? "Freeze Stone" : (const char*)u8"Замороженные камни",
 			lang ? "Poison Stone" : (const char*)u8"Ядовитые камни",
-			lang ? "Magic Stone" : (const char*)u8"Магические камни"};
+			lang ? "Magic Stone" : (const char*)u8"Магические камни" };
 		static int item = -1;
 
 		ImGui::Text(lang ? "Items" : (const char*)u8"Предметы");
@@ -964,6 +970,14 @@ void gui::Render() noexcept
 		if (ImGui::Checkbox(lang ? "Disable wall sliding" : (const char*)u8"Отключить скольжение по стене", &sliding_wall)) {
 			change_1Byte_hobbit((LPVOID)0x0044342F, 0xEB, 0x74); //функция отключения скольжения по стене (если скольже с анимацие, то скольжение всё равно сработает)
 		}
+		if (ImGui::Checkbox(lang ? "Slide on" : (const char*)u8"Включить слайд", &slide)) {
+			change_1Byte_hobbit((LPVOID)0x0043CD52, 0x08, 0x04); //функция окончания беты после окончания уровня
+		}
+		if (ImGui::Checkbox(lang ? "Lock animation" : (const char*)u8"Залочить анимацию", &lock_animation)) {
+			savedPoint.ukazatel_animation = ukazatel_hobbit((LPDWORD)0x0075BA3C);
+			ukazatel_animation = savedPoint.ukazatel_animation; //функция беконечной стамины
+			savedPoint.frame_animation = save_float_hobbit(ukazatel_animation + 0x530);
+		}
 		if (ImGui::Checkbox(lang ? "Finish the game after completing a level" : (const char*)u8"Закончить игру после окончания уровня", &finish_game)) {
 			change_1Byte_hobbit((LPVOID)0x0052ACDF, 0x75, 0x74); //функция окончания игры после окончания уровня
 		}
@@ -987,9 +1001,9 @@ void gui::Render() noexcept
 			else plusA_int_hobbit((LPBYTE)0x004F5BB8, 1); //функция изменения худа хп
 		}
 		HUD_HP = read_int_value((LPBYTE)0x004F5BB8);
-		ImGui::Text((const char*)to_string(HUD_HP-98615552).c_str());
+		ImGui::Text((const char*)to_string(HUD_HP - 98615552).c_str());
 		ImGui::Unindent();
-		
+
 	}
 	if (ImGui::CollapsingHeader(lang ? "Special option" : (const char*)u8"Сложные опции"))
 	{
@@ -1014,6 +1028,14 @@ void gui::Render() noexcept
 	}
 	if (stamina == true)
 		change_float_hobbit(ukazatel_stamina + 641, 10);
+	if (lock_animation == true)
+	{
+		if (timer_animation >= 0.1) {
+			change_float_hobbit(ukazatel_animation + 332, savedPoint.frame_animation);
+			timer_animation = 0.0;
+		}
+		else timer_animation += ImGui::GetIO().DeltaTime;
+	}
 	if (stones == true)
 		change_float_hobbit((LPVOID)0x0075BDB4, 10);
 
