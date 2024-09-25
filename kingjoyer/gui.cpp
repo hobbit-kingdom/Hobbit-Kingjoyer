@@ -354,7 +354,7 @@ float amountOfBlocks = 0;
 float timer = 0;
 float vremaeffectof = 10;
 
-int HUD_HP = 98615574-22+6;
+int HUD_HP = 98615574 - 22 + 6;
 
 void gui::Render() noexcept
 {
@@ -581,6 +581,14 @@ void gui::Render() noexcept
 		if (ImGui::Button(lang ? "Increase FOV" : (const char*)u8"Увеличить FOV")) {
 			plusA_float_hobbit((LPVOID)0x00772BF0, +0.1); //функция отдаления камеры на 0.1
 		}
+
+		static float fovValue = 1.27;
+		ImGui::InputFloat(lang ? "Set FOV manually" : (const char*)u8"Поставить Угол Обзора Вручную", &fovValue, 0.1);
+		if (ImGui::Button(lang ? "Apply manual FOV" : (const char*)u8"Применить ручной Угол Обзора")) {
+			change_float_hobbit((LPVOID)0x00772BF0, fovValue);
+		}
+
+
 
 		static int cameraDistance = 100;
 		ImGui::InputInt(lang ? "Camera Distance" : (const char*)u8"Растояние камеры", &cameraDistance, 50);
