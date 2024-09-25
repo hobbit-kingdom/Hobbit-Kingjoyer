@@ -605,19 +605,23 @@ void gui::Render() noexcept
 			change_float_hobbit((LPVOID)0x00772B3C, maxCameraDistance);
 		}
 
-		if (ImGui::Button(lang ? "First persone" : (const char*)u8"Первое лицо")) {
+		if (ImGui::Button(lang ? "Flip camera" : (const char*)u8"Перевернуть камеру")) {
+			change_4Byte_hobbit((LPVOID)0x00772BF0, 0x3FA0D97C, 0x408CCCCD);
+		}
+
+		if (ImGui::Button(lang ? "First person" : (const char*)u8"Первое лицо")) {
 			change_float_hobbit((LPVOID)0x00772A70, 1);
 			change_float_hobbit((LPVOID)0x00772B38, 1);  //первое лицо
 			change_float_hobbit((LPVOID)0x00772B3C, 1);
 			change_1Byte_hobbit((LPVOID)0x00777AA0, 0x00, 0x00);
 		}
-		if (ImGui::Button(lang ? "Second persone" : (const char*)u8"Второе лицо")) {
+		if (ImGui::Button(lang ? "Second person" : (const char*)u8"Второе лицо")) {
 			change_float_hobbit((LPVOID)0x00772A70, -300);
 			change_float_hobbit((LPVOID)0x00772B38, -300);  //второе лицо
 			change_float_hobbit((LPVOID)0x00772B3C, -300);
 			change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x01);
 		}
-		if (ImGui::Button(lang ? "Third persone" : (const char*)u8"Третье лицо")) {
+		if (ImGui::Button(lang ? "Third person" : (const char*)u8"Третье лицо")) {
 			change_float_hobbit((LPVOID)0x00772A70, 100);
 			change_float_hobbit((LPVOID)0x00772B38, 100);  //третье лицо
 			change_float_hobbit((LPVOID)0x00772B3C, 300);
