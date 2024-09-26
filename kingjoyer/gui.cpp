@@ -1045,7 +1045,8 @@ void gui::Render() noexcept
 	ImGui::Text("");
 	ImGui::Text("");
 	ImGui::Text("");
-
+	//change_float_hobbit((LPVOID)0x0F96D9D0, save_float_hobbit((LPVOID)0x0F9685E8));
+	//change_float_hobbit((LPVOID)0x0F96D9D8, save_float_hobbit((LPVOID)0x0F9685F4));
 
 	ImGui::Text(lang ? "Our links" : (const char*)u8"Наши ссылки");
 	ImGui::Separator();
