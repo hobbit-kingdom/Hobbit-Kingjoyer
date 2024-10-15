@@ -296,6 +296,7 @@ bool finish_game = false;
 bool finish_demo = false;
 bool slide = false;
 bool lock_animation = false;
+bool chesttimer = false;
 struct Point {
 	float x = 0;
 	float y = 0;
@@ -507,6 +508,10 @@ void gui::Render() noexcept
 		if (ImGui::Checkbox(lang ? "Full stamina" : (const char*)u8"Бесконечная выносливость", &stamina)) {
 			savedPoint.ukazatel_stamina = ukazatel_hobbit((LPDWORD)0x0075BA3C);
 			ukazatel_stamina = savedPoint.ukazatel_stamina; //функция беконечной стамины
+		}
+		if (ImGui::Checkbox(lang ? "Full chest time" : (const char*)u8"Бесконечный таймер сундука", &chesttimer)) {
+			change_4Byte_hobbit((LPDWORD)0x005299E9, 0x90909090, 0xFA5025D8);
+			change_2Byte_hobbit((LPDWORD)0x005299ED, 0x9090, 0x006E); //тут просто надо 6 байтов обнулять, по-этому тут 2 функции
 		}
 		if (ImGui::Checkbox(lang ? "Full stones" : (const char*)u8"Бесконечные камни", &stones)) { //бесконечные камни
 		}
