@@ -516,8 +516,6 @@ void gui::Render() noexcept
 			ukazatel_chesttime = savedPoint.ukazatel_chesttime;
 			savedPoint.ukazatel_chesttime = ukazatel_hobbit((LPDWORD)savedPoint.ukazatel_chesttime +371);
 			ukazatel_chesttime = savedPoint.ukazatel_chesttime;
-			savedPoint.ukazatel_chesttime = ukazatel_hobbit((LPDWORD)savedPoint.ukazatel_chesttime);
-			ukazatel_chesttime = savedPoint.ukazatel_chesttime;
 			//change_4Byte_hobbit((LPDWORD)0x005299E9, 0x90909090, 0xFA5025D8);
 			//change_2Byte_hobbit((LPDWORD)0x005299ED, 0x9090, 0x006E); //тут просто надо 6 байтов обнулять, по-этому тут 2 функции
 		}
@@ -1054,9 +1052,13 @@ void gui::Render() noexcept
 	if (stamina == true)
 		change_float_hobbit(ukazatel_stamina + 641, 10);
 	if (chesttimer == true)
+	{
+		savedPoint.ukazatel_chesttime = ukazatel_hobbit((LPDWORD)savedPoint.ukazatel_chesttime);
+		ukazatel_chesttime = savedPoint.ukazatel_chesttime;
 		ImGui::Text(to_string(read_float_value(ukazatel_chesttime + 320)).c_str());
-		//change_float_hobbit(ukazatel_chesttime +320,	10);
-	if (lock_animation == true)
+		change_float_hobbit(ukazatel_chesttime + 320, 10);
+	}
+		if (lock_animation == true)
 	{
 		if (timer_animation >= 0.1) {
 			change_float_hobbit(ukazatel_animation + 332, savedPoint.frame_animation);
