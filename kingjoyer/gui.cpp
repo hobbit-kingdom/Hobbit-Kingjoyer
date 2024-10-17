@@ -986,7 +986,7 @@ void gui::Render() noexcept
 		}
 		ImGui::Unindent();
 	}
-	if (ImGui::CollapsingHeader(lang ? "Special option" : (const char*)u8"Специальные опции"))
+	if (ImGui::CollapsingHeader(lang ? "Special options" : (const char*)u8"Специальные опции"))
 	{
 		ImGui::Indent();
 		if (ImGui::Checkbox(lang ? "Disable the possibility of poisoning" : (const char*)u8"Отключить возможность отравиться", &poison_chance)) {
@@ -1030,7 +1030,7 @@ void gui::Render() noexcept
 		ImGui::Unindent();
 
 	}
-	if (ImGui::CollapsingHeader(lang ? "Special option" : (const char*)u8"Сложные опции"))
+	if (ImGui::CollapsingHeader(lang ? "Compicated options" : (const char*)u8"Сложные опции"))
 	{
 		ImGui::Indent();
 		ImGui::Text(lang ? "Effect change time" : (const char*)u8"Время смены эффектов");
