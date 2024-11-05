@@ -297,6 +297,7 @@ bool finish_demo = false;
 bool slide = false;
 bool lock_animation = false;
 bool chesttimer = false;
+float chesttimer2 = false;
 struct Point {
 	float x = 0;
 	float y = 0;
@@ -321,6 +322,7 @@ int lang = 0; // 0 - RUS , 1 - ENG
 Point currentBilboPos;
 
 auto start = high_resolution_clock::now();
+auto startChest = high_resolution_clock::now();
 
 LPDWORD xPointer = 0x00;
 float xPos = 0;
@@ -512,18 +514,29 @@ void gui::Render() noexcept
 			ukazatel_stamina = savedPoint.ukazatel_stamina; //функция беконечной стамины
 		}
 		if (ImGui::Checkbox(lang ? "Full chest time" : (const char*)u8"Бесконечный таймер сундука", &chesttimer)) {
-			savedPoint.ukazatel_chesttime = ukazatel_hobbit((LPDWORD)0x00813038);
-			ukazatel_chesttime = savedPoint.ukazatel_chesttime;
-			savedPoint.ukazatel_chesttime = ukazatel_hobbit((LPDWORD)savedPoint.ukazatel_chesttime +371);
-			ukazatel_chesttime = savedPoint.ukazatel_chesttime;
-			//change_4Byte_hobbit((LPDWORD)0x005299E9, 0x90909090, 0xFA5025D8);
-			//change_2Byte_hobbit((LPDWORD)0x005299ED, 0x9090, 0x006E); //тут просто надо 6 байтов обнулять, по-этому тут 2 функции
+
+			change_4Byte_hobbit((LPDWORD)0x005299E9, 0x90909090, 0xFA5025D8);
+			change_2Byte_hobbit((LPDWORD)0x005299ED, 0x9090, 0x006E); //тут просто надо 6 байтов обнулять, по-этому тут 2 функции
 		}
 		if (ImGui::Checkbox(lang ? "Full stones" : (const char*)u8"Бесконечные камни", &stones)) { //бесконечные камни
 		}
 		if (ImGui::Checkbox(lang ? "Invulnerability" : (const char*)u8"Бессмертие", &invulBilbo)) {
 			change_1Byte_hobbit((LPVOID)0x0075FBF4, 0x01, 0x00); //функция бессмертия
 		}
+
+		if (ImGui::Button(lang ? "Upgrade staff" : (const char*)u8"Улучшить посох")) {
+			for (int item = 28; item<37; item++)
+				plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //функция выдачи всех улучшений на посох
+		}
+		if (ImGui::Button(lang ? "Upgrade 1 sting" : (const char*)u8"Улучшить меч")) {
+			for (int item = 37; item < 43; item++)
+				plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //функция выдачи всех улучшений на жало
+		}
+		if (ImGui::Button(lang ? "Upgrade 1 stone" : (const char*)u8"Улучшить камни")) {
+			for (int item = 43; item < 46; item++)
+				plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //функция выдачи всех улучшений на камни
+		}
+
 		if (ImGui::Button(lang ? "Add 1 stone" : (const char*)u8"Выдать 1 камень")) {
 			plusA_float_hobbit((LPVOID)0x0075BDB4, 1); //функция прибавки на 1 камней
 		}
@@ -1051,14 +1064,9 @@ void gui::Render() noexcept
 	}
 	if (stamina == true)
 		change_float_hobbit(ukazatel_stamina + 641, 10);
-	if (chesttimer == true)
-	{
-		savedPoint.ukazatel_chesttime = ukazatel_hobbit((LPDWORD)savedPoint.ukazatel_chesttime);
-		ukazatel_chesttime = savedPoint.ukazatel_chesttime;
-		ImGui::Text(to_string(read_float_value(ukazatel_chesttime + 320)).c_str());
-		change_float_hobbit(ukazatel_chesttime + 320, 10);
-	}
-		if (lock_animation == true)
+
+
+	if (lock_animation == true)
 	{
 		if (timer_animation >= 0.1) {
 			change_float_hobbit(ukazatel_animation + 332, savedPoint.frame_animation);
