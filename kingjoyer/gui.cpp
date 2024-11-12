@@ -282,17 +282,17 @@ bool copyAndRenameFile(const std::string& sourceFile) {
 	}
 }
 
-void displaySkinButtons()
+void displaySkinButtons(bool lang)
 {
 	fs::path skinsDir = "./SKINS";
 
 	if (!fs::exists(skinsDir)) {
-		ImGui::Text("SKINS directory does not exist.");
+		ImGui::Text(lang ? "SKINS directory does not exist." : (const char*)u8"папка SKINS не найдена");
 		return;
 	}
 
 	if (fs::is_empty(skinsDir)) {
-		ImGui::Text("SKINS directory is empty.");
+		ImGui::Text(lang ? "SKINS directory is empty." : (const char*)u8"папка SKINS пуста.");
 		return;
 	}
 
@@ -309,7 +309,7 @@ void displaySkinButtons()
 				ImGui::Text("%s", fileName.c_str());
 				ImGui::SameLine();
 
-				if (ImGui::Button(("Apply##" + fileName).c_str()))
+				if (ImGui::Button((lang ? "Apply##" : (const char*)u8"Принять##" + fileName).c_str()))
 					copyAndRenameFile(filePath.filename().string());
 
 			}
@@ -433,7 +433,7 @@ void gui::Render() noexcept
 	ImGui::SetNextWindowPos({ 0, 0 });
 	ImGui::SetNextWindowSize({ WIDTH, HEIGHT });
 	ImGui::Begin(
-		"The KingJoyer v1.1 by king174rus and Mr_Kliff",
+		"The KingJoyer v1.2 by king174rus and Mr_Kliff",
 		&isRunning,
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoSavedSettings |
@@ -1128,7 +1128,7 @@ void gui::Render() noexcept
 			(const char*)u8"Перезагрузите уровень или загрузите сохранение после установки скина");
 		ImGui::Text("");
 
-		displaySkinButtons();
+		displaySkinButtons(lang);
 	}
 
 	if (randommod == true) {
