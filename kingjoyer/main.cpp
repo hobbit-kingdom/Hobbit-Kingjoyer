@@ -12,7 +12,7 @@ int __stdcall wWinMain(  //__stdcall wWinMain
 	setlocale(LC_ALL, "RUSSIAN");
 
 	// create gui
-	CreateHWindow("Cheat Menu");
+	CreateHWindow(L"Cheat Menu");
 	CreateDevice();
 	CreateImGui();
 	while (gui::isRunning)

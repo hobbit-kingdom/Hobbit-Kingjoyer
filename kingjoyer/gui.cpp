@@ -12,6 +12,7 @@
 #include <chrono>
 #include <random>
 #include <thread>
+#include <filesystem>
 
 using namespace std::chrono;
 using namespace std;
@@ -87,7 +88,7 @@ long __stdcall WindowProcess(
 	return DefWindowProc(window, message, wideParameter, longParameter);
 }
 
-void gui::CreateHWindow(const char* windowName) noexcept
+void gui::CreateHWindow(const LPCWSTR windowName) noexcept
 {
 	windowClass.cbSize = sizeof(WNDCLASSEX);
 	windowClass.style = CS_CLASSDC;
@@ -99,14 +100,14 @@ void gui::CreateHWindow(const char* windowName) noexcept
 	windowClass.hCursor = 0;
 	windowClass.hbrBackground = 0;
 	windowClass.lpszMenuName = 0;
-	windowClass.lpszClassName = "class001";
+	windowClass.lpszClassName = L"class001";
 	windowClass.hIconSm = 0;
 
 	RegisterClassEx(&windowClass);
 
 	window = CreateWindowEx(
 		0,
-		"class001",
+		L"class001",
 		windowName,
 		WS_POPUP,
 		100,
@@ -248,6 +249,72 @@ void gui::EndRender() noexcept
 	// Handle loss of D3D9 device
 	if (result == D3DERR_DEVICELOST && device->TestCooperativeLevel() == D3DERR_DEVICENOTRESET)
 		ResetDevice();
+}
+
+namespace fs = std::filesystem;
+bool copyAndRenameFile(const std::string& sourceFile) {
+	try {
+		fs::path sourcePath = "./SKINS/" + sourceFile;
+		fs::path destDir = "./Common/Bilbo/";
+
+		if (!fs::exists(sourcePath)) {
+			std::cerr << "Source file does not exist: " << sourcePath << std::endl;
+			return false;
+		}
+
+		std::string fileExtension = sourcePath.extension().string();
+		fs::path destFilePath = destDir / ("BILBO[D]" + fileExtension);
+
+		fs::create_directories(destDir);
+
+		if (fs::exists(destFilePath)) {
+			fs::remove(destFilePath);
+			std::cout << "Existing file deleted: " << destFilePath << std::endl;
+		}
+
+		fs::copy_file(sourcePath, destFilePath, fs::copy_options::overwrite_existing);
+		std::cout << "File copied and renamed to: " << destFilePath << std::endl;
+		return true;
+	}
+	catch (const fs::filesystem_error& e) {
+		std::cerr << "Filesystem error: " << e.what() << std::endl;
+		return false;
+	}
+}
+
+void displaySkinButtons()
+{
+	fs::path skinsDir = "./SKINS";
+
+	if (!fs::exists(skinsDir)) {
+		ImGui::Text("SKINS directory does not exist.");
+		return;
+	}
+
+	if (fs::is_empty(skinsDir)) {
+		ImGui::Text("SKINS directory is empty.");
+		return;
+	}
+
+	for (const auto& entry : fs::directory_iterator(skinsDir))
+	{
+		if (entry.is_regular_file())
+		{
+			fs::path filePath = entry.path();
+
+			if (filePath.extension() == ".xbmp" || filePath.extension() == ".XBMP")
+			{
+				std::string fileName = filePath.stem().string();
+
+				ImGui::Text("%s", fileName.c_str());
+				ImGui::SameLine();
+
+				if (ImGui::Button(("Apply##" + fileName).c_str()))
+					copyAndRenameFile(filePath.filename().string());
+
+			}
+		}
+	}
 }
 
 bool developerMode = false;
@@ -525,7 +592,7 @@ void gui::Render() noexcept
 		}
 
 		if (ImGui::Button(lang ? "Upgrade staff" : (const char*)u8"Улучшить посох")) {
-			for (int item = 28; item<37; item++)
+			for (int item = 28; item < 37; item++)
 				plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //функция выдачи всех улучшений на посох
 		}
 		if (ImGui::Button(lang ? "Upgrade 1 sting" : (const char*)u8"Улучшить меч")) {
@@ -1055,6 +1122,14 @@ void gui::Render() noexcept
 		}
 		ImGui::Unindent();
 	}
+	if (ImGui::CollapsingHeader(lang ? "Skinchanger" : (const char*)u8"Скинчейнджер"))
+	{
+		ImGui::Text(lang ? "Restart the level/Load save after skin selection" :
+			(const char*)u8"Перезагрузите уровень или загрузите сохранение после установки скина");
+		ImGui::Text("");
+
+		displaySkinButtons();
+	}
 
 	if (randommod == true) {
 		RandomMod(vremaeffectof);
@@ -1090,15 +1165,15 @@ void gui::Render() noexcept
 	ImGui::Separator();
 
 	if (ImGui::Button("king174rus")) {
-		ShellExecute(NULL, "open", "https://www.youtube.com/c/@king174rus", 0, 0, SW_SHOWNORMAL);
+		ShellExecute(NULL, L"open", L"https://www.youtube.com/c/@king174rus", 0, 0, SW_SHOWNORMAL);
 	}
 	ImGui::SameLine(); ImGui::Text(" "); ImGui::SameLine();
 	if (ImGui::Button("Mr_Kliff")) {
-		ShellExecute(NULL, "open", "https://youtube.com/c/@YKliffa", 0, 0, SW_SHOWNORMAL);
+		ShellExecute(NULL, L"open", L"https://youtube.com/c/@YKliffa", 0, 0, SW_SHOWNORMAL);
 	}
 	ImGui::SameLine(); ImGui::Text(" "); ImGui::SameLine();
 	if (ImGui::Button(lang ? "Hobbit Technical Discord" : (const char*)u8"Технический канал Хоббита в Дискорде")) {
-		ShellExecute(NULL, "open", "https://discord.gg/hvzB3maxQ3", 0, 0, SW_SHOWNORMAL);
+		ShellExecute(NULL, L"open", L"https://discord.gg/hvzB3maxQ3", 0, 0, SW_SHOWNORMAL);
 	}
 
 	ImGui::End();

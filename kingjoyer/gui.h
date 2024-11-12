@@ -24,7 +24,7 @@ namespace gui
 	inline D3DPRESENT_PARAMETERS presentParameters = { };
 
 	// handle window creation & destruction
-	void CreateHWindow(const char* windowName) noexcept;
+	void CreateHWindow(LPCWSTR windowName) noexcept;
 	void DestroyHWindow() noexcept;
 
 	// handle device creation & destruction
