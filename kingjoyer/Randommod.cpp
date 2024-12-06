@@ -13,7 +13,7 @@
 float timer2 = 0;
 std::random_device rd;
 std::mt19937 gen(rd());
-std::uniform_int_distribution<> distrib(0, 12);
+std::uniform_int_distribution<> distrib(0, 14);
 int random_number = distrib(gen);
 int a = 0;
 bool vkl = false;
@@ -48,6 +48,8 @@ void RandomMod(float vremaeffectof)
 			change_4Byte_hobbit((LPVOID)0x00772B38, 0xC3960000, 0x42C80000);  //второе лицо
 			change_4Byte_hobbit((LPVOID)0x00772B3C, 0xC3960000, 0x43960000);
 		}
+		else if (random_number == 13) change_4Byte_hobbit((LPVOID)0x006E92E8, 0x3F8CCCCD, 0x3F800000); //большой Бильбо
+		else if (random_number == 14) change_4Byte_hobbit((LPVOID)0x006E92E8, 0x3F666666, 0x3F800000); //маленький Бильбо
 		vkl = !vkl;
 	}
 	if (timer2 >= vremaeffectof) {
