@@ -1,4 +1,4 @@
-#include "gui.h"
+ï»¿#include "gui.h"
 #include "byte_functions.h"
 #include "Randommod.h"
 #include "../imgui/imgui.h"
@@ -21,35 +21,35 @@ void RandomMod(float vremaeffectof)
 {
 	if (vkl == false or timer2 >= vremaeffectof) 
 	{
-		if (random_number == 0) change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x00);  //íåâèäèìûé Áèëüáî
-		else if (random_number == 1) change_2Byte_hobbit((LPVOID)0x0075B852, 0x42C8, 0x4396); //ìåäëåííûé Áèëüáî
-		else if (random_number == 2) change_4Byte_hobbit((LPVOID)0x0075B850, 0x453B8000, 0x43960000); //áûñòðûé Áèëüáî
-		else if (random_number == 3) change_4Byte_hobbit((LPVOID)0x0075B850, 0x461C4000, 0x43960000); //Ñóïåðáûñòðûé Áèëüáî
+		if (random_number == 0) change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x00);  //Ð½ÐµÐ²Ð¸Ð´Ð¸Ð¼Ñ‹Ð¹ Ð…Ð¸Ð»ÑŒÐ±Ð¾
+		else if (random_number == 1) change_2Byte_hobbit((LPVOID)0x0075B852, 0x42C8, 0x4396); //Ð¼ÐµÐ´Ð»ÐµÐ½Ð½Ñ‹Ð¹ Ð…Ð¸Ð»ÑŒÐ±Ð¾
+		else if (random_number == 2) change_4Byte_hobbit((LPVOID)0x0075B850, 0x453B8000, 0x43960000); //Ð±Ñ‹ÑÑ‚Ñ€Ñ‹Ð¹ Ð…Ð¸Ð»ÑŒÐ±Ð¾
+		else if (random_number == 3) change_4Byte_hobbit((LPVOID)0x0075B850, 0x461C4000, 0x43960000); //â€”ÑƒÐ¿ÐµÑ€Ð±Ñ‹ÑÑ‚Ñ€Ñ‹Ð¹ Ð…Ð¸Ð»ÑŒÐ±Ð¾
 		else if (random_number == 4)
 		{
-			change_1Byte_hobbit((LPVOID)0x00777A8C, 0x01, 0x00); //ðåíäåð îáúåêòîâ
-			change_1Byte_hobbit((LPVOID)0x00777A98, 0x01, 0x00); //ðåíäåð ëàíäøàôòà
+			change_1Byte_hobbit((LPVOID)0x00777A8C, 0x01, 0x00); //Ñ€ÐµÐ½Ð´ÐµÑ€ Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð²
+			change_1Byte_hobbit((LPVOID)0x00777A98, 0x01, 0x00); //Ñ€ÐµÐ½Ð´ÐµÑ€ Ð»Ð°Ð½Ð´ÑˆÐ°Ñ„Ñ‚Ð°
 		}
-		else if (random_number == 5) change_4Byte_hobbit((LPVOID)0x0075B888, 0x447A0000, 0x453B8000); //âûñîêèé ïðûæîê
-		else if (random_number == 6) change_4Byte_hobbit((LPVOID)0x0075B888, 0x42C80000, 0x453B8000); //î÷åíü âûñîêèé ïðûæîê
-		else if (random_number == 7) change_2Byte_hobbit((LPVOID)0x0077244A, 0x4080, 0x0000); //øèðîêèé Áèëüáî
-		else if (random_number == 8) change_1Byte_hobbit((LPVOID)0x0045CA39, 0xD4, 0xD8);//òèïî äèàáëî
-		else if (random_number == 9) change_2Byte_hobbit((LPVOID)0x00772BF8, 0x0000, 0x4170); //âèäèìîñòü âñåõ îáúåêòîâ ÷åðåç îáúåêòû
-		else if (random_number == 10) change_4Byte_hobbit((LPVOID)0x00772BF0, 0x40866666 ,0x3F99999A); //ïåðåâåðíóòàÿ êàìåðà
+		else if (random_number == 5) change_4Byte_hobbit((LPVOID)0x0075B888, 0x447A0000, 0x453B8000); //Ð²Ñ‹ÑÐ¾ÐºÐ¸Ð¹ Ð¿Ñ€Ñ‹Ð¶Ð¾Ðº
+		else if (random_number == 6) change_4Byte_hobbit((LPVOID)0x0075B888, 0x42C80000, 0x453B8000); //Ð¾Ñ‡ÐµÐ½ÑŒ Ð²Ñ‹ÑÐ¾ÐºÐ¸Ð¹ Ð¿Ñ€Ñ‹Ð¶Ð¾Ðº
+		else if (random_number == 7) change_2Byte_hobbit((LPVOID)0x0077244A, 0x4080, 0x0000); //ÑˆÐ¸Ñ€Ð¾ÐºÐ¸Ð¹ Ð…Ð¸Ð»ÑŒÐ±Ð¾
+		else if (random_number == 8) change_1Byte_hobbit((LPVOID)0x0045CA39, 0xD4, 0xD8);//Ñ‚Ð¸Ð¿Ð¾ Ð´Ð¸Ð°Ð±Ð»Ð¾
+		else if (random_number == 9) change_2Byte_hobbit((LPVOID)0x00772BF8, 0x0000, 0x4170); //Ð²Ð¸Ð´Ð¸Ð¼Ð¾ÑÑ‚ÑŒ Ð²ÑÐµÑ… Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð² Ñ‡ÐµÑ€ÐµÐ· Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹
+		else if (random_number == 10) change_4Byte_hobbit((LPVOID)0x00772BF0, 0x40866666 ,0x3F99999A); //Ð¿ÐµÑ€ÐµÐ²ÐµÑ€Ð½ÑƒÑ‚Ð°Â¤ ÐºÐ°Ð¼ÐµÑ€Ð°
 		else if (random_number == 11)
 		{
 			change_4Byte_hobbit((LPVOID)0x00772A70, 0x3F800000, 0x42C80000);
-			change_4Byte_hobbit((LPVOID)0x00772B38, 0x3F800000, 0x42C80000);  //ïåðâîå ëèöî
+			change_4Byte_hobbit((LPVOID)0x00772B38, 0x3F800000, 0x42C80000);  //Ð¿ÐµÑ€Ð²Ð¾Ðµ Ð»Ð¸Ñ†Ð¾
 			change_4Byte_hobbit((LPVOID)0x00772B3C, 0x3F800000, 0x43960000);
 		}
 		else if (random_number == 12)
 		{
 			change_4Byte_hobbit((LPVOID)0x00772A70, 0xC3960000, 0x42C80000);
-			change_4Byte_hobbit((LPVOID)0x00772B38, 0xC3960000, 0x42C80000);  //âòîðîå ëèöî
+			change_4Byte_hobbit((LPVOID)0x00772B38, 0xC3960000, 0x42C80000);  //Ð²Ñ‚Ð¾Ñ€Ð¾Ðµ Ð»Ð¸Ñ†Ð¾
 			change_4Byte_hobbit((LPVOID)0x00772B3C, 0xC3960000, 0x43960000);
 		}
-		else if (random_number == 13) change_4Byte_hobbit((LPVOID)0x006E92E8, 0x3F8CCCCD, 0x3F800000); //áîëüøîé Áèëüáî
-		else if (random_number == 14) change_4Byte_hobbit((LPVOID)0x006E92E8, 0x3F666666, 0x3F800000); //ìàëåíüêèé Áèëüáî
+		else if (random_number == 13) change_4Byte_hobbit((LPVOID)0x006E92E8, 0x3F8CCCCD, 0x3F800000); //Ð±Ð¾Ð»ÑŒÑˆÐ¾Ð¹ Ð…Ð¸Ð»ÑŒÐ±Ð¾
+		else if (random_number == 14) change_4Byte_hobbit((LPVOID)0x006E92E8, 0x3F666666, 0x3F800000); //Ð¼Ð°Ð»ÐµÐ½ÑŒÐºÐ¸Ð¹ Ð…Ð¸Ð»ÑŒÐ±Ð¾
 		vkl = !vkl;
 	}
 	if (timer2 >= vremaeffectof) {

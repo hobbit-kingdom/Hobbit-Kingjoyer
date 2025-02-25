@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 int change_1Byte_hobbit(LPVOID Address, BYTE Znachenie, BYTE Iznachalnoe) noexcept;
 int change_2Byte_hobbit(LPVOID Address, WORD Znachenie, WORD Iznachalnoe) noexcept;

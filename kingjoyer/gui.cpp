@@ -1,4 +1,4 @@
-#include "gui.h"
+п»ї#include "gui.h"
 #include "byte_functions.h"
 #include "Randommod.h"
 #include "PickupAll.h"
@@ -287,12 +287,12 @@ void displaySkinButtons(bool lang)
 	fs::path skinsDir = "./SKINS";
 
 	if (!fs::exists(skinsDir)) {
-		ImGui::Text(lang ? "SKINS directory does not exist." : (const char*)u8"папка SKINS не найдена");
+		ImGui::Text(lang ? "SKINS directory does not exist." : (const char*)u8"РїР°РїРєР° SKINS РЅРµ РЅР°Р№РґРµРЅР°");
 		return;
 	}
 
 	if (fs::is_empty(skinsDir)) {
-		ImGui::Text(lang ? "SKINS directory is empty." : (const char*)u8"папка SKINS пуста.");
+		ImGui::Text(lang ? "SKINS directory is empty." : (const char*)u8"РїР°РїРєР° SKINS РїСѓСЃС‚Р°.");
 		return;
 	}
 
@@ -309,7 +309,7 @@ void displaySkinButtons(bool lang)
 				ImGui::Text("%s", fileName.c_str());
 				ImGui::SameLine();
 
-				if (ImGui::Button((lang ? "Apply##" : (const char*)u8"Принять##" + fileName).c_str()))
+				if (ImGui::Button((lang ? "Apply##" : (const char*)u8"РџСЂРёРЅСЏС‚СЊ##" + fileName).c_str()))
 					copyAndRenameFile(filePath.filename().string());
 
 			}
@@ -444,90 +444,90 @@ void gui::Render() noexcept
 	ImGui::Text("                                                                               The Hobbit KingJoyer                  ");
 	ImGui::Text("");
 
-	if (ImGui::Button(!lang ? "Change Language" : (const char*)u8"Поменять язык")) lang = !lang;
+	if (ImGui::Button(!lang ? "Change Language" : (const char*)u8"РџРѕРјРµРЅСЏС‚СЊ СЏР·С‹Рє")) lang = !lang;
 
 	ImGui::Separator();
 	ImGui::Text("");
 
-	if (ImGui::Checkbox(lang ? "Developer mode" : (const char*)u8"Режим Разработчика", &developerMode)) {
-		change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00); //функция включения режима разработчика
+	if (ImGui::Checkbox(lang ? "Developer mode" : (const char*)u8"Р РµР¶РёРј Р Р°Р·СЂР°Р±РѕС‚С‡РёРєР°", &developerMode)) {
+		change_1Byte_hobbit((LPVOID)0x007600E9, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ РІРєР»СЋС‡РµРЅРёСЏ СЂРµР¶РёРјР° СЂР°Р·СЂР°Р±РѕС‚С‡РёРєР°
 	}
-	if (ImGui::Checkbox(lang ? "60 FPS" : (const char*)u8"60 фпс", &fps60)) {
-		change_2Byte_hobbit((LPVOID)0x006EFBDA, 0x4180, 0x4204); //функция FPS
+	if (ImGui::Checkbox(lang ? "60 FPS" : (const char*)u8"60 С„РїСЃ", &fps60)) {
+		change_2Byte_hobbit((LPVOID)0x006EFBDA, 0x4180, 0x4204); //С„СѓРЅРєС†РёСЏ FPS
 	}
 
 
-	if (ImGui::CollapsingHeader(lang ? "Renders" : (const char*)u8"Рендеры"))
+	if (ImGui::CollapsingHeader(lang ? "Renders" : (const char*)u8"Р РµРЅРґРµСЂС‹"))
 	{
 		ImGui::Indent();
 
-		ImGui::Text(lang ? "Renders" : (const char*)u8"Рендеры");
+		ImGui::Text(lang ? "Renders" : (const char*)u8"Р РµРЅРґРµСЂС‹");
 		ImGui::Separator();
 
 		if (ImGui::BeginTable("split", 3))
 		{
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Volumes" : (const char*)u8"Волумы", &renderVolumes)) {
-				change_1Byte_hobbit((LPVOID)0x00777B04, 0x01, 0x00); //функция рендера волумов
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Volumes" : (const char*)u8"Р’РѕР»СѓРјС‹", &renderVolumes)) {
+				change_1Byte_hobbit((LPVOID)0x00777B04, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° РІРѕР»СѓРјРѕРІ
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "PolyCache" : (const char*)u8"Полигоны", &polyCache)) {
-				change_1Byte_hobbit((LPVOID)0x00778078, 0x01, 0x00); //функция рендера полигонов
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "PolyCache" : (const char*)u8"РџРѕР»РёРіРѕРЅС‹", &polyCache)) {
+				change_1Byte_hobbit((LPVOID)0x00778078, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° РїРѕР»РёРіРѕРЅРѕРІ
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Load Triggers" : (const char*)u8"Триггеры Загрузки", &renderLoadTriggers)) {
-				change_1Byte_hobbit((LPVOID)0x00777B18, 0x01, 0x00); //функция рендера загрузочных триггеров
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Load Triggers" : (const char*)u8"РўСЂРёРіРіРµСЂС‹ Р—Р°РіСЂСѓР·РєРё", &renderLoadTriggers)) {
+				change_1Byte_hobbit((LPVOID)0x00777B18, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° Р·Р°РіСЂСѓР·РѕС‡РЅС‹С… С‚СЂРёРіРіРµСЂРѕРІ
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Triggers" : (const char*)u8"Триггеры", &renderTriggers)) {
-				change_1Byte_hobbit((LPVOID)0x00777B1C, 0x01, 0x00); //функция рендера триггеров
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Triggers" : (const char*)u8"РўСЂРёРіРіРµСЂС‹", &renderTriggers)) {
+				change_1Byte_hobbit((LPVOID)0x00777B1C, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° С‚СЂРёРіРіРµСЂРѕРІ
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Water" : (const char*)u8"Вода", &renderWater)) {
-				change_1Byte_hobbit((LPVOID)0x00777B10, 0x01, 0x00); //функция рендера воды
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Water" : (const char*)u8"Р’РѕРґР°", &renderWater)) {
+				change_1Byte_hobbit((LPVOID)0x00777B10, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° РІРѕРґС‹
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Web" : (const char*)u8"Паутина", &renderWeb)) {
-				change_1Byte_hobbit((LPVOID)0x00777B90, 0x01, 0x00); //функция рендера паутины
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Web" : (const char*)u8"РџР°СѓС‚РёРЅР°", &renderWeb)) {
+				change_1Byte_hobbit((LPVOID)0x00777B90, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° РїР°СѓС‚РёРЅС‹
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Ropes" : (const char*)u8"Веревка", &renderRopes)) {
-				change_1Byte_hobbit((LPVOID)0x00777B24, 0x01, 0x00); //функция рендера веревок
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Ropes" : (const char*)u8"Р’РµСЂРµРІРєР°", &renderRopes)) {
+				change_1Byte_hobbit((LPVOID)0x00777B24, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° РІРµСЂРµРІРѕРє
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Leaves" : (const char*)u8"Листва", &renderLeaves)) {
-				change_1Byte_hobbit((LPVOID)0x00777B80, 0x01, 0x00); //функция рендер кластеров листвы деревьев
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Leaves" : (const char*)u8"Р›РёСЃС‚РІР°", &renderLeaves)) {
+				change_1Byte_hobbit((LPVOID)0x00777B80, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂ РєР»Р°СЃС‚РµСЂРѕРІ Р»РёСЃС‚РІС‹ РґРµСЂРµРІСЊРµРІ
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Chests" : (const char*)u8"Сундуки", &renderChests)) {
-				change_1Byte_hobbit((LPVOID)0x00777AF0, 0x01, 0x00); //функция рендер сундуков
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Chests" : (const char*)u8"РЎСѓРЅРґСѓРєРё", &renderChests)) {
+				change_1Byte_hobbit((LPVOID)0x00777AF0, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂ СЃСѓРЅРґСѓРєРѕРІ
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Levers" : (const char*)u8"Рычаги", &renderLevers)) {
-				change_1Byte_hobbit((LPVOID)0x00777AEC, 0x01, 0x00); //функция рендер рычагов
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Levers" : (const char*)u8"Р С‹С‡Р°РіРё", &renderLevers)) {
+				change_1Byte_hobbit((LPVOID)0x00777AEC, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂ СЂС‹С‡Р°РіРѕРІ
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Bilbo" : (const char*)u8"Бильбо", &renderBilbo)) {
-				change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x00); //функция рендер Бильбо
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Bilbo" : (const char*)u8"Р‘РёР»СЊР±Рѕ", &renderBilbo)) {
+				change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂ Р‘РёР»СЊР±Рѕ
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Lights" : (const char*)u8"Свет", &renderLights)) {
-				change_1Byte_hobbit((LPVOID)0x00777AA4, 0x01, 0x00); //функция рендер света
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Lights" : (const char*)u8"РЎРІРµС‚", &renderLights)) {
+				change_1Byte_hobbit((LPVOID)0x00777AA4, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂ СЃРІРµС‚Р°
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Effects" : (const char*)u8"Эффекты", &renderEffects)) {
-				change_1Byte_hobbit((LPVOID)0x00777B88, 0x01, 0x00); //функция рендер эффектов
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Effects" : (const char*)u8"Р­С„С„РµРєС‚С‹", &renderEffects)) {
+				change_1Byte_hobbit((LPVOID)0x00777B88, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂ СЌС„С„РµРєС‚РѕРІ
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Breakway" : (const char*)u8"Падающий путь", &breakway)) {
-				change_1Byte_hobbit((LPVOID)0x00777B0C, 0x01, 0x00); //функция рендера падающего пути
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Breakway" : (const char*)u8"РџР°РґР°СЋС‰РёР№ РїСѓС‚СЊ", &breakway)) {
+				change_1Byte_hobbit((LPVOID)0x00777B0C, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° РїР°РґР°СЋС‰РµРіРѕ РїСѓС‚Рё
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Falling boulders" : (const char*)u8"Падающие булыжники", &boulderRun)) {
-				change_1Byte_hobbit((LPVOID)0x00777AFC, 0x01, 0x00); //функция рендер болдер рана
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Falling boulders" : (const char*)u8"РџР°РґР°СЋС‰РёРµ Р±СѓР»С‹Р¶РЅРёРєРё", &boulderRun)) {
+				change_1Byte_hobbit((LPVOID)0x00777AFC, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂ Р±РѕР»РґРµСЂ СЂР°РЅР°
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Skybox" : (const char*)u8"Небо", &renderSkybox)) {
-				change_1Byte_hobbit((LPVOID)0x00777B5C, 0x01, 0x00); //функция рендера скайбокса
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Skybox" : (const char*)u8"РќРµР±Рѕ", &renderSkybox)) {
+				change_1Byte_hobbit((LPVOID)0x00777B5C, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° СЃРєР°Р№Р±РѕРєСЃР°
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Save Pedestal" : (const char*)u8"Пьедестал сохранения", &renderSavePedestal)) {
-				change_1Byte_hobbit((LPVOID)0x00777AF8, 0x01, 0x00); //функция рендера сохранялок
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Save Pedestal" : (const char*)u8"РџСЊРµРґРµСЃС‚Р°Р» СЃРѕС…СЂР°РЅРµРЅРёСЏ", &renderSavePedestal)) {
+				change_1Byte_hobbit((LPVOID)0x00777AF8, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° СЃРѕС…СЂР°РЅСЏР»РѕРє
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Push boxes" : (const char*)u8"Двигающиеся коробки", &renderPushBoxes)) {
-				change_1Byte_hobbit((LPVOID)0x00777AF4, 0x01, 0x00); //функция рендера пушбоксов
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Push boxes" : (const char*)u8"Р”РІРёРіР°СЋС‰РёРµСЃСЏ РєРѕСЂРѕР±РєРё", &renderPushBoxes)) {
+				change_1Byte_hobbit((LPVOID)0x00777AF4, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° РїСѓС€Р±РѕРєСЃРѕРІ
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Rigid Instances" : (const char*)u8"Объекты", &renderRigidInstances)) {
-				change_1Byte_hobbit((LPVOID)0x00777A8C, 0x01, 0x00); //функция рендера rigidInstances
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Rigid Instances" : (const char*)u8"РћР±СЉРµРєС‚С‹", &renderRigidInstances)) {
+				change_1Byte_hobbit((LPVOID)0x00777A8C, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° rigidInstances
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Play surfaces" : (const char*)u8"Ландшафт", &renderPlaySurface)) {
-				change_1Byte_hobbit((LPVOID)0x00777A98, 0x01, 0x00); //функция рендера ландшафта
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Play surfaces" : (const char*)u8"Р›Р°РЅРґС€Р°С„С‚", &renderPlaySurface)) {
+				change_1Byte_hobbit((LPVOID)0x00777A98, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° Р»Р°РЅРґС€Р°С„С‚Р°
 			}
-			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Geometry" : (const char*)u8"Геометрия", &renderGeometry)) {
-				change_1Byte_hobbit((LPVOID)0x0075D2CC, 0x01, 0x00); //функция рендера геометрии
+			ImGui::TableNextColumn(); if (ImGui::Checkbox(lang ? "Geometry" : (const char*)u8"Р“РµРѕРјРµС‚СЂРёСЏ", &renderGeometry)) {
+				change_1Byte_hobbit((LPVOID)0x0075D2CC, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ СЂРµРЅРґРµСЂР° РіРµРѕРјРµС‚СЂРёРё
 			}
 			ImGui::EndTable();
 		}
@@ -536,24 +536,24 @@ void gui::Render() noexcept
 
 	}
 
-	if (ImGui::CollapsingHeader(lang ? "Cheats" : (const char*)u8"Читы"))
+	if (ImGui::CollapsingHeader(lang ? "Cheats" : (const char*)u8"Р§РёС‚С‹"))
 	{
 		ImGui::Indent();
 
-		ImGui::Text(lang ? "Teleportation" : (const char*)u8"Телепортация");
+		ImGui::Text(lang ? "Teleportation" : (const char*)u8"РўРµР»РµРїРѕСЂС‚Р°С†РёСЏ");
 		ImGui::Separator();
 
-		if (ImGui::Button(lang ? "Set Teleportation Waypoint" : (const char*)u8"Установить Точку Телепортации")) {
+		if (ImGui::Button(lang ? "Set Teleportation Waypoint" : (const char*)u8"РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РўРѕС‡РєСѓ РўРµР»РµРїРѕСЂС‚Р°С†РёРё")) {
 			savedPoint.ukazatel = ukazatel_hobbit((LPVOID)0x0075BA3C);
 			ukazatel = savedPoint.ukazatel;
 			savedPoint.x = save_float_hobbit(ukazatel + 5);
 			savedPoint.y = save_float_hobbit(ukazatel + 6);
-			savedPoint.z = save_float_hobbit(ukazatel + 7);//функция установки точки телепортации
+			savedPoint.z = save_float_hobbit(ukazatel + 7);//С„СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅРѕРІРєРё С‚РѕС‡РєРё С‚РµР»РµРїРѕСЂС‚Р°С†РёРё
 		}
 		ImGui::SameLine();
 		ImGui::Text("");
 		ImGui::SameLine();
-		if (ImGui::Button(lang ? "Teleport!" : (const char*)u8"Телепортироваться!")) {
+		if (ImGui::Button(lang ? "Teleport!" : (const char*)u8"РўРµР»РµРїРѕСЂС‚РёСЂРѕРІР°С‚СЊСЃСЏ!")) {
 			x = savedPoint.x;
 			y = savedPoint.y;
 			z = savedPoint.z;
@@ -573,86 +573,86 @@ void gui::Render() noexcept
 		ImGui::Text("Z: %g", savedPoint.z);
 
 		ImGui::Text("");
-		ImGui::Text(lang ? "Cheats" : (const char*)u8"Читы");
+		ImGui::Text(lang ? "Cheats" : (const char*)u8"Р§РёС‚С‹");
 		ImGui::Separator();
 
-		if (ImGui::Checkbox(lang ? "Full stamina" : (const char*)u8"Бесконечная выносливость", &stamina)) {
+		if (ImGui::Checkbox(lang ? "Full stamina" : (const char*)u8"Р‘РµСЃРєРѕРЅРµС‡РЅР°СЏ РІС‹РЅРѕСЃР»РёРІРѕСЃС‚СЊ", &stamina)) {
 			savedPoint.ukazatel_stamina = ukazatel_hobbit((LPDWORD)0x0075BA3C);
-			ukazatel_stamina = savedPoint.ukazatel_stamina; //функция беконечной стамины
+			ukazatel_stamina = savedPoint.ukazatel_stamina; //С„СѓРЅРєС†РёСЏ Р±РµРєРѕРЅРµС‡РЅРѕР№ СЃС‚Р°РјРёРЅС‹
 		}
-		if (ImGui::Checkbox(lang ? "Full chest time" : (const char*)u8"Бесконечный таймер сундука", &chesttimer)) {
+		if (ImGui::Checkbox(lang ? "Full chest time" : (const char*)u8"Р‘РµСЃРєРѕРЅРµС‡РЅС‹Р№ С‚Р°Р№РјРµСЂ СЃСѓРЅРґСѓРєР°", &chesttimer)) {
 
 			change_4Byte_hobbit((LPDWORD)0x005299E9, 0x90909090, 0xFA5025D8);
-			change_2Byte_hobbit((LPDWORD)0x005299ED, 0x9090, 0x006E); //тут просто надо 6 байтов обнулять, по-этому тут 2 функции
+			change_2Byte_hobbit((LPDWORD)0x005299ED, 0x9090, 0x006E); //С‚СѓС‚ РїСЂРѕСЃС‚Рѕ РЅР°РґРѕ 6 Р±Р°Р№С‚РѕРІ РѕР±РЅСѓР»СЏС‚СЊ, РїРѕ-СЌС‚РѕРјСѓ С‚СѓС‚ 2 С„СѓРЅРєС†РёРё
 		}
-		if (ImGui::Checkbox(lang ? "Full stones" : (const char*)u8"Бесконечные камни", &stones)) { //бесконечные камни
+		if (ImGui::Checkbox(lang ? "Full stones" : (const char*)u8"Р‘РµСЃРєРѕРЅРµС‡РЅС‹Рµ РєР°РјРЅРё", &stones)) { //Р±РµСЃРєРѕРЅРµС‡РЅС‹Рµ РєР°РјРЅРё
 		}
-		if (ImGui::Checkbox(lang ? "Invulnerability" : (const char*)u8"Бессмертие", &invulBilbo)) {
-			change_1Byte_hobbit((LPVOID)0x0075FBF4, 0x01, 0x00); //функция бессмертия
+		if (ImGui::Checkbox(lang ? "Invulnerability" : (const char*)u8"Р‘РµСЃСЃРјРµСЂС‚РёРµ", &invulBilbo)) {
+			change_1Byte_hobbit((LPVOID)0x0075FBF4, 0x01, 0x00); //С„СѓРЅРєС†РёСЏ Р±РµСЃСЃРјРµСЂС‚РёСЏ
 		}
 
-		if (ImGui::Button(lang ? "Upgrade staff" : (const char*)u8"Улучшить посох")) {
+		if (ImGui::Button(lang ? "Upgrade staff" : (const char*)u8"РЈР»СѓС‡С€РёС‚СЊ РїРѕСЃРѕС…")) {
 			for (int item = 28; item < 37; item++)
-				plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //функция выдачи всех улучшений на посох
+				plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //С„СѓРЅРєС†РёСЏ РІС‹РґР°С‡Рё РІСЃРµС… СѓР»СѓС‡С€РµРЅРёР№ РЅР° РїРѕСЃРѕС…
 		}
-		if (ImGui::Button(lang ? "Upgrade 1 sting" : (const char*)u8"Улучшить меч")) {
+		if (ImGui::Button(lang ? "Upgrade 1 sting" : (const char*)u8"РЈР»СѓС‡С€РёС‚СЊ РјРµС‡")) {
 			for (int item = 37; item < 43; item++)
-				plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //функция выдачи всех улучшений на жало
+				plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //С„СѓРЅРєС†РёСЏ РІС‹РґР°С‡Рё РІСЃРµС… СѓР»СѓС‡С€РµРЅРёР№ РЅР° Р¶Р°Р»Рѕ
 		}
-		if (ImGui::Button(lang ? "Upgrade 1 stone" : (const char*)u8"Улучшить камни")) {
+		if (ImGui::Button(lang ? "Upgrade 1 stone" : (const char*)u8"РЈР»СѓС‡С€РёС‚СЊ РєР°РјРЅРё")) {
 			for (int item = 43; item < 46; item++)
-				plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //функция выдачи всех улучшений на камни
+				plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //С„СѓРЅРєС†РёСЏ РІС‹РґР°С‡Рё РІСЃРµС… СѓР»СѓС‡С€РµРЅРёР№ РЅР° РєР°РјРЅРё
 		}
 
-		if (ImGui::Button(lang ? "Add 1 stone" : (const char*)u8"Выдать 1 камень")) {
-			plusA_float_hobbit((LPVOID)0x0075BDB4, 1); //функция прибавки на 1 камней
+		if (ImGui::Button(lang ? "Add 1 stone" : (const char*)u8"Р’С‹РґР°С‚СЊ 1 РєР°РјРµРЅСЊ")) {
+			plusA_float_hobbit((LPVOID)0x0075BDB4, 1); //С„СѓРЅРєС†РёСЏ РїСЂРёР±Р°РІРєРё РЅР° 1 РєР°РјРЅРµР№
 		}
-		if (ImGui::Button(lang ? "Add 5 stones" : (const char*)u8"Выдать 5 каменей")) {
-			plusA_float_hobbit((LPVOID)0x0075BDB4, 5); //функция прибавки на 5 камней
+		if (ImGui::Button(lang ? "Add 5 stones" : (const char*)u8"Р’С‹РґР°С‚СЊ 5 РєР°РјРµРЅРµР№")) {
+			plusA_float_hobbit((LPVOID)0x0075BDB4, 5); //С„СѓРЅРєС†РёСЏ РїСЂРёР±Р°РІРєРё РЅР° 5 РєР°РјРЅРµР№
 		}
-		if (ImGui::Button(lang ? "Add 1 extra HP" : (const char*)u8"1 доп хп")) {
-			plusA_float_hobbit((LPVOID)0x0075BDC4, 1); //функция прибавки на 1 доп хп
+		if (ImGui::Button(lang ? "Add 1 extra HP" : (const char*)u8"1 РґРѕРї С…Рї")) {
+			plusA_float_hobbit((LPVOID)0x0075BDC4, 1); //С„СѓРЅРєС†РёСЏ РїСЂРёР±Р°РІРєРё РЅР° 1 РґРѕРї С…Рї
 		}
-		if (ImGui::Button(lang ? "Add 10 extra HP" : (const char*)u8"10 доп хп")) {
-			plusA_float_hobbit((LPVOID)0x0075BDC4, 10); //функция прибавки на 10 доп хп
+		if (ImGui::Button(lang ? "Add 10 extra HP" : (const char*)u8"10 РґРѕРї С…Рї")) {
+			plusA_float_hobbit((LPVOID)0x0075BDC4, 10); //С„СѓРЅРєС†РёСЏ РїСЂРёР±Р°РІРєРё РЅР° 10 РґРѕРї С…Рї
 		}
-		if (ImGui::Button(lang ? "Add 1 Max HP" : (const char*)u8"1 макс хп")) {
-			plusA_float_hobbit((LPVOID)0x0075BE14, 1); //функция прибавки на 1 макс хп
+		if (ImGui::Button(lang ? "Add 1 Max HP" : (const char*)u8"1 РјР°РєСЃ С…Рї")) {
+			plusA_float_hobbit((LPVOID)0x0075BE14, 1); //С„СѓРЅРєС†РёСЏ РїСЂРёР±Р°РІРєРё РЅР° 1 РјР°РєСЃ С…Рї
 		}
-		if (ImGui::Button(lang ? "Add 10 Max HP" : (const char*)u8"10 макс хп")) {
-			plusA_float_hobbit((LPVOID)0x0075BE14, 10); //функция прибавки на 10 макс хп
+		if (ImGui::Button(lang ? "Add 10 Max HP" : (const char*)u8"10 РјР°РєСЃ С…Рї")) {
+			plusA_float_hobbit((LPVOID)0x0075BE14, 10); //С„СѓРЅРєС†РёСЏ РїСЂРёР±Р°РІРєРё РЅР° 10 РјР°РєСЃ С…Рї
 		}
 
 		ImGui::Text("");
-		ImGui::Text(lang ? "Speed" : (const char*)u8"Скорость");
+		ImGui::Text(lang ? "Speed" : (const char*)u8"РЎРєРѕСЂРѕСЃС‚СЊ");
 		ImGui::Separator();
 
-		ImGui::Text(lang ? "Bilbos' speed" : (const char*)u8"Скорость Бильбо");
+		ImGui::Text(lang ? "Bilbos' speed" : (const char*)u8"РЎРєРѕСЂРѕСЃС‚СЊ Р‘РёР»СЊР±Рѕ");
 		static int speed = 300;
 		ImGui::InputInt("", &speed, 50);
 
-		if (ImGui::Button(lang ? "Apply speed" : (const char*)u8"Применить скорость")) {
-			change_float_hobbit((LPVOID)0x0075B850, speed); //функция изменения скорости Бильбо
+		if (ImGui::Button(lang ? "Apply speed" : (const char*)u8"РџСЂРёРјРµРЅРёС‚СЊ СЃРєРѕСЂРѕСЃС‚СЊ")) {
+			change_float_hobbit((LPVOID)0x0075B850, speed); //С„СѓРЅРєС†РёСЏ РёР·РјРµРЅРµРЅРёСЏ СЃРєРѕСЂРѕСЃС‚Рё Р‘РёР»СЊР±Рѕ
 		}
 
 		ImGui::Text("");
-		ImGui::Text(lang ? "Jump" : (const char*)u8"Прыжок");
+		ImGui::Text(lang ? "Jump" : (const char*)u8"РџСЂС‹Р¶РѕРє");
 		ImGui::Separator();
 
-		ImGui::Text(lang ? "Jump power (lower = better)" : (const char*)u8"Сила прыжка (меньше = лучше)");
+		ImGui::Text(lang ? "Jump power (lower = better)" : (const char*)u8"РЎРёР»Р° РїСЂС‹Р¶РєР° (РјРµРЅСЊС€Рµ = Р»СѓС‡С€Рµ)");
 		static int jumpPower = 3000;
 		ImGui::InputInt(" ", &jumpPower, 500);
 
-		if (ImGui::Button(lang ? "Apply power" : (const char*)u8"Применить прыжок")) {
+		if (ImGui::Button(lang ? "Apply power" : (const char*)u8"РџСЂРёРјРµРЅРёС‚СЊ РїСЂС‹Р¶РѕРє")) {
 			change_float_hobbit((LPVOID)0x0075B888, jumpPower);
 		}
 		ImGui::Text("");
-		ImGui::Text(lang ? "Speed in jump" : (const char*)u8"Скорость в прыжке");
+		ImGui::Text(lang ? "Speed in jump" : (const char*)u8"РЎРєРѕСЂРѕСЃС‚СЊ РІ РїСЂС‹Р¶РєРµ");
 
 		static int speedInJump = 350;
 		ImGui::InputInt("  ", &speedInJump, 100);
 
-		if (ImGui::Button(lang ? "Apply speed in jump" : (const char*)u8"Применить скорсоть в прыжке")) {
+		if (ImGui::Button(lang ? "Apply speed in jump" : (const char*)u8"РџСЂРёРјРµРЅРёС‚СЊ СЃРєРѕСЂСЃРѕС‚СЊ РІ РїСЂС‹Р¶РєРµ")) {
 			change_float_hobbit((LPVOID)0x0075B868, speedInJump);
 		}
 
@@ -660,94 +660,94 @@ void gui::Render() noexcept
 		ImGui::Unindent();
 	}
 
-	if (ImGui::CollapsingHeader(lang ? "Camera" : (const char*)u8"Камера"))
+	if (ImGui::CollapsingHeader(lang ? "Camera" : (const char*)u8"РљР°РјРµСЂР°"))
 	{
 		ImGui::Indent();
-		ImGui::Text(lang ? "Camera" : (const char*)u8"Камера");
+		ImGui::Text(lang ? "Camera" : (const char*)u8"РљР°РјРµСЂР°");
 		ImGui::Separator();
 
-		if (ImGui::Button(lang ? "Decrease FOV" : (const char*)u8"Уменьшить FOV")) {
-			plusA_float_hobbit((LPVOID)0x00772BF0, -0.1); //функция приближения камеры на 0.1
+		if (ImGui::Button(lang ? "Decrease FOV" : (const char*)u8"РЈРјРµРЅСЊС€РёС‚СЊ FOV")) {
+			plusA_float_hobbit((LPVOID)0x00772BF0, -0.1); //С„СѓРЅРєС†РёСЏ РїСЂРёР±Р»РёР¶РµРЅРёСЏ РєР°РјРµСЂС‹ РЅР° 0.1
 		}
-		if (ImGui::Button(lang ? "Increase FOV" : (const char*)u8"Увеличить FOV")) {
-			plusA_float_hobbit((LPVOID)0x00772BF0, +0.1); //функция отдаления камеры на 0.1
+		if (ImGui::Button(lang ? "Increase FOV" : (const char*)u8"РЈРІРµР»РёС‡РёС‚СЊ FOV")) {
+			plusA_float_hobbit((LPVOID)0x00772BF0, +0.1); //С„СѓРЅРєС†РёСЏ РѕС‚РґР°Р»РµРЅРёСЏ РєР°РјРµСЂС‹ РЅР° 0.1
 		}
 
 		static float fovValue = 1.27;
-		ImGui::InputFloat(lang ? "Set FOV manually" : (const char*)u8"Поставить Угол Обзора Вручную", &fovValue, 0.1);
-		if (ImGui::Button(lang ? "Apply manual FOV" : (const char*)u8"Применить ручной Угол Обзора")) {
+		ImGui::InputFloat(lang ? "Set FOV manually" : (const char*)u8"РџРѕСЃС‚Р°РІРёС‚СЊ РЈРіРѕР» РћР±Р·РѕСЂР° Р’СЂСѓС‡РЅСѓСЋ", &fovValue, 0.1);
+		if (ImGui::Button(lang ? "Apply manual FOV" : (const char*)u8"РџСЂРёРјРµРЅРёС‚СЊ СЂСѓС‡РЅРѕР№ РЈРіРѕР» РћР±Р·РѕСЂР°")) {
 			change_float_hobbit((LPVOID)0x00772BF0, fovValue);
 		}
 
 
 
 		static int cameraDistance = 100;
-		ImGui::InputInt(lang ? "Camera Distance" : (const char*)u8"Растояние камеры", &cameraDistance, 50);
+		ImGui::InputInt(lang ? "Camera Distance" : (const char*)u8"Р Р°СЃС‚РѕСЏРЅРёРµ РєР°РјРµСЂС‹", &cameraDistance, 50);
 
-		if (ImGui::Button(lang ? "Apply Distance" : (const char*)u8"Применить расстояние")) {
+		if (ImGui::Button(lang ? "Apply Distance" : (const char*)u8"РџСЂРёРјРµРЅРёС‚СЊ СЂР°СЃСЃС‚РѕСЏРЅРёРµ")) {
 			change_float_hobbit((LPVOID)0x00772A70, cameraDistance);
 			change_float_hobbit((LPVOID)0x00772B38, cameraDistance);
 		}
 
 		static int maxCameraDistance = 300;
-		ImGui::InputInt(lang ? "Max Camera Distance" : (const char*)u8"Максимальное Растояние камеры", &maxCameraDistance, 50);
+		ImGui::InputInt(lang ? "Max Camera Distance" : (const char*)u8"РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р Р°СЃС‚РѕСЏРЅРёРµ РєР°РјРµСЂС‹", &maxCameraDistance, 50);
 
-		if (ImGui::Button(lang ? "Apply Max Distance" : (const char*)u8"Применить макс. расстояние")) {
+		if (ImGui::Button(lang ? "Apply Max Distance" : (const char*)u8"РџСЂРёРјРµРЅРёС‚СЊ РјР°РєСЃ. СЂР°СЃСЃС‚РѕСЏРЅРёРµ")) {
 			change_float_hobbit((LPVOID)0x00772B3C, maxCameraDistance);
 		}
 
-		if (ImGui::Button(lang ? "Flip camera" : (const char*)u8"Перевернуть камеру")) {
+		if (ImGui::Button(lang ? "Flip camera" : (const char*)u8"РџРµСЂРµРІРµСЂРЅСѓС‚СЊ РєР°РјРµСЂСѓ")) {
 			change_4Byte_hobbit((LPVOID)0x00772BF0, 0x3FA0D97C, 0x408CCCCD);
 		}
 
-		if (ImGui::Button(lang ? "First person" : (const char*)u8"Первое лицо")) {
+		if (ImGui::Button(lang ? "First person" : (const char*)u8"РџРµСЂРІРѕРµ Р»РёС†Рѕ")) {
 			change_float_hobbit((LPVOID)0x00772A70, 1);
-			change_float_hobbit((LPVOID)0x00772B38, 1);  //первое лицо
+			change_float_hobbit((LPVOID)0x00772B38, 1);  //РїРµСЂРІРѕРµ Р»РёС†Рѕ
 			change_float_hobbit((LPVOID)0x00772B3C, 1);
 			change_1Byte_hobbit((LPVOID)0x00777AA0, 0x00, 0x00);
 		}
-		if (ImGui::Button(lang ? "Second person" : (const char*)u8"Второе лицо")) {
+		if (ImGui::Button(lang ? "Second person" : (const char*)u8"Р’С‚РѕСЂРѕРµ Р»РёС†Рѕ")) {
 			change_float_hobbit((LPVOID)0x00772A70, -300);
-			change_float_hobbit((LPVOID)0x00772B38, -300);  //второе лицо
+			change_float_hobbit((LPVOID)0x00772B38, -300);  //РІС‚РѕСЂРѕРµ Р»РёС†Рѕ
 			change_float_hobbit((LPVOID)0x00772B3C, -300);
 			change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x01);
 		}
-		if (ImGui::Button(lang ? "Third person" : (const char*)u8"Третье лицо")) {
+		if (ImGui::Button(lang ? "Third person" : (const char*)u8"РўСЂРµС‚СЊРµ Р»РёС†Рѕ")) {
 			change_float_hobbit((LPVOID)0x00772A70, 100);
-			change_float_hobbit((LPVOID)0x00772B38, 100);  //третье лицо
+			change_float_hobbit((LPVOID)0x00772B38, 100);  //С‚СЂРµС‚СЊРµ Р»РёС†Рѕ
 			change_float_hobbit((LPVOID)0x00772B3C, 300);
 			change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x01);
 		}
 		ImGui::Unindent();
 	}
 
-	if (ImGui::CollapsingHeader(lang ? "Statistics" : (const char*)u8"Статистика"))
+	if (ImGui::CollapsingHeader(lang ? "Statistics" : (const char*)u8"РЎС‚Р°С‚РёСЃС‚РёРєР°"))
 	{
 		ImGui::Indent();
 
-		ImGui::Text(lang ? "Statistics" : (const char*)u8"Статистика");
+		ImGui::Text(lang ? "Statistics" : (const char*)u8"РЎС‚Р°С‚РёСЃС‚РёРєР°");
 		ImGui::Separator();
-		if (ImGui::Checkbox(lang ? "Bilbo Positon" : (const char*)u8"Позиция Бильбо", &bilboPos)) {
+		if (ImGui::Checkbox(lang ? "Bilbo Positon" : (const char*)u8"РџРѕР·РёС†РёСЏ Р‘РёР»СЊР±Рѕ", &bilboPos)) {
 			change_1Byte_hobbit((LPVOID)0x0075FBD4, 0x01, 0x00);
 		}
 
-		if (ImGui::Checkbox(lang ? "Cinema Debug" : (const char*)u8"Информация в катсценах", &cutsceneInfo)) {
+		if (ImGui::Checkbox(lang ? "Cinema Debug" : (const char*)u8"РРЅС„РѕСЂРјР°С†РёСЏ РІ РєР°С‚СЃС†РµРЅР°С…", &cutsceneInfo)) {
 			change_1Byte_hobbit((LPVOID)0x0075FBF8, 0x01, 0x00);
 		}
 
-		if (ImGui::Checkbox(lang ? "Objects stats" : (const char*)u8"Информация об объектах", &objInfo)) {
+		if (ImGui::Checkbox(lang ? "Objects stats" : (const char*)u8"РРЅС„РѕСЂРјР°С†РёСЏ РѕР± РѕР±СЉРµРєС‚Р°С…", &objInfo)) {
 			change_1Byte_hobbit((LPVOID)0x0075FBC4, 0x01, 0x00);
 		}
 
-		if (ImGui::Checkbox(lang ? "Big Objects stats" : (const char*)u8"Много информации об объектах", &maxobjInfo)) {
+		if (ImGui::Checkbox(lang ? "Big Objects stats" : (const char*)u8"РњРЅРѕРіРѕ РёРЅС„РѕСЂРјР°С†РёРё РѕР± РѕР±СЉРµРєС‚Р°С…", &maxobjInfo)) {
 			change_1Byte_hobbit((LPVOID)0x00778054, 0x01, 0x00);
 		}
 
-		if (ImGui::Checkbox(lang ? "Objects in view" : (const char*)u8"Объекты в зоне видимости", &objInView)) {
+		if (ImGui::Checkbox(lang ? "Objects in view" : (const char*)u8"РћР±СЉРµРєС‚С‹ РІ Р·РѕРЅРµ РІРёРґРёРјРѕСЃС‚Рё", &objInView)) {
 			change_1Byte_hobbit((LPVOID)0x00778070, 0x01, 0x00);
 		}
 
-		if (ImGui::Checkbox(lang ? "Triangles in view" : (const char*)u8"Треугольники в зоне видимости", &trianglesInView)) {
+		if (ImGui::Checkbox(lang ? "Triangles in view" : (const char*)u8"РўСЂРµСѓРіРѕР»СЊРЅРёРєРё РІ Р·РѕРЅРµ РІРёРґРёРјРѕСЃС‚Рё", &trianglesInView)) {
 			change_1Byte_hobbit((LPVOID)0x00778058, 0x01, 0x00);
 		}
 
@@ -794,220 +794,220 @@ void gui::Render() noexcept
 		ImGui::Text("Y: %g", yPos); ImGui::SameLine();
 		ImGui::Text("Z: %g", zPos);
 
-		ImGui::Text(lang ? "Number Of Attacks: %g" : (const char*)u8"Количество Ударов: %g", numberOfAttacks);
-		ImGui::Text(lang ? "Number Of Jumps: %g" : (const char*)u8"Количество Прыжков: %g", numberOfJumps);
-		ImGui::Text(lang ? "Distance Traveled: %g" : (const char*)u8"Пройденное Расстояние: %g", distanceTraveled);
-		ImGui::Text(lang ? "Missed Jumps: %g" : (const char*)u8"Неудачные Прыжки: %g", missedJumps);
-		ImGui::Text(lang ? "Damage Taken: %g" : (const char*)u8"Полученный Урон: %g", damageTaken);
-		ImGui::Text(lang ? "Number Of Pole Jumps: %g" : (const char*)u8"Количество Прыжков С Посохом: %g", numberOfPoleJumps);
-		ImGui::Text(lang ? "Jumps Almost Missed: %g" : (const char*)u8"Количество Рискованных Прыжков: %g", jumpsAlmostMissed);
-		ImGui::Text(lang ? "Deaths Due to Sting: %g" : (const char*)u8"Убито Жалом: %g", deathsDueToSting);
-		ImGui::Text(lang ? "Deaths Due to Staff: %g" : (const char*)u8"Убито Посохом: %g", deathDueToStuff);
-		ImGui::Text(lang ? "Deaths Due to Stones: %g" : (const char*)u8"Убито Камнями: %g", deathsDueToStones);
-		ImGui::Text(lang ? "Damage Taken From Poison: %g" : (const char*)u8"Урон От Яда: %g", damageTakenFromPoison);
-		ImGui::Text(lang ? "Time Spent Hiding: %g" : (const char*)u8"Время Спрятавшись: %g", timeSpentHiding);
-		ImGui::Text(lang ? "Number Of Stones Thrown: %g" : (const char*)u8"Количество Брошенных Камней: %g", numberOfStonesThrown);
-		ImGui::Text(lang ? "Vigor Health Used: %g" : (const char*)u8"Использованные Лечебные Зелья: %g", vigorHealthUsed);
-		ImGui::Text(lang ? "Swings from Mine Cart: %g" : (const char*)u8"Количество Ударов С Вагонетки: %g", swingsFromMineCart);
-		ImGui::Text(lang ? "Rides In Mine Cart: %g" : (const char*)u8"Количество Поездок В Вагонетке: %g", ridesInMinecart);
-		ImGui::Text(lang ? "SP Spent in Vendor: %g" : (const char*)u8"Монет Потраченно: %g", spSpentInVendor);
-		ImGui::Text(lang ? "Health Potions Purchased: %g" : (const char*)u8"Зелий Куплено: %g", healthPotionsBought);
-		ImGui::Text(lang ? "Distance in Mine Cart: %g" : (const char*)u8"Расстояние На Вагонетке: %g", distanceInMineCart);
-		ImGui::Text(lang ? "Enemies Killed: %g" : (const char*)u8"Врагов Убито: %g", enemiesKilled);
-		ImGui::Text(lang ? "Missed Courage from Kills: %g" : (const char*)u8"Кристаллов Потеряно: %g", missedCourageFromKills);
-		ImGui::Text(lang ? "Total SP Missed: %g" : (const char*)u8"Пропущено Монет: %g", totalSpMissed);
-		ImGui::Text(lang ? "Total Courage Missed: %g" : (const char*)u8"Пропущено Кристаллов: %g", totalCouragePointsMissed);
-		ImGui::Text(lang ? "Total Chests Missed: %g" : (const char*)u8"Пропущено Сундуков: %g", totalChestsMissed);
-		ImGui::Text(lang ? "Total Quests Missed: %g" : (const char*)u8"Пропущено Квестов: %g", totalQuestsMissed);
-		ImGui::Text(lang ? "Blocks: %g" : (const char*)u8"Количество Блоков: %g", amountOfBlocks);
+		ImGui::Text(lang ? "Number Of Attacks: %g" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ РЈРґР°СЂРѕРІ: %g", numberOfAttacks);
+		ImGui::Text(lang ? "Number Of Jumps: %g" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ РџСЂС‹Р¶РєРѕРІ: %g", numberOfJumps);
+		ImGui::Text(lang ? "Distance Traveled: %g" : (const char*)u8"РџСЂРѕР№РґРµРЅРЅРѕРµ Р Р°СЃСЃС‚РѕСЏРЅРёРµ: %g", distanceTraveled);
+		ImGui::Text(lang ? "Missed Jumps: %g" : (const char*)u8"РќРµСѓРґР°С‡РЅС‹Рµ РџСЂС‹Р¶РєРё: %g", missedJumps);
+		ImGui::Text(lang ? "Damage Taken: %g" : (const char*)u8"РџРѕР»СѓС‡РµРЅРЅС‹Р№ РЈСЂРѕРЅ: %g", damageTaken);
+		ImGui::Text(lang ? "Number Of Pole Jumps: %g" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ РџСЂС‹Р¶РєРѕРІ РЎ РџРѕСЃРѕС…РѕРј: %g", numberOfPoleJumps);
+		ImGui::Text(lang ? "Jumps Almost Missed: %g" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ Р РёСЃРєРѕРІР°РЅРЅС‹С… РџСЂС‹Р¶РєРѕРІ: %g", jumpsAlmostMissed);
+		ImGui::Text(lang ? "Deaths Due to Sting: %g" : (const char*)u8"РЈР±РёС‚Рѕ Р–Р°Р»РѕРј: %g", deathsDueToSting);
+		ImGui::Text(lang ? "Deaths Due to Staff: %g" : (const char*)u8"РЈР±РёС‚Рѕ РџРѕСЃРѕС…РѕРј: %g", deathDueToStuff);
+		ImGui::Text(lang ? "Deaths Due to Stones: %g" : (const char*)u8"РЈР±РёС‚Рѕ РљР°РјРЅСЏРјРё: %g", deathsDueToStones);
+		ImGui::Text(lang ? "Damage Taken From Poison: %g" : (const char*)u8"РЈСЂРѕРЅ РћС‚ РЇРґР°: %g", damageTakenFromPoison);
+		ImGui::Text(lang ? "Time Spent Hiding: %g" : (const char*)u8"Р’СЂРµРјСЏ РЎРїСЂСЏС‚Р°РІС€РёСЃСЊ: %g", timeSpentHiding);
+		ImGui::Text(lang ? "Number Of Stones Thrown: %g" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ Р‘СЂРѕС€РµРЅРЅС‹С… РљР°РјРЅРµР№: %g", numberOfStonesThrown);
+		ImGui::Text(lang ? "Vigor Health Used: %g" : (const char*)u8"РСЃРїРѕР»СЊР·РѕРІР°РЅРЅС‹Рµ Р›РµС‡РµР±РЅС‹Рµ Р—РµР»СЊСЏ: %g", vigorHealthUsed);
+		ImGui::Text(lang ? "Swings from Mine Cart: %g" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ РЈРґР°СЂРѕРІ РЎ Р’Р°РіРѕРЅРµС‚РєРё: %g", swingsFromMineCart);
+		ImGui::Text(lang ? "Rides In Mine Cart: %g" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ РџРѕРµР·РґРѕРє Р’ Р’Р°РіРѕРЅРµС‚РєРµ: %g", ridesInMinecart);
+		ImGui::Text(lang ? "SP Spent in Vendor: %g" : (const char*)u8"РњРѕРЅРµС‚ РџРѕС‚СЂР°С‡РµРЅРЅРѕ: %g", spSpentInVendor);
+		ImGui::Text(lang ? "Health Potions Purchased: %g" : (const char*)u8"Р—РµР»РёР№ РљСѓРїР»РµРЅРѕ: %g", healthPotionsBought);
+		ImGui::Text(lang ? "Distance in Mine Cart: %g" : (const char*)u8"Р Р°СЃСЃС‚РѕСЏРЅРёРµ РќР° Р’Р°РіРѕРЅРµС‚РєРµ: %g", distanceInMineCart);
+		ImGui::Text(lang ? "Enemies Killed: %g" : (const char*)u8"Р’СЂР°РіРѕРІ РЈР±РёС‚Рѕ: %g", enemiesKilled);
+		ImGui::Text(lang ? "Missed Courage from Kills: %g" : (const char*)u8"РљСЂРёСЃС‚Р°Р»Р»РѕРІ РџРѕС‚РµСЂСЏРЅРѕ: %g", missedCourageFromKills);
+		ImGui::Text(lang ? "Total SP Missed: %g" : (const char*)u8"РџСЂРѕРїСѓС‰РµРЅРѕ РњРѕРЅРµС‚: %g", totalSpMissed);
+		ImGui::Text(lang ? "Total Courage Missed: %g" : (const char*)u8"РџСЂРѕРїСѓС‰РµРЅРѕ РљСЂРёСЃС‚Р°Р»Р»РѕРІ: %g", totalCouragePointsMissed);
+		ImGui::Text(lang ? "Total Chests Missed: %g" : (const char*)u8"РџСЂРѕРїСѓС‰РµРЅРѕ РЎСѓРЅРґСѓРєРѕРІ: %g", totalChestsMissed);
+		ImGui::Text(lang ? "Total Quests Missed: %g" : (const char*)u8"РџСЂРѕРїСѓС‰РµРЅРѕ РљРІРµСЃС‚РѕРІ: %g", totalQuestsMissed);
+		ImGui::Text(lang ? "Blocks: %g" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ Р‘Р»РѕРєРѕРІ: %g", amountOfBlocks);
 
-		const char* Stats[] = { lang ? "Number Of Attacks" : (const char*)u8"Количество Ударов",
-			lang ? "Number Of Jumps" : (const char*)u8"Количество Прыжков",
-		lang ? "Distance Traveled" : (const char*)u8"Пройденное Расстояние",
-		lang ? "Damage Taken From Poison" : (const char*)u8"Урон От Яда",
-		lang ? "Time Spent Hiding" : (const char*)u8"Время Спрятавшись",
-		lang ? "Number Of Stones Thrown" : (const char*)u8"Количество Брошенных Камней",
-		lang ? "Missed Jumps" : (const char*)u8"Неудачные Прыжки",
-		lang ? "Number Of Pole Jumps" : (const char*)u8"Количество Прыжков С Посохом",
-		lang ? "Damage Taken" : (const char*)u8"Полученный Урон",
-		lang ? "Vigor Health Used" : (const char*)u8"Использованные Лечебные Зелья",
-		lang ? "Swings from Mine Cart" : (const char*)u8"Количество Ударов С Вагонетки",
-		lang ? "Rides In Mine Cart" : (const char*)u8"Количество Поездок В Вагонетке",
-		lang ? "SP Spent in Vendor" : (const char*)u8"Монет Потраченно",
-		lang ? "Health Potions Purchased" : (const char*)u8"Зелий Куплено",
-		lang ? "Jumps Almost Missed" : (const char*)u8"Количество Рискованных Прыжков",
-		lang ? "Distance in Mine Cart" : (const char*)u8"Расстояние На Вагонетке",
-		lang ? "Enemies Killed" : (const char*)u8"Врагов Убито",
-		lang ? "Deaths Due to Sting" : (const char*)u8"Убито Жалом",
-		lang ? "Deaths Due to Staff" : (const char*)u8"Убито Посохом",
-		lang ? "Deaths Due to Stones" : (const char*)u8"Убито Камнями",
-		lang ? "Missed Courage from Kills" : (const char*)u8"Кристаллов Потеряно",
-		lang ? "Total SP Missed" : (const char*)u8"Пропущено Монет",
-		lang ? "Total Courage Missed" : (const char*)u8"Пропущено Кристаллов",
-		lang ? "Total Chests Missed" : (const char*)u8"Пропущено Сундуков",
-		lang ? "Total Quests Missed" : (const char*)u8"Пропущено Квестов",
-		lang ? "Blocks" : (const char*)u8"Количество Блоков" };
+		const char* Stats[] = { lang ? "Number Of Attacks" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ РЈРґР°СЂРѕРІ",
+			lang ? "Number Of Jumps" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ РџСЂС‹Р¶РєРѕРІ",
+		lang ? "Distance Traveled" : (const char*)u8"РџСЂРѕР№РґРµРЅРЅРѕРµ Р Р°СЃСЃС‚РѕСЏРЅРёРµ",
+		lang ? "Damage Taken From Poison" : (const char*)u8"РЈСЂРѕРЅ РћС‚ РЇРґР°",
+		lang ? "Time Spent Hiding" : (const char*)u8"Р’СЂРµРјСЏ РЎРїСЂСЏС‚Р°РІС€РёСЃСЊ",
+		lang ? "Number Of Stones Thrown" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ Р‘СЂРѕС€РµРЅРЅС‹С… РљР°РјРЅРµР№",
+		lang ? "Missed Jumps" : (const char*)u8"РќРµСѓРґР°С‡РЅС‹Рµ РџСЂС‹Р¶РєРё",
+		lang ? "Number Of Pole Jumps" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ РџСЂС‹Р¶РєРѕРІ РЎ РџРѕСЃРѕС…РѕРј",
+		lang ? "Damage Taken" : (const char*)u8"РџРѕР»СѓС‡РµРЅРЅС‹Р№ РЈСЂРѕРЅ",
+		lang ? "Vigor Health Used" : (const char*)u8"РСЃРїРѕР»СЊР·РѕРІР°РЅРЅС‹Рµ Р›РµС‡РµР±РЅС‹Рµ Р—РµР»СЊСЏ",
+		lang ? "Swings from Mine Cart" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ РЈРґР°СЂРѕРІ РЎ Р’Р°РіРѕРЅРµС‚РєРё",
+		lang ? "Rides In Mine Cart" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ РџРѕРµР·РґРѕРє Р’ Р’Р°РіРѕРЅРµС‚РєРµ",
+		lang ? "SP Spent in Vendor" : (const char*)u8"РњРѕРЅРµС‚ РџРѕС‚СЂР°С‡РµРЅРЅРѕ",
+		lang ? "Health Potions Purchased" : (const char*)u8"Р—РµР»РёР№ РљСѓРїР»РµРЅРѕ",
+		lang ? "Jumps Almost Missed" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ Р РёСЃРєРѕРІР°РЅРЅС‹С… РџСЂС‹Р¶РєРѕРІ",
+		lang ? "Distance in Mine Cart" : (const char*)u8"Р Р°СЃСЃС‚РѕСЏРЅРёРµ РќР° Р’Р°РіРѕРЅРµС‚РєРµ",
+		lang ? "Enemies Killed" : (const char*)u8"Р’СЂР°РіРѕРІ РЈР±РёС‚Рѕ",
+		lang ? "Deaths Due to Sting" : (const char*)u8"РЈР±РёС‚Рѕ Р–Р°Р»РѕРј",
+		lang ? "Deaths Due to Staff" : (const char*)u8"РЈР±РёС‚Рѕ РџРѕСЃРѕС…РѕРј",
+		lang ? "Deaths Due to Stones" : (const char*)u8"РЈР±РёС‚Рѕ РљР°РјРЅСЏРјРё",
+		lang ? "Missed Courage from Kills" : (const char*)u8"РљСЂРёСЃС‚Р°Р»Р»РѕРІ РџРѕС‚РµСЂСЏРЅРѕ",
+		lang ? "Total SP Missed" : (const char*)u8"РџСЂРѕРїСѓС‰РµРЅРѕ РњРѕРЅРµС‚",
+		lang ? "Total Courage Missed" : (const char*)u8"РџСЂРѕРїСѓС‰РµРЅРѕ РљСЂРёСЃС‚Р°Р»Р»РѕРІ",
+		lang ? "Total Chests Missed" : (const char*)u8"РџСЂРѕРїСѓС‰РµРЅРѕ РЎСѓРЅРґСѓРєРѕРІ",
+		lang ? "Total Quests Missed" : (const char*)u8"РџСЂРѕРїСѓС‰РµРЅРѕ РљРІРµСЃС‚РѕРІ",
+		lang ? "Blocks" : (const char*)u8"РљРѕР»РёС‡РµСЃС‚РІРѕ Р‘Р»РѕРєРѕРІ" };
 
 		static int NumberStat = -1;
-		ImGui::Combo(lang ? "Select Statistics" : (const char*)u8"Выбрать Статистику", &NumberStat, Stats, IM_ARRAYSIZE(Stats));
+		ImGui::Combo(lang ? "Select Statistics" : (const char*)u8"Р’С‹Р±СЂР°С‚СЊ РЎС‚Р°С‚РёСЃС‚РёРєСѓ", &NumberStat, Stats, IM_ARRAYSIZE(Stats));
 		static int Stat = 0;
 		ImGui::InputInt(" ", &Stat);
-		if (ImGui::Button(lang ? "Change Statistics" : (const char*)u8"Изменить Статистику")) {
+		if (ImGui::Button(lang ? "Change Statistics" : (const char*)u8"РР·РјРµРЅРёС‚СЊ РЎС‚Р°С‚РёСЃС‚РёРєСѓ")) {
 			change_float_hobbit((LPDWORD)0x0075C034 + NumberStat, Stat);
 		}
 
 		ImGui::Unindent();
 	}
 
-	if (ImGui::CollapsingHeader(lang ? "Quest Items" : (const char*)u8"Квестовые предметы"))
+	if (ImGui::CollapsingHeader(lang ? "Quest Items" : (const char*)u8"РљРІРµСЃС‚РѕРІС‹Рµ РїСЂРµРґРјРµС‚С‹"))
 	{
 		ImGui::Indent();
-		const char* questItems[] = { lang ? "Troll key(OHUH)" : (const char*)u8"Ключ тролля",
-		lang ? "Witch King Crystal" : (const char*)u8"Камень Короля-Чародея",
-		lang ? "Burberry plant" : (const char*)u8"Шиполист",
-		lang ? "Blue urn" : (const char*)u8"Синяя урна",
-		lang ? "Red urn" : (const char*)u8"Красная урна",
-		lang ? "Yellow urn" : (const char*)u8"Желтая урна",
-		lang ? "Unlit torch" : (const char*)u8"Незаженный факел",
-		lang ? "Lit torch" : (const char*)u8"Горящий факел",
-		lang ? "Bellows" : (const char*)u8"Мехи",
-		lang ? "Signet ring" : (const char*)u8"Перстень",
-		lang ? "Can of oil" : (const char*)u8"Масло",
-		lang ? "Small iron gear" : (const char*)u8"Железная звездочка",
-		lang ? "Small silver gear" : (const char*)u8"Серебряная звездочка",
-		lang ? "Small golden gear" : (const char*)u8"Золотая звездочка",
-		lang ? "Small copper gear" : (const char*)u8"Медная звездочка",
-		lang ? "Small metallic" : (const char*)u8"Стальная звездочка",
-		lang ? "Iron gear" : (const char*)u8"Железная шестеренка",
-		lang ? "Silver gear" : (const char*)u8"Серебряная шестеренка",
-		lang ? "Golden gear" : (const char*)u8"Золотая шестеренка",
-		lang ? "Copper gear" : (const char*)u8"Медная шестеренка",
-		lang ? "Metallic gear" : (const char*)u8"Стальная шестеренка",
-		lang ? "Large iron gear" : (const char*)u8"Железная шестерня",
-		lang ? "Large silver gear" : (const char*)u8"Серебряная шестерня",
-		lang ? "Large golden gear" : (const char*)u8"Золотая шестерня",
-		lang ? "Large copper gear" : (const char*)u8"Медная шестерня",
-		lang ? "Large metallic gear" : (const char*)u8"Стальная шестерня",
-		lang ? "Iron shank head" : (const char*)u8"Железный толкатель",
-		lang ? "Silver shank head" : (const char*)u8"Серебряный толкатель",
-		lang ? "Golden shank head" : (const char*)u8"Золотой толкатель",
-		lang ? "Copper shank head" : (const char*)u8"Медный толкатель",
-		lang ? "Metallic shank head" : (const char*)u8"Стальной толкатель",
-		lang ? "Iron shank arm" : (const char*)u8"Железная шпага",
-		lang ? "Silver shank arm" : (const char*)u8"Серебряная шпага",
-		lang ? "Golden shank arm" : (const char*)u8"Золотая шпага",
-		lang ? "Copper shank arm" : (const char*)u8"Медная шпага",
-		lang ? "Metallic shank arm" : (const char*)u8"Стальная шпага",
-		lang ? "Firewood" : (const char*)u8"Дрова",
-		lang ? "Grit-lift key" : (const char*)u8"Ключ Грит",
-		lang ? "Dim-lift key" : (const char*)u8"Ключ Дим",
-		lang ? "Mugg-lift key" : (const char*)u8"Ключ Мугг",
-		lang ? "Jail Exit Key" : (const char*)u8"Ключ от тюрьмы",
-		lang ? "Final Bridge Key" : (const char*)u8"Ключ от последнего моста",
-		lang ? "Gandola gear 1" : (const char*)u8"Шестеренка Гандолы №1",
-		lang ? "Gandola gear 2" : (const char*)u8"Шестеренка Гандолы №2",
-		lang ? "Wart-lift lever" : (const char*)u8"Рычаг Варт",
-		lang ? "Wart-stone" : (const char*)u8"Камень Варт",
-		lang ? "Thror`s golden cup" : (const char*)u8"Золотая чаша Трора",
-		lang ? "Necklace of Girion" : (const char*)u8"Ожерелье Гириона",
-		lang ? "Groin`s ruby" : (const char*)u8"Рубин Гроина",
-		lang ? "King Bladorthin`s spears" : (const char*)u8"Копье короля Дортина",
-		lang ? "Golden serving dish" : (const char*)u8"Золотое блюдо",
-		lang ? "Tea-cakes" : (const char*)u8"Кексы",
-		lang ? "Tea-cakes ingredients" : (const char*)u8"Ингридиенты для кексов",
-		lang ? "Shed key" : (const char*)u8"Ключ от сарая",
-		lang ? "Apple" : (const char*)u8"Яблоко",
-		lang ? "Hammer" : (const char*)u8"Молоток",
-		lang ? "Nails" : (const char*)u8"Гвозди",
-		lang ? "Walking stick" : (const char*)u8"Посох",
-		lang ? "Egg" : (const char*)u8"Яйцо",
-		lang ? "Berries" : (const char*)u8"Ягоды",
-		lang ? "Sack of Wheat" : (const char*)u8"Мешок пшеницы",
-		lang ? "Sugar" : (const char*)u8"Сахар",
-		lang ? "Spice" : (const char*)u8"Специи",
-		lang ? "Sausage" : (const char*)u8"Колбаски",
-		lang ? "Wheat" : (const char*)u8"Пшеница",
-		lang ? "Quilt" : (const char*)u8"Одеяло",
-		lang ? "Quilting needle" : (const char*)u8"Иголка",
-		lang ? "Elvish opening crystal 1" : (const char*)u8"1 ключ-кристалл",
-		lang ? "Elvish opening crystal 2" : (const char*)u8"2 ключ-кристалл",
-		lang ? "Elvish opening crystal 3" : (const char*)u8"3 ключ-кристалл",
-		lang ? "Elvish opening crystal 4" : (const char*)u8"4 ключ-кристалл",
-		lang ? "Elvish healing potion" : (const char*)u8"Эльфийское зелье исцеления",
-		lang ? "Deep cellar key 1" : (const char*)u8"1 ключ от Подземелья",
-		lang ? "Deep cellar key 2" : (const char*)u8"2 ключ от Подземелья",
-		lang ? "Deep cellar key 3" : (const char*)u8"3 ключ от Подземелья",
-		lang ? "Deep cellar key 4" : (const char*)u8"4 ключ от Подземелья",
-		lang ? "Cavern crystal" : (const char*)u8"Пещерный кристалл",
-		lang ? "Wilowweed" : (const char*)u8"Сон-трава",
-		lang ? "Moonleaf" : (const char*)u8"Луннолист",
-		lang ? "Spidersbane" : (const char*)u8"Паутинник",
-		lang ? "Web potion" : (const char*)u8"Паутинное зелье",
-		lang ? "Gear belt" : (const char*)u8"Приводной ремень",
-		lang ? "Treasury Chain" : (const char*)u8"Цепь из сокровищницы",
-		lang ? "Treasury key mold" : (const char*)u8"Форма для ключа",
-		lang ? "Throne key mold 1" : (const char*)u8"1 форма для ключа",
-		lang ? "Throne key mold 2" : (const char*)u8"2 форма для ключа",
-		lang ? "Treasury key" : (const char*)u8"Ключ от сокровищницы",
-		lang ? "Throne key 1" : (const char*)u8"1 ключ от Тронного зала",
-		lang ? "Throne key 2" : (const char*)u8"2 ключ от Тронного зала",
-		lang ? "Arkenstone" : (const char*)u8"Аркенстон",
-		lang ? "City warehouse key" : (const char*)u8"Ключ от городского склада",
-		lang ? "Black arrow" : (const char*)u8"Черная стрела",
-		lang ? "Malloc`s golden dagger" : (const char*)u8"Золотой кинжал Мэллока",
-		lang ? "Black wine bottle" : (const char*)u8"Черная бутылка",
-		lang ? "Blue wine bottle" : (const char*)u8"Синяя бутылка",
-		lang ? "Purple wine bottle" : (const char*)u8"Фиолетовая бутылка",
-		lang ? "Red wine bottle" : (const char*)u8"Красная бутылка",
-		lang ? "Yellow wine bottle" : (const char*)u8"Желтая бутылка",
-		lang ? "Gandalf`s Message" : (const char*)u8"Послание Гендольфа",
-		lang ? "Healing Draught" : (const char*)u8"Лекарство",
-		lang ? "Troll key(TH)" : (const char*)u8"Ключ троллей",
-		lang ? "Ladder switch lever" : (const char*)u8"Рукоятка для лестницы",
-		lang ? "Rennar`s key" : (const char*)u8"Ключ Реннара" };
+		const char* questItems[] = { lang ? "Troll key(OHUH)" : (const char*)u8"РљР»СЋС‡ С‚СЂРѕР»Р»СЏ",
+		lang ? "Witch King Crystal" : (const char*)u8"РљР°РјРµРЅСЊ РљРѕСЂРѕР»СЏ-Р§Р°СЂРѕРґРµСЏ",
+		lang ? "Burberry plant" : (const char*)u8"РЁРёРїРѕР»РёСЃС‚",
+		lang ? "Blue urn" : (const char*)u8"РЎРёРЅСЏСЏ СѓСЂРЅР°",
+		lang ? "Red urn" : (const char*)u8"РљСЂР°СЃРЅР°СЏ СѓСЂРЅР°",
+		lang ? "Yellow urn" : (const char*)u8"Р–РµР»С‚Р°СЏ СѓСЂРЅР°",
+		lang ? "Unlit torch" : (const char*)u8"РќРµР·Р°Р¶РµРЅРЅС‹Р№ С„Р°РєРµР»",
+		lang ? "Lit torch" : (const char*)u8"Р“РѕСЂСЏС‰РёР№ С„Р°РєРµР»",
+		lang ? "Bellows" : (const char*)u8"РњРµС…Рё",
+		lang ? "Signet ring" : (const char*)u8"РџРµСЂСЃС‚РµРЅСЊ",
+		lang ? "Can of oil" : (const char*)u8"РњР°СЃР»Рѕ",
+		lang ? "Small iron gear" : (const char*)u8"Р–РµР»РµР·РЅР°СЏ Р·РІРµР·РґРѕС‡РєР°",
+		lang ? "Small silver gear" : (const char*)u8"РЎРµСЂРµР±СЂСЏРЅР°СЏ Р·РІРµР·РґРѕС‡РєР°",
+		lang ? "Small golden gear" : (const char*)u8"Р—РѕР»РѕС‚Р°СЏ Р·РІРµР·РґРѕС‡РєР°",
+		lang ? "Small copper gear" : (const char*)u8"РњРµРґРЅР°СЏ Р·РІРµР·РґРѕС‡РєР°",
+		lang ? "Small metallic" : (const char*)u8"РЎС‚Р°Р»СЊРЅР°СЏ Р·РІРµР·РґРѕС‡РєР°",
+		lang ? "Iron gear" : (const char*)u8"Р–РµР»РµР·РЅР°СЏ С€РµСЃС‚РµСЂРµРЅРєР°",
+		lang ? "Silver gear" : (const char*)u8"РЎРµСЂРµР±СЂСЏРЅР°СЏ С€РµСЃС‚РµСЂРµРЅРєР°",
+		lang ? "Golden gear" : (const char*)u8"Р—РѕР»РѕС‚Р°СЏ С€РµСЃС‚РµСЂРµРЅРєР°",
+		lang ? "Copper gear" : (const char*)u8"РњРµРґРЅР°СЏ С€РµСЃС‚РµСЂРµРЅРєР°",
+		lang ? "Metallic gear" : (const char*)u8"РЎС‚Р°Р»СЊРЅР°СЏ С€РµСЃС‚РµСЂРµРЅРєР°",
+		lang ? "Large iron gear" : (const char*)u8"Р–РµР»РµР·РЅР°СЏ С€РµСЃС‚РµСЂРЅСЏ",
+		lang ? "Large silver gear" : (const char*)u8"РЎРµСЂРµР±СЂСЏРЅР°СЏ С€РµСЃС‚РµСЂРЅСЏ",
+		lang ? "Large golden gear" : (const char*)u8"Р—РѕР»РѕС‚Р°СЏ С€РµСЃС‚РµСЂРЅСЏ",
+		lang ? "Large copper gear" : (const char*)u8"РњРµРґРЅР°СЏ С€РµСЃС‚РµСЂРЅСЏ",
+		lang ? "Large metallic gear" : (const char*)u8"РЎС‚Р°Р»СЊРЅР°СЏ С€РµСЃС‚РµСЂРЅСЏ",
+		lang ? "Iron shank head" : (const char*)u8"Р–РµР»РµР·РЅС‹Р№ С‚РѕР»РєР°С‚РµР»СЊ",
+		lang ? "Silver shank head" : (const char*)u8"РЎРµСЂРµР±СЂСЏРЅС‹Р№ С‚РѕР»РєР°С‚РµР»СЊ",
+		lang ? "Golden shank head" : (const char*)u8"Р—РѕР»РѕС‚РѕР№ С‚РѕР»РєР°С‚РµР»СЊ",
+		lang ? "Copper shank head" : (const char*)u8"РњРµРґРЅС‹Р№ С‚РѕР»РєР°С‚РµР»СЊ",
+		lang ? "Metallic shank head" : (const char*)u8"РЎС‚Р°Р»СЊРЅРѕР№ С‚РѕР»РєР°С‚РµР»СЊ",
+		lang ? "Iron shank arm" : (const char*)u8"Р–РµР»РµР·РЅР°СЏ С€РїР°РіР°",
+		lang ? "Silver shank arm" : (const char*)u8"РЎРµСЂРµР±СЂСЏРЅР°СЏ С€РїР°РіР°",
+		lang ? "Golden shank arm" : (const char*)u8"Р—РѕР»РѕС‚Р°СЏ С€РїР°РіР°",
+		lang ? "Copper shank arm" : (const char*)u8"РњРµРґРЅР°СЏ С€РїР°РіР°",
+		lang ? "Metallic shank arm" : (const char*)u8"РЎС‚Р°Р»СЊРЅР°СЏ С€РїР°РіР°",
+		lang ? "Firewood" : (const char*)u8"Р”СЂРѕРІР°",
+		lang ? "Grit-lift key" : (const char*)u8"РљР»СЋС‡ Р“СЂРёС‚",
+		lang ? "Dim-lift key" : (const char*)u8"РљР»СЋС‡ Р”РёРј",
+		lang ? "Mugg-lift key" : (const char*)u8"РљР»СЋС‡ РњСѓРіРі",
+		lang ? "Jail Exit Key" : (const char*)u8"РљР»СЋС‡ РѕС‚ С‚СЋСЂСЊРјС‹",
+		lang ? "Final Bridge Key" : (const char*)u8"РљР»СЋС‡ РѕС‚ РїРѕСЃР»РµРґРЅРµРіРѕ РјРѕСЃС‚Р°",
+		lang ? "Gandola gear 1" : (const char*)u8"РЁРµСЃС‚РµСЂРµРЅРєР° Р“Р°РЅРґРѕР»С‹ в„–1",
+		lang ? "Gandola gear 2" : (const char*)u8"РЁРµСЃС‚РµСЂРµРЅРєР° Р“Р°РЅРґРѕР»С‹ в„–2",
+		lang ? "Wart-lift lever" : (const char*)u8"Р С‹С‡Р°Рі Р’Р°СЂС‚",
+		lang ? "Wart-stone" : (const char*)u8"РљР°РјРµРЅСЊ Р’Р°СЂС‚",
+		lang ? "Thror`s golden cup" : (const char*)u8"Р—РѕР»РѕС‚Р°СЏ С‡Р°С€Р° РўСЂРѕСЂР°",
+		lang ? "Necklace of Girion" : (const char*)u8"РћР¶РµСЂРµР»СЊРµ Р“РёСЂРёРѕРЅР°",
+		lang ? "Groin`s ruby" : (const char*)u8"Р СѓР±РёРЅ Р“СЂРѕРёРЅР°",
+		lang ? "King Bladorthin`s spears" : (const char*)u8"РљРѕРїСЊРµ РєРѕСЂРѕР»СЏ Р”РѕСЂС‚РёРЅР°",
+		lang ? "Golden serving dish" : (const char*)u8"Р—РѕР»РѕС‚РѕРµ Р±Р»СЋРґРѕ",
+		lang ? "Tea-cakes" : (const char*)u8"РљРµРєСЃС‹",
+		lang ? "Tea-cakes ingredients" : (const char*)u8"РРЅРіСЂРёРґРёРµРЅС‚С‹ РґР»СЏ РєРµРєСЃРѕРІ",
+		lang ? "Shed key" : (const char*)u8"РљР»СЋС‡ РѕС‚ СЃР°СЂР°СЏ",
+		lang ? "Apple" : (const char*)u8"РЇР±Р»РѕРєРѕ",
+		lang ? "Hammer" : (const char*)u8"РњРѕР»РѕС‚РѕРє",
+		lang ? "Nails" : (const char*)u8"Р“РІРѕР·РґРё",
+		lang ? "Walking stick" : (const char*)u8"РџРѕСЃРѕС…",
+		lang ? "Egg" : (const char*)u8"РЇР№С†Рѕ",
+		lang ? "Berries" : (const char*)u8"РЇРіРѕРґС‹",
+		lang ? "Sack of Wheat" : (const char*)u8"РњРµС€РѕРє РїС€РµРЅРёС†С‹",
+		lang ? "Sugar" : (const char*)u8"РЎР°С…Р°СЂ",
+		lang ? "Spice" : (const char*)u8"РЎРїРµС†РёРё",
+		lang ? "Sausage" : (const char*)u8"РљРѕР»Р±Р°СЃРєРё",
+		lang ? "Wheat" : (const char*)u8"РџС€РµРЅРёС†Р°",
+		lang ? "Quilt" : (const char*)u8"РћРґРµСЏР»Рѕ",
+		lang ? "Quilting needle" : (const char*)u8"РРіРѕР»РєР°",
+		lang ? "Elvish opening crystal 1" : (const char*)u8"1 РєР»СЋС‡-РєСЂРёСЃС‚Р°Р»Р»",
+		lang ? "Elvish opening crystal 2" : (const char*)u8"2 РєР»СЋС‡-РєСЂРёСЃС‚Р°Р»Р»",
+		lang ? "Elvish opening crystal 3" : (const char*)u8"3 РєР»СЋС‡-РєСЂРёСЃС‚Р°Р»Р»",
+		lang ? "Elvish opening crystal 4" : (const char*)u8"4 РєР»СЋС‡-РєСЂРёСЃС‚Р°Р»Р»",
+		lang ? "Elvish healing potion" : (const char*)u8"Р­Р»СЊС„РёР№СЃРєРѕРµ Р·РµР»СЊРµ РёСЃС†РµР»РµРЅРёСЏ",
+		lang ? "Deep cellar key 1" : (const char*)u8"1 РєР»СЋС‡ РѕС‚ РџРѕРґР·РµРјРµР»СЊСЏ",
+		lang ? "Deep cellar key 2" : (const char*)u8"2 РєР»СЋС‡ РѕС‚ РџРѕРґР·РµРјРµР»СЊСЏ",
+		lang ? "Deep cellar key 3" : (const char*)u8"3 РєР»СЋС‡ РѕС‚ РџРѕРґР·РµРјРµР»СЊСЏ",
+		lang ? "Deep cellar key 4" : (const char*)u8"4 РєР»СЋС‡ РѕС‚ РџРѕРґР·РµРјРµР»СЊСЏ",
+		lang ? "Cavern crystal" : (const char*)u8"РџРµС‰РµСЂРЅС‹Р№ РєСЂРёСЃС‚Р°Р»Р»",
+		lang ? "Wilowweed" : (const char*)u8"РЎРѕРЅ-С‚СЂР°РІР°",
+		lang ? "Moonleaf" : (const char*)u8"Р›СѓРЅРЅРѕР»РёСЃС‚",
+		lang ? "Spidersbane" : (const char*)u8"РџР°СѓС‚РёРЅРЅРёРє",
+		lang ? "Web potion" : (const char*)u8"РџР°СѓС‚РёРЅРЅРѕРµ Р·РµР»СЊРµ",
+		lang ? "Gear belt" : (const char*)u8"РџСЂРёРІРѕРґРЅРѕР№ СЂРµРјРµРЅСЊ",
+		lang ? "Treasury Chain" : (const char*)u8"Р¦РµРїСЊ РёР· СЃРѕРєСЂРѕРІРёС‰РЅРёС†С‹",
+		lang ? "Treasury key mold" : (const char*)u8"Р¤РѕСЂРјР° РґР»СЏ РєР»СЋС‡Р°",
+		lang ? "Throne key mold 1" : (const char*)u8"1 С„РѕСЂРјР° РґР»СЏ РєР»СЋС‡Р°",
+		lang ? "Throne key mold 2" : (const char*)u8"2 С„РѕСЂРјР° РґР»СЏ РєР»СЋС‡Р°",
+		lang ? "Treasury key" : (const char*)u8"РљР»СЋС‡ РѕС‚ СЃРѕРєСЂРѕРІРёС‰РЅРёС†С‹",
+		lang ? "Throne key 1" : (const char*)u8"1 РєР»СЋС‡ РѕС‚ РўСЂРѕРЅРЅРѕРіРѕ Р·Р°Р»Р°",
+		lang ? "Throne key 2" : (const char*)u8"2 РєР»СЋС‡ РѕС‚ РўСЂРѕРЅРЅРѕРіРѕ Р·Р°Р»Р°",
+		lang ? "Arkenstone" : (const char*)u8"РђСЂРєРµРЅСЃС‚РѕРЅ",
+		lang ? "City warehouse key" : (const char*)u8"РљР»СЋС‡ РѕС‚ РіРѕСЂРѕРґСЃРєРѕРіРѕ СЃРєР»Р°РґР°",
+		lang ? "Black arrow" : (const char*)u8"Р§РµСЂРЅР°СЏ СЃС‚СЂРµР»Р°",
+		lang ? "Malloc`s golden dagger" : (const char*)u8"Р—РѕР»РѕС‚РѕР№ РєРёРЅР¶Р°Р» РњСЌР»Р»РѕРєР°",
+		lang ? "Black wine bottle" : (const char*)u8"Р§РµСЂРЅР°СЏ Р±СѓС‚С‹Р»РєР°",
+		lang ? "Blue wine bottle" : (const char*)u8"РЎРёРЅСЏСЏ Р±СѓС‚С‹Р»РєР°",
+		lang ? "Purple wine bottle" : (const char*)u8"Р¤РёРѕР»РµС‚РѕРІР°СЏ Р±СѓС‚С‹Р»РєР°",
+		lang ? "Red wine bottle" : (const char*)u8"РљСЂР°СЃРЅР°СЏ Р±СѓС‚С‹Р»РєР°",
+		lang ? "Yellow wine bottle" : (const char*)u8"Р–РµР»С‚Р°СЏ Р±СѓС‚С‹Р»РєР°",
+		lang ? "Gandalf`s Message" : (const char*)u8"РџРѕСЃР»Р°РЅРёРµ Р“РµРЅРґРѕР»СЊС„Р°",
+		lang ? "Healing Draught" : (const char*)u8"Р›РµРєР°СЂСЃС‚РІРѕ",
+		lang ? "Troll key(TH)" : (const char*)u8"РљР»СЋС‡ С‚СЂРѕР»Р»РµР№",
+		lang ? "Ladder switch lever" : (const char*)u8"Р СѓРєРѕСЏС‚РєР° РґР»СЏ Р»РµСЃС‚РЅРёС†С‹",
+		lang ? "Rennar`s key" : (const char*)u8"РљР»СЋС‡ Р РµРЅРЅР°СЂР°" };
 
 
-		ImGui::Text(lang ? "Quest Items" : (const char*)u8"Квестовые предметы");
+		ImGui::Text(lang ? "Quest Items" : (const char*)u8"РљРІРµСЃС‚РѕРІС‹Рµ РїСЂРµРґРјРµС‚С‹");
 		ImGui::Separator();
 
 		static int questItem = -1;
 		ImGui::Combo("   ", &questItem, questItems, IM_ARRAYSIZE(questItems));
 
-		if (ImGui::Button(lang ? "Give quest item" : (const char*)u8"Выдать квестовый предмет")) {
-			plusA_float_hobbit((LPBYTE)0x0075BE98 + questItem * 4, 1); //функция выдачи квестового предмета
+		if (ImGui::Button(lang ? "Give quest item" : (const char*)u8"Р’С‹РґР°С‚СЊ РєРІРµСЃС‚РѕРІС‹Р№ РїСЂРµРґРјРµС‚")) {
+			plusA_float_hobbit((LPBYTE)0x0075BE98 + questItem * 4, 1); //С„СѓРЅРєС†РёСЏ РІС‹РґР°С‡Рё РєРІРµСЃС‚РѕРІРѕРіРѕ РїСЂРµРґРјРµС‚Р°
 		}
-		if (ImGui::Button(lang ? "Delete quest item" : (const char*)u8"Удалить квестовый предмет")) {
-			change_2Byte_hobbit((LPBYTE)0x0075BE9A + questItem * 4, 0x00, 0x00); //функция выдачи квестового предмета
+		if (ImGui::Button(lang ? "Delete quest item" : (const char*)u8"РЈРґР°Р»РёС‚СЊ РєРІРµСЃС‚РѕРІС‹Р№ РїСЂРµРґРјРµС‚")) {
+			change_2Byte_hobbit((LPBYTE)0x0075BE9A + questItem * 4, 0x00, 0x00); //С„СѓРЅРєС†РёСЏ РІС‹РґР°С‡Рё РєРІРµСЃС‚РѕРІРѕРіРѕ РїСЂРµРґРјРµС‚Р°
 		}
 		ImGui::Unindent();
 	}
 
-	if (ImGui::CollapsingHeader(lang ? "Items" : (const char*)u8"Предметы"))
+	if (ImGui::CollapsingHeader(lang ? "Items" : (const char*)u8"РџСЂРµРґРјРµС‚С‹"))
 	{
 		ImGui::Indent();
-		const char* items[] = { lang ? "Coin" : (const char*)u8"Монета",
-			lang ? "Stones" : (const char*)u8"Камень",
+		const char* items[] = { lang ? "Coin" : (const char*)u8"РњРѕРЅРµС‚Р°",
+			lang ? "Stones" : (const char*)u8"РљР°РјРµРЅСЊ",
 			(const char*)u8"Ihavehadstones",
-			lang ? "Health" : (const char*)u8"Здоровье",
+			lang ? "Health" : (const char*)u8"Р—РґРѕСЂРѕРІСЊРµ",
 			(const char*)u8"GreaterHealth",
-			lang ? "Vigor Health" : (const char*)u8"Выносливость",
+			lang ? "Vigor Health" : (const char*)u8"Р’С‹РЅРѕСЃР»РёРІРѕСЃС‚СЊ",
 			(const char*)u8"CPTOTAL",
 			(const char*)u8"LevelingCP",
-			lang ? "Courage" : (const char*)u8"Синий кристалл",
-			lang ? "Courage1" : (const char*)u8"Голубой кристалл",
-			lang ? "Courage5" : (const char*)u8"Красный кристалл",
-			lang ? "Courage10" : (const char*)u8"Зеленный кристалл",
-			lang ? "Courage25" : (const char*)u8"Фиолетовый кристалл",
-			lang ? "Courage50" : (const char*)u8"Белый кристалл",
+			lang ? "Courage" : (const char*)u8"РЎРёРЅРёР№ РєСЂРёСЃС‚Р°Р»Р»",
+			lang ? "Courage1" : (const char*)u8"Р“РѕР»СѓР±РѕР№ РєСЂРёСЃС‚Р°Р»Р»",
+			lang ? "Courage5" : (const char*)u8"РљСЂР°СЃРЅС‹Р№ РєСЂРёСЃС‚Р°Р»Р»",
+			lang ? "Courage10" : (const char*)u8"Р—РµР»РµРЅРЅС‹Р№ РєСЂРёСЃС‚Р°Р»Р»",
+			lang ? "Courage25" : (const char*)u8"Р¤РёРѕР»РµС‚РѕРІС‹Р№ РєСЂРёСЃС‚Р°Р»Р»",
+			lang ? "Courage50" : (const char*)u8"Р‘РµР»С‹Р№ РєСЂРёСЃС‚Р°Р»Р»",
 			(const char*)u8"Coinbag",
 			(const char*)u8"Coinbag5",
 			(const char*)u8"Coinbag10",
 			(const char*)u8"Coinbag25",
 			(const char*)u8"Coinbag50",
 			(const char*)u8"Coinbag100",
-			lang ? "Rock Bag" : (const char*)u8"Сумка для камней",
-			lang ? "Med Bag" : (const char*)u8"Сумка для зелей",
-			lang ? "Skeleton key" : (const char*)u8"Отмычка",
+			lang ? "Rock Bag" : (const char*)u8"РЎСѓРјРєР° РґР»СЏ РєР°РјРЅРµР№",
+			lang ? "Med Bag" : (const char*)u8"РЎСѓРјРєР° РґР»СЏ Р·РµР»РµР№",
+			lang ? "Skeleton key" : (const char*)u8"РћС‚РјС‹С‡РєР°",
 			(const char*)u8"CLevelCP",
 			(const char*)u8"ChestCount",
 			(const char*)u8"BilboLevel",
@@ -1031,69 +1031,69 @@ void gui::Render() noexcept
 			(const char*)u8"Bilbo_Stone_Throw",
 			(const char*)u8"Bilbo_Stone_Throw2",
 			(const char*)u8"Bilbo_Stone_Throw3",
-			lang ? "Level Potion" : (const char*)u8"Зелье уровня",
-			lang ? "Health Potion" : (const char*)u8"Лечебное зелье",
-			lang ? "Antidote" : (const char*)u8"Противоядие",
-			lang ? "Water of Vigor" : (const char*)u8"Живая вода",
-			lang ? "Sword Sting" : (const char*)u8"Жало",
-			lang ? "Ring" : (const char*)u8"Кольцо",
-			lang ? "Staff" : (const char*)u8"Посох",
-			lang ? "Explosive Stone" : (const char*)u8"Взрывные камни",
-			lang ? "Fire Stone" : (const char*)u8"Огненные камни",
-			lang ? "Freeze Stone" : (const char*)u8"Замороженные камни",
-			lang ? "Poison Stone" : (const char*)u8"Ядовитые камни",
-			lang ? "Magic Stone" : (const char*)u8"Магические камни" };
+			lang ? "Level Potion" : (const char*)u8"Р—РµР»СЊРµ СѓСЂРѕРІРЅСЏ",
+			lang ? "Health Potion" : (const char*)u8"Р›РµС‡РµР±РЅРѕРµ Р·РµР»СЊРµ",
+			lang ? "Antidote" : (const char*)u8"РџСЂРѕС‚РёРІРѕСЏРґРёРµ",
+			lang ? "Water of Vigor" : (const char*)u8"Р–РёРІР°СЏ РІРѕРґР°",
+			lang ? "Sword Sting" : (const char*)u8"Р–Р°Р»Рѕ",
+			lang ? "Ring" : (const char*)u8"РљРѕР»СЊС†Рѕ",
+			lang ? "Staff" : (const char*)u8"РџРѕСЃРѕС…",
+			lang ? "Explosive Stone" : (const char*)u8"Р’Р·СЂС‹РІРЅС‹Рµ РєР°РјРЅРё",
+			lang ? "Fire Stone" : (const char*)u8"РћРіРЅРµРЅРЅС‹Рµ РєР°РјРЅРё",
+			lang ? "Freeze Stone" : (const char*)u8"Р—Р°РјРѕСЂРѕР¶РµРЅРЅС‹Рµ РєР°РјРЅРё",
+			lang ? "Poison Stone" : (const char*)u8"РЇРґРѕРІРёС‚С‹Рµ РєР°РјРЅРё",
+			lang ? "Magic Stone" : (const char*)u8"РњР°РіРёС‡РµСЃРєРёРµ РєР°РјРЅРё" };
 		static int item = -1;
 
-		ImGui::Text(lang ? "Items" : (const char*)u8"Предметы");
+		ImGui::Text(lang ? "Items" : (const char*)u8"РџСЂРµРґРјРµС‚С‹");
 		ImGui::Separator();
 
 		ImGui::Combo("     ", &item, items, IM_ARRAYSIZE(items));
 
-		if (ImGui::Button(lang ? "Give item" : (const char*)u8"Выдать предмет")) {
-			plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //функция выдачи предмета
+		if (ImGui::Button(lang ? "Give item" : (const char*)u8"Р’С‹РґР°С‚СЊ РїСЂРµРґРјРµС‚")) {
+			plusA_float_hobbit((LPBYTE)0x0075BDB0 + item * 4, 1); //С„СѓРЅРєС†РёСЏ РІС‹РґР°С‡Рё РїСЂРµРґРјРµС‚Р°
 		}
-		if (ImGui::Button(lang ? "Remove item" : (const char*)u8"Удалить предмет")) {
-			change_2Byte_hobbit((LPBYTE)0x0075BDB2 + item * 4, 0x00, 0x00); //функция удаления предмета
+		if (ImGui::Button(lang ? "Remove item" : (const char*)u8"РЈРґР°Р»РёС‚СЊ РїСЂРµРґРјРµС‚")) {
+			change_2Byte_hobbit((LPBYTE)0x0075BDB2 + item * 4, 0x00, 0x00); //С„СѓРЅРєС†РёСЏ СѓРґР°Р»РµРЅРёСЏ РїСЂРµРґРјРµС‚Р°
 		}
-		if (ImGui::Button(lang ? "Show item" : (const char*)u8"Показать предмет")) {
-			change_1Byte_hobbit((LPBYTE)0x007212BC + item * 4, 0x01, 0x01); //функция показа предмета
+		if (ImGui::Button(lang ? "Show item" : (const char*)u8"РџРѕРєР°Р·Р°С‚СЊ РїСЂРµРґРјРµС‚")) {
+			change_1Byte_hobbit((LPBYTE)0x007212BC + item * 4, 0x01, 0x01); //С„СѓРЅРєС†РёСЏ РїРѕРєР°Р·Р° РїСЂРµРґРјРµС‚Р°
 		}
-		if (ImGui::Button(lang ? "Hide item" : (const char*)u8"Спрятать предмет")) {
-			change_2Byte_hobbit((LPBYTE)0x007212BC + item * 4, 0x00, 0x00); //функция убирания предмета
+		if (ImGui::Button(lang ? "Hide item" : (const char*)u8"РЎРїСЂСЏС‚Р°С‚СЊ РїСЂРµРґРјРµС‚")) {
+			change_2Byte_hobbit((LPBYTE)0x007212BC + item * 4, 0x00, 0x00); //С„СѓРЅРєС†РёСЏ СѓР±РёСЂР°РЅРёСЏ РїСЂРµРґРјРµС‚Р°
 		}
 		ImGui::Unindent();
 	}
-	if (ImGui::CollapsingHeader(lang ? "Special options" : (const char*)u8"Специальные опции"))
+	if (ImGui::CollapsingHeader(lang ? "Special options" : (const char*)u8"РЎРїРµС†РёР°Р»СЊРЅС‹Рµ РѕРїС†РёРё"))
 	{
 		ImGui::Indent();
-		if (ImGui::Checkbox(lang ? "Disable the possibility of poisoning" : (const char*)u8"Отключить возможность отравиться", &poison_chance)) {
-			change_1Byte_hobbit((LPVOID)0x0042132C, 0x00, 0x01); //функция возможности отравиться у Бильбо
+		if (ImGui::Checkbox(lang ? "Disable the possibility of poisoning" : (const char*)u8"РћС‚РєР»СЋС‡РёС‚СЊ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РѕС‚СЂР°РІРёС‚СЊСЃСЏ", &poison_chance)) {
+			change_1Byte_hobbit((LPVOID)0x0042132C, 0x00, 0x01); //С„СѓРЅРєС†РёСЏ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РѕС‚СЂР°РІРёС‚СЊСЃСЏ Сѓ Р‘РёР»СЊР±Рѕ
 		}
-		if (ImGui::Checkbox(lang ? "Disable wall sliding" : (const char*)u8"Отключить скольжение по стене", &sliding_wall)) {
-			change_1Byte_hobbit((LPVOID)0x0044342F, 0xEB, 0x74); //функция отключения скольжения по стене (если скольже с анимацие, то скольжение всё равно сработает)
+		if (ImGui::Checkbox(lang ? "Disable wall sliding" : (const char*)u8"РћС‚РєР»СЋС‡РёС‚СЊ СЃРєРѕР»СЊР¶РµРЅРёРµ РїРѕ СЃС‚РµРЅРµ", &sliding_wall)) {
+			change_1Byte_hobbit((LPVOID)0x0044342F, 0xEB, 0x74); //С„СѓРЅРєС†РёСЏ РѕС‚РєР»СЋС‡РµРЅРёСЏ СЃРєРѕР»СЊР¶РµРЅРёСЏ РїРѕ СЃС‚РµРЅРµ (РµСЃР»Рё СЃРєРѕР»СЊР¶Рµ СЃ Р°РЅРёРјР°С†РёРµ, С‚Рѕ СЃРєРѕР»СЊР¶РµРЅРёРµ РІСЃС‘ СЂР°РІРЅРѕ СЃСЂР°Р±РѕС‚Р°РµС‚)
 		}
-		if (ImGui::Checkbox(lang ? "Slide on" : (const char*)u8"Включить слайд", &slide)) {
-			change_1Byte_hobbit((LPVOID)0x0043CD52, 0x08, 0x04); //функция окончания беты после окончания уровня
+		if (ImGui::Checkbox(lang ? "Slide on" : (const char*)u8"Р’РєР»СЋС‡РёС‚СЊ СЃР»Р°Р№Рґ", &slide)) {
+			change_1Byte_hobbit((LPVOID)0x0043CD52, 0x08, 0x04); //С„СѓРЅРєС†РёСЏ РѕРєРѕРЅС‡Р°РЅРёСЏ Р±РµС‚С‹ РїРѕСЃР»Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ СѓСЂРѕРІРЅСЏ
 		}
-		if (ImGui::Checkbox(lang ? "Lock animation" : (const char*)u8"Залочить анимацию", &lock_animation)) {
+		if (ImGui::Checkbox(lang ? "Lock animation" : (const char*)u8"Р—Р°Р»РѕС‡РёС‚СЊ Р°РЅРёРјР°С†РёСЋ", &lock_animation)) {
 			savedPoint.ukazatel_animation = ukazatel_hobbit((LPDWORD)0x0075BA3C);
-			ukazatel_animation = savedPoint.ukazatel_animation; //функция беконечной стамины
+			ukazatel_animation = savedPoint.ukazatel_animation; //С„СѓРЅРєС†РёСЏ Р±РµРєРѕРЅРµС‡РЅРѕР№ СЃС‚Р°РјРёРЅС‹
 			savedPoint.frame_animation = save_float_hobbit(ukazatel_animation + 0x530);
 		}
-		if (ImGui::Checkbox(lang ? "Finish the game after completing a level" : (const char*)u8"Закончить игру после окончания уровня", &finish_game)) {
-			change_1Byte_hobbit((LPVOID)0x0052ACDF, 0x75, 0x74); //функция окончания игры после окончания уровня
+		if (ImGui::Checkbox(lang ? "Finish the game after completing a level" : (const char*)u8"Р—Р°РєРѕРЅС‡РёС‚СЊ РёРіСЂСѓ РїРѕСЃР»Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ СѓСЂРѕРІРЅСЏ", &finish_game)) {
+			change_1Byte_hobbit((LPVOID)0x0052ACDF, 0x75, 0x74); //С„СѓРЅРєС†РёСЏ РѕРєРѕРЅС‡Р°РЅРёСЏ РёРіСЂС‹ РїРѕСЃР»Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ СѓСЂРѕРІРЅСЏ
 		}
-		if (ImGui::Checkbox(lang ? "Finish the demo after completing a level" : (const char*)u8"Закончить демо после окончания уровня", &finish_demo)) {
-			change_1Byte_hobbit((LPVOID)0x0052ACC2, 0x75, 0x74); //функция окончания беты после окончания уровня
+		if (ImGui::Checkbox(lang ? "Finish the demo after completing a level" : (const char*)u8"Р—Р°РєРѕРЅС‡РёС‚СЊ РґРµРјРѕ РїРѕСЃР»Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ СѓСЂРѕРІРЅСЏ", &finish_demo)) {
+			change_1Byte_hobbit((LPVOID)0x0052ACC2, 0x75, 0x74); //С„СѓРЅРєС†РёСЏ РѕРєРѕРЅС‡Р°РЅРёСЏ Р±РµС‚С‹ РїРѕСЃР»Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ СѓСЂРѕРІРЅСЏ
 		}
-		ImGui::Text(lang ? "Change HUD HP (max 22)" : (const char*)u8"Изменение HUD ХП (макс 22)");
+		ImGui::Text(lang ? "Change HUD HP (max 22)" : (const char*)u8"РР·РјРµРЅРµРЅРёРµ HUD РҐРџ (РјР°РєСЃ 22)");
 		if (ImGui::Button("<")) {
 			HUD_HP = read_int_value((LPBYTE)0x004F5BB8);
 			if (HUD_HP == 98615552) {
 				change_1Byte_hobbit((LPBYTE)0x004F5BB8, 0x16, 0x00);
 			}
-			else plusA_int_hobbit((LPBYTE)0x004F5BB8, -1); //функция изменения худа хп
+			else plusA_int_hobbit((LPBYTE)0x004F5BB8, -1); //С„СѓРЅРєС†РёСЏ РёР·РјРµРЅРµРЅРёСЏ С…СѓРґР° С…Рї
 		}
 		ImGui::SameLine();
 		if (ImGui::Button(">")) {
@@ -1101,31 +1101,31 @@ void gui::Render() noexcept
 			if (HUD_HP == 98615574) {
 				change_1Byte_hobbit((LPBYTE)0x004F5BB8, 0x00, 0x00);
 			}
-			else plusA_int_hobbit((LPBYTE)0x004F5BB8, 1); //функция изменения худа хп
+			else plusA_int_hobbit((LPBYTE)0x004F5BB8, 1); //С„СѓРЅРєС†РёСЏ РёР·РјРµРЅРµРЅРёСЏ С…СѓРґР° С…Рї
 		}
 		HUD_HP = read_int_value((LPBYTE)0x004F5BB8);
 		ImGui::Text((const char*)to_string(HUD_HP - 98615552).c_str());
 		ImGui::Unindent();
 
 	}
-	if (ImGui::CollapsingHeader(lang ? "Compicated options" : (const char*)u8"Сложные опции"))
+	if (ImGui::CollapsingHeader(lang ? "Compicated options" : (const char*)u8"РЎР»РѕР¶РЅС‹Рµ РѕРїС†РёРё"))
 	{
 		ImGui::Indent();
-		ImGui::Text(lang ? "Effect change time" : (const char*)u8"Время смены эффектов");
+		ImGui::Text(lang ? "Effect change time" : (const char*)u8"Р’СЂРµРјСЏ СЃРјРµРЅС‹ СЌС„С„РµРєС‚РѕРІ");
 		ImGui::InputFloat(" ", &vremaeffectof, 10);
 		if (vremaeffectof < 0.0f) {
 			vremaeffectof = 0.0f;
 		}
-		if (ImGui::Checkbox(lang ? "Random mod" : (const char*)u8"Рандом мод", &randommod)) {
+		if (ImGui::Checkbox(lang ? "Random mod" : (const char*)u8"Р Р°РЅРґРѕРј РјРѕРґ", &randommod)) {
 		}
-		if (ImGui::Checkbox(lang ? "PickupAll mod" : (const char*)u8"Все поднять мод", &pickupall)) {
+		if (ImGui::Checkbox(lang ? "PickupAll mod" : (const char*)u8"Р’СЃРµ РїРѕРґРЅСЏС‚СЊ РјРѕРґ", &pickupall)) {
 		}
 		ImGui::Unindent();
 	}
-	if (ImGui::CollapsingHeader(lang ? "Skinchanger" : (const char*)u8"Скинчейнджер"))
+	if (ImGui::CollapsingHeader(lang ? "Skinchanger" : (const char*)u8"РЎРєРёРЅС‡РµР№РЅРґР¶РµСЂ"))
 	{
 		ImGui::Text(lang ? "Restart the level/Load save after skin selection" :
-			(const char*)u8"Перезагрузите уровень или загрузите сохранение после установки скина");
+			(const char*)u8"РџРµСЂРµР·Р°РіСЂСѓР·РёС‚Рµ СѓСЂРѕРІРµРЅСЊ РёР»Рё Р·Р°РіСЂСѓР·РёС‚Рµ СЃРѕС…СЂР°РЅРµРЅРёРµ РїРѕСЃР»Рµ СѓСЃС‚Р°РЅРѕРІРєРё СЃРєРёРЅР°");
 		ImGui::Text("");
 
 		displaySkinButtons(lang);
@@ -1161,7 +1161,7 @@ void gui::Render() noexcept
 	//change_float_hobbit((LPVOID)0x0F96D9D0, save_float_hobbit((LPVOID)0x0F9685E8));
 	//change_float_hobbit((LPVOID)0x0F96D9D8, save_float_hobbit((LPVOID)0x0F9685F4));
 
-	ImGui::Text(lang ? "Our links" : (const char*)u8"Наши ссылки");
+	ImGui::Text(lang ? "Our links" : (const char*)u8"РќР°С€Рё СЃСЃС‹Р»РєРё");
 	ImGui::Separator();
 
 	if (ImGui::Button("king174rus")) {
@@ -1172,7 +1172,7 @@ void gui::Render() noexcept
 		ShellExecute(NULL, L"open", L"https://youtube.com/c/@YKliffa", 0, 0, SW_SHOWNORMAL);
 	}
 	ImGui::SameLine(); ImGui::Text(" "); ImGui::SameLine();
-	if (ImGui::Button(lang ? "Hobbit Technical Discord" : (const char*)u8"Технический канал Хоббита в Дискорде")) {
+	if (ImGui::Button(lang ? "Hobbit Technical Discord" : (const char*)u8"РўРµС…РЅРёС‡РµСЃРєРёР№ РєР°РЅР°Р» РҐРѕР±Р±РёС‚Р° РІ Р”РёСЃРєРѕСЂРґРµ")) {
 		ShellExecute(NULL, L"open", L"https://discord.gg/hvzB3maxQ3", 0, 0, SW_SHOWNORMAL);
 	}
 

@@ -1,4 +1,4 @@
-#include "MemoryAccess.h"
+﻿#include "MemoryAccess.h"
 #include "byte_functions.h"
 std::mutex MemoryAccess::guardWriteData;
 std::mutex MemoryAccess::guardProcess;
