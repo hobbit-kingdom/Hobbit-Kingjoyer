@@ -600,8 +600,10 @@ void gui::Render() noexcept
 		ImGui::Separator();
 
 		if (ImGui::Checkbox(lang ? "Full stamina" : (const char*)u8"Бесконечная выносливость", &stamina)) {
-			savedPoint.ukazatel_stamina = ukazatel_hobbit((LPDWORD)0x0075BA3C);
-			ukazatel_stamina = savedPoint.ukazatel_stamina; //функция беконечной стамины
+			//savedPoint.ukazatel_stamina = ukazatel_hobbit((LPDWORD)0x0075BA3C);
+			//ukazatel_stamina = savedPoint.ukazatel_stamina; //функция беконечной стамины
+			change_4Byte_hobbit((LPDWORD)0x0043D8E9, 0x90909090, 0x0A049E89);
+			change_2Byte_hobbit((LPDWORD)0x0043D8ED, 0x9090, 0x0000); //тут просто надо 6 байтов обнулять, по-этому тут 2 функции
 		}
 		if (ImGui::Checkbox(lang ? "Full chest time" : (const char*)u8"Бесконечный таймер сундука", &chesttimer)) {
 
@@ -609,6 +611,7 @@ void gui::Render() noexcept
 			change_2Byte_hobbit((LPDWORD)0x005299ED, 0x9090, 0x006E); //тут просто надо 6 байтов обнулять, по-этому тут 2 функции
 		}
 		if (ImGui::Checkbox(lang ? "Full stones" : (const char*)u8"Бесконечные камни", &stones)) { //бесконечные камни
+			change_4Byte_hobbit((LPDWORD)0x00434DDB, 0x90909090, 0x082464D8);
 		}
 		if (ImGui::Checkbox(lang ? "Invulnerability" : (const char*)u8"Бессмертие", &invulBilbo)) {
 			change_1Byte_hobbit((LPVOID)0x0075FBF4, 0x01, 0x00); //функция бессмертия
@@ -1172,8 +1175,6 @@ void gui::Render() noexcept
 		}
 		else timer_animation += ImGui::GetIO().DeltaTime;
 	}
-	if (stones == true)
-		change_float_hobbit((LPVOID)0x0075BDB4, 10);
 
 	ImGui::Text("");
 	ImGui::Text("");
