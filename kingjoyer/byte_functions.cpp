@@ -13,7 +13,7 @@ HANDLE read_process_hobbit()
 	pe32.dwSize = sizeof(PROCESSENTRY32);
 	if (Process32First(snapshot, &pe32)) {
 		while (Process32Next(snapshot, &pe32)) { //ищет айди процесса
-			if (strcmp(pe32.szExeFile, "Meridian.exe") == 0) {
+			if (_wcsicmp(pe32.szExeFile, L"Meridian.exe") == 0) {
 				pid = pe32.th32ProcessID; //переменная айди процесса
 				break;
 			}
@@ -24,6 +24,44 @@ HANDLE read_process_hobbit()
 	HANDLE Process = OpenProcess(Prava, FALSE, pid); //числовое значение - это айди процесса в диспетчере задач
 	return Process;
 }
+
+DWORD GetProcessID(const wchar_t* processName) {
+	DWORD processID = 0;
+	HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+	PROCESSENTRY32 processEntry;
+	processEntry.dwSize = sizeof(PROCESSENTRY32);
+
+	if (Process32First(snapshot, &processEntry)) {
+		do {
+			if (!_wcsicmp(processEntry.szExeFile, processName)) {
+				processID = processEntry.th32ProcessID;
+				break;
+			}
+		} while (Process32Next(snapshot, &processEntry));
+	}
+	CloseHandle(snapshot);
+	return processID;
+}
+
+uintptr_t GetModuleBaseAddress(DWORD pid, const wchar_t* moduleName) {
+	uintptr_t baseAddress = 0;
+	HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid);
+	if (hSnapshot != INVALID_HANDLE_VALUE) {
+		MODULEENTRY32 moduleEntry;
+		moduleEntry.dwSize = sizeof(moduleEntry);
+		if (Module32First(hSnapshot, &moduleEntry)) {
+			do {
+				if (_wcsicmp(moduleEntry.szModule, moduleName) == 0) {
+					baseAddress = (uintptr_t)moduleEntry.modBaseAddr;
+					break;
+				}
+			} while (Module32Next(hSnapshot, &moduleEntry));
+		}
+		CloseHandle(hSnapshot);
+	}
+	return baseAddress;
+}
+
 LPDWORD ukazatel_hobbit(LPVOID Address) {
 	HANDLE Process;
 	Process = read_process_hobbit();
@@ -204,4 +242,22 @@ int read_int_value(LPVOID Address)
 		return 1.0;
 	}
 	return value;
+}
+
+int save_1Byte_hobbit(LPVOID Address, BYTE Znachenie)
+{
+	HANDLE Process;
+	Process = read_process_hobbit();
+	BYTE value;  //переменная значения байта по адресу
+	if (!ReadProcessMemory(Process, Address, &value, sizeof(value), NULL)) { //Чтение значения байта
+		CloseHandle(Process);
+		return 1;
+	}
+	DWORD oldProtect;
+
+	SIZE_T dwSize = sizeof(Znachenie);
+	VirtualProtectEx(Process, Address, dwSize, PAGE_EXECUTE_READWRITE, &oldProtect);
+	BOOL bWriteSuccess = WriteProcessMemory(Process, Address, &Znachenie, dwSize, NULL);
+	VirtualProtectEx(Process, Address, dwSize, oldProtect, &oldProtect);
+	if (bWriteSuccess) return 0;
 }

@@ -384,6 +384,9 @@ LPDWORD ukazatel_stamina;
 LPDWORD ukazatel_animation;
 LPDWORD ukazatel_chesttime;
 
+LPBYTE currentLevel = (LPBYTE)(GetModuleBaseAddress(GetProcessID(L"Meridian.exe"), L"Meridian.exe") + 0x362B5C);
+
+
 bool debug = false;
 int lang = 0; // 0 - RUS , 1 - ENG
 
@@ -575,6 +578,22 @@ void gui::Render() noexcept
 		ImGui::Text("X: %g", savedPoint.x); ImGui::SameLine();
 		ImGui::Text("Y: %g", savedPoint.y); ImGui::SameLine();
 		ImGui::Text("Z: %g", savedPoint.z);
+
+		ImGui::Text("");
+
+		ImGui::Text(lang ? "Next level" : (const char*)u8"Cледующий уровень");
+		ImGui::Separator();
+
+		static int nextLevel = read_int_value(currentLevel) + 1;
+
+		ImGui::PushItemWidth(100);
+		ImGui::InputInt("", &nextLevel, 1);
+		ImGui::PopItemWidth();
+
+		if (ImGui::Button(lang ? "Set next level" : (const char*)u8"Установить следующий уровень")) {
+			save_1Byte_hobbit(currentLevel, nextLevel - 1);
+		}
+
 
 		ImGui::Text("");
 		ImGui::Text(lang ? "Cheats" : (const char*)u8"Читы");
