@@ -365,6 +365,9 @@ bool finish_demo = false;
 bool slide = false;
 bool lock_animation = false;
 bool chesttimer = false;
+bool instantChest = false;
+
+
 float chesttimer2 = false;
 struct Point {
 	float x = 0;
@@ -431,6 +434,14 @@ float timer = 0;
 float vremaeffectof = 10;
 
 int HUD_HP = 98615574 - 22 + 6;
+
+
+int ringRed = 0x80;
+int ringBlue = 0x18;
+int ringGreen = 0x18;
+
+ImVec4 color = ImVec4(ringRed/255.0f, ringGreen / 255.0f, ringBlue / 255.0f, 1.0f);
+
 
 void gui::Render() noexcept
 {
@@ -595,6 +606,8 @@ void gui::Render() noexcept
 		}
 
 
+
+
 		ImGui::Text("");
 		ImGui::Text(lang ? "Cheats" : (const char*)u8"Читы");
 		ImGui::Separator();
@@ -609,6 +622,9 @@ void gui::Render() noexcept
 
 			change_4Byte_hobbit((LPDWORD)0x005299E9, 0x90909090, 0xFA5025D8);
 			change_2Byte_hobbit((LPDWORD)0x005299ED, 0x9090, 0x006E); //тут просто надо 6 байтов обнулять, по-этому тут 2 функции
+		}
+		if (ImGui::Checkbox(lang ? "Instant opening of chests" : (const char*)u8"Моментальное открытие сундуков", &instantChest)) {
+			change_1Byte_hobbit((LPVOID)0x00529A22, 0x75, 0x74); //функция моментального открытия сундуков
 		}
 		if (ImGui::Checkbox(lang ? "Full stones" : (const char*)u8"Бесконечные камни", &stones)) { //бесконечные камни
 			change_4Byte_hobbit((LPDWORD)0x00434DDB, 0x90909090, 0x082464D8);
@@ -1131,9 +1147,32 @@ void gui::Render() noexcept
 		}
 		HUD_HP = read_int_value((LPBYTE)0x004F5BB8);
 		ImGui::Text((const char*)to_string(HUD_HP - 98615552).c_str());
+
 		ImGui::Unindent();
 
 	}
+	if (ImGui::CollapsingHeader(lang ? "Ring settings" : (const char*)u8"Настройки кольца"))
+	{
+		ImGui::Indent();
+		ImGui::ColorPicker4("Color Picker", (float*)&color, ImGuiColorEditFlags_PickerHueWheel);
+
+
+		ringRed = static_cast<int>(round(color.x * 255));
+		ringGreen = static_cast<int>(round(color.y * 255));
+		ringBlue = static_cast<int>(round(color.z * 255));
+
+		if (ImGui::Button(lang ? "Change the color of the ring" : (const char*)u8"Изменить цвет кольца")) {
+			change_1Byte_hobbit((LPBYTE)0x0041B031, ringRed, ringRed); //функция изменения цвета кольца
+			change_1Byte_hobbit((LPBYTE)0x0041B018, ringGreen, ringGreen);
+			change_4Byte_hobbit((LPDWORD)0x0041B032, 0x102444C6, 0x102444C6);
+			change_1Byte_hobbit((LPBYTE)0x0041B036, ringBlue, ringBlue); //Ебучий сдвиг и надеюсь, что отсуствие jmp не влияет
+			change_4Byte_hobbit((LPDWORD)0x0041B037, 0x142444C7, 0x142444C7);
+			change_4Byte_hobbit((LPDWORD)0x0041B03B, 0x3F800000, 0x3F800000);
+			change_4Byte_hobbit((LPDWORD)0x0041B03E, 0x5C8A903F, 0x5C8A903F);
+		}
+		ImGui::Unindent();
+	}
+
 	if (ImGui::CollapsingHeader(lang ? "Compicated options" : (const char*)u8"Сложные опции"))
 	{
 		ImGui::Indent();
