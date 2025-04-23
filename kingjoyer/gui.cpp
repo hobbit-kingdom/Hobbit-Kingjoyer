@@ -440,7 +440,7 @@ int ringRed = 0x80;
 int ringBlue = 0x18;
 int ringGreen = 0x18;
 
-ImVec4 color = ImVec4(ringRed/255.0f, ringGreen / 255.0f, ringBlue / 255.0f, 1.0f);
+ImVec4 color = ImVec4(ringRed / 255.0f, ringGreen / 255.0f, ringBlue / 255.0f, 1.0f);
 
 
 void gui::Render() noexcept
@@ -611,6 +611,11 @@ void gui::Render() noexcept
 		ImGui::Text("");
 		ImGui::Text(lang ? "Cheats" : (const char*)u8"Читы");
 		ImGui::Separator();
+
+		if (ImGui::Button(lang ? "Ressurect" : (const char*)u8"Воскреснуть")) {
+			LPDWORD ressurect = ukazatel_hobbit((LPDWORD)0x0075BA3C) + 441;
+			change_1Byte_hobbit(ressurect, 0x0, 0x1);
+		}
 
 		if (ImGui::Checkbox(lang ? "Full stamina" : (const char*)u8"Бесконечная выносливость", &stamina)) {
 			//savedPoint.ukazatel_stamina = ukazatel_hobbit((LPDWORD)0x0075BA3C);
