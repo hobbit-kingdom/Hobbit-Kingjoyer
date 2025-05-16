@@ -1200,7 +1200,7 @@ void gui::Render() noexcept
 		tempValue = std::clamp(tempValue, 0, 255); // Ограничение перед записью
 		alphaNaVhod = static_cast<int8_t>(tempValue); // Приведение обратно к int8_t
 		if (ImGui::Button(lang ? "Apply Bilbo's transparency to the input" : (const char*)u8"Применить прозрачность Бильбо на входе")) {
-			change_1Byte_hobbit((LPBYTE)0x00423CDC, alphaNaVhod, alphaNaVhod);
+			change_1Byte_hobbit((LPBYTE)0x00423D06, alphaNaVhod, alphaNaVhod);
 		}
 
 		static uint8_t alphaNaVihod = 255;
@@ -1210,7 +1210,7 @@ void gui::Render() noexcept
 		tempValue = std::clamp(tempValue, 0, 255); // Ограничение перед записью
 		alphaNaVihod = static_cast<int8_t>(tempValue); // Приведение обратно к int8_t
 		if (ImGui::Button(lang ? "Apply Bilbo's transparency to the output" : (const char*)u8"Применить прозрачность Бильбо на выходе")) {
-			change_1Byte_hobbit((LPBYTE)0x00423D06, alphaNaVihod, alphaNaVihod);
+			change_1Byte_hobbit((LPBYTE)0x00423CDC, alphaNaVihod, alphaNaVihod);
 		}
 
 		static uint8_t tuman = 69;
