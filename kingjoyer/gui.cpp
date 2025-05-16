@@ -366,7 +366,9 @@ bool slide = false;
 bool lock_animation = false;
 bool chesttimer = false;
 bool instantChest = false;
-
+bool blackScreenVhod = true;
+bool blackScreenVihod = true;
+bool plavPerehod = true;
 
 float chesttimer2 = false;
 struct Point {
@@ -1167,13 +1169,58 @@ void gui::Render() noexcept
 		ringBlue = static_cast<int>(round(color.z * 255));
 
 		if (ImGui::Button(lang ? "Change the color of the ring" : (const char*)u8"Изменить цвет кольца")) {
-			change_1Byte_hobbit((LPBYTE)0x0041B031, ringRed, ringRed); //функция изменения цвета кольца
 			change_1Byte_hobbit((LPBYTE)0x0041B018, ringGreen, ringGreen);
-			change_4Byte_hobbit((LPDWORD)0x0041B032, 0x102444C6, 0x102444C6);
-			change_1Byte_hobbit((LPBYTE)0x0041B036, ringBlue, ringBlue); //Ебучий сдвиг и надеюсь, что отсуствие jmp не влияет
-			change_4Byte_hobbit((LPDWORD)0x0041B037, 0x142444C7, 0x142444C7);
-			change_4Byte_hobbit((LPDWORD)0x0041B03B, 0x3F800000, 0x3F800000);
-			change_4Byte_hobbit((LPDWORD)0x0041B03E, 0x5C8A903F, 0x5C8A903F);
+			change_4Byte_hobbit((LPDWORD)0x0041B019, 0xC747FF31, 0xC747FF31);
+			change_4Byte_hobbit((LPDWORD)0x0041B01D, 0x005EF086, 0x005EF086);
+			change_4Byte_hobbit((LPDWORD)0x0041B021, 0x00000000, 0x00000000);
+			change_4Byte_hobbit((LPDWORD)0x0041B025, 0x2444C600, 0x2444C600);
+			change_4Byte_hobbit((LPDWORD)0x0041B029, 0x44C6FF13, 0x44C6FF13);
+			change_2Byte_hobbit((LPWORD)0x0041B02D, 0x1224, 0x1224);
+			change_1Byte_hobbit((LPBYTE)0x0041B02F, ringRed, ringRed); //функция изменения цвета кольца
+			change_4Byte_hobbit((LPDWORD)0x0041B030, 0x102444C6, 0x102444C6);
+			change_1Byte_hobbit((LPBYTE)0x0041B034, ringBlue, ringBlue);
+			change_4Byte_hobbit((LPDWORD)0x0041B035, 0x142444C7, 0x142444C7);
+			change_4Byte_hobbit((LPDWORD)0x0041B039, 0x3F800000, 0x3F800000);
+			change_1Byte_hobbit((LPBYTE)0x0041B03D, 0x90, 0x90);
+		}
+		if (ImGui::Checkbox(lang ? "Black screen when entering invis" : (const char*)u8"Черный экран при входе в инвиз", &blackScreenVhod)) {
+			change_1Byte_hobbit((LPVOID)0x00423D6A, 0x00, 0x01); //функция рендера волумов
+		}
+		if (ImGui::Checkbox(lang ? "Black screen when exiting invis" : (const char*)u8"Черный экран при выходе из инвиза", &blackScreenVihod)) {
+			change_1Byte_hobbit((LPVOID)0x00423D31, 0x00, 0x01); //функция рендера волумов
+		}
+		if (ImGui::Checkbox(lang ? "Smooth transition of transparency" : (const char*)u8"Плавный переход прозрачности", &plavPerehod)) {
+			change_1Byte_hobbit((LPVOID)0x00423CD9, 0x00, 0x01); //функция рендера волумов
+		}
+
+		static uint8_t alphaNaVhod = 128;
+		int tempValue = alphaNaVhod; // Временная переменная типа int (так как InputInt работает с int)
+		ImGui::Text(lang ? "Bilbo's transparency to the input" : (const char*)u8"Прозрачность Бильбо на входе");
+		ImGui::InputInt("##MyAlphaNaVhod", &tempValue, 1, 100, ImGuiInputTextFlags_CharsDecimal);
+		tempValue = std::clamp(tempValue, 0, 255); // Ограничение перед записью
+		alphaNaVhod = static_cast<int8_t>(tempValue); // Приведение обратно к int8_t
+		if (ImGui::Button(lang ? "Apply Bilbo's transparency to the input" : (const char*)u8"Применить прозрачность Бильбо на входе")) {
+			change_1Byte_hobbit((LPBYTE)0x00423CDC, alphaNaVhod, alphaNaVhod);
+		}
+
+		static uint8_t alphaNaVihod = 255;
+		tempValue = alphaNaVihod; // Временная переменная типа int (так как InputInt работает с int)
+		ImGui::Text(lang ? "Bilbo's transparency to the output" : (const char*)u8"Прозрачность Бильбо на выходе");
+		ImGui::InputInt("##MyAlphaNaVihod", &tempValue, 1, 100, ImGuiInputTextFlags_CharsDecimal);
+		tempValue = std::clamp(tempValue, 0, 255); // Ограничение перед записью
+		alphaNaVihod = static_cast<int8_t>(tempValue); // Приведение обратно к int8_t
+		if (ImGui::Button(lang ? "Apply Bilbo's transparency to the output" : (const char*)u8"Применить прозрачность Бильбо на выходе")) {
+			change_1Byte_hobbit((LPBYTE)0x00423D06, alphaNaVihod, alphaNaVihod);
+		}
+
+		static uint8_t tuman = 69;
+		tempValue = tuman; // Временная переменная типа int (так как InputInt работает с int)
+		ImGui::Text(lang ? "Fog" : (const char*)u8"Туман");
+		ImGui::InputInt("##Tuman", &tempValue, 1, 100, ImGuiInputTextFlags_CharsDecimal);
+		tempValue = std::clamp(tempValue, 65, 75); // Ограничение перед записью
+		tuman = static_cast<int8_t>(tempValue); // Приведение обратно к int8_t
+		if (ImGui::Button(lang ? "Apply fog" : (const char*)u8"Применить туман")) {
+			change_1Byte_hobbit((LPBYTE)0x00777B6F, tuman, tuman);
 		}
 		ImGui::Unindent();
 	}
