@@ -450,7 +450,7 @@ void gui::Render() noexcept
 	ImGui::SetNextWindowPos({ 0, 0 });
 	ImGui::SetNextWindowSize({ WIDTH, HEIGHT });
 	ImGui::Begin(
-		"The KingJoyer v1.2 by king174rus and Mr_Kliff",
+		"The KingJoyer v1.3 by king174rus and Mr_Kliff",
 		&isRunning,
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoSavedSettings |
