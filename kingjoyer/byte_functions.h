@@ -10,6 +10,7 @@
 int change_1Byte_hobbit(LPVOID Address, BYTE Znachenie, BYTE Iznachalnoe) noexcept;
 int save_1Byte_hobbit(LPVOID Address, BYTE Znachenie) noexcept;
 int change_2Byte_hobbit(LPVOID Address, WORD Znachenie, WORD Iznachalnoe) noexcept;
+int save_2Byte_hobbit(LPVOID Address, WORD Znachenie) noexcept;
 int change_4Byte_hobbit(LPVOID Address, DWORD Znachenie, DWORD Iznachalnoe) noexcept;
 int plusA_int_hobbit(LPVOID Address, int a) noexcept;
 int read_int_value(LPVOID Address) noexcept;

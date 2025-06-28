@@ -607,7 +607,17 @@ void gui::Render() noexcept
 			save_1Byte_hobbit(currentLevel, nextLevel - 1);
 		}
 
+		ImGui::Text("");
+		ImGui::Text(lang ? "Fake Bilbo Damage" : (const char*)u8"Урон фейк Бильбо");
+		ImGui::Separator();
 
+		ImGui::Text(lang ? "Damage" : (const char*)u8"Урон");
+		static int damage = 5000;
+		ImGui::InputInt("Damage:", &damage, 100);
+
+		if (ImGui::Button(lang ? "Apply damage" : (const char*)u8"Применить урон")) {
+			save_2Byte_hobbit((LPVOID)0x00572D8E, damage); //функция изменения скорости Бильбо
+		}
 
 
 		ImGui::Text("");
