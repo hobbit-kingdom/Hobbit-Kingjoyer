@@ -250,17 +250,59 @@ void gui::EndRender() noexcept
 	if (result == D3DERR_DEVICELOST && device->TestCooperativeLevel() == D3DERR_DEVICENOTRESET)
 		ResetDevice();
 }
-
+static int selected_item = 1;
 namespace fs = std::filesystem;
+bool copyAndRenameFile(const string& sourceFile, const std::string& xbmpfile) {
+		try {
+			fs::path sourcePath = "./WEAPONS/" + sourceFile;
+			fs::path xbmpPath = "./WEAPONS/" + xbmpfile;
+			fs::path destDir = "./Common/Props/";
+
+			if (!fs::exists(sourcePath) or !fs::exists(xbmpPath)) {
+				std::cerr << "Source file does not exist: " << sourcePath << std::endl;
+				return false;
+			}
+
+			std::string fileExtension = sourcePath.extension().string();
+			std::string xbmpExtension = xbmpPath.extension().string();
+			fs::path destFilePath = destDir / ("STAFF" + fileExtension);
+			if (selected_item == 2) fs::path destFilePath = destDir / ("STING" + fileExtension);
+			else if (selected_item == 3) fs::path destFilePath = destDir / ("THROWINGSTONE" + fileExtension);
+
+			fs::path destXbmpPath = destDir / ("STAFF[D]" + xbmpExtension);
+			if (selected_item == 2) fs::path destFilePath = destDir / ("STING[D]" + xbmpExtension);
+			else if (selected_item == 3) fs::path destFilePath = destDir / ("THROWSTONE[D]" + xbmpExtension);
+
+			fs::create_directories(destDir);
+
+			if (fs::exists(destFilePath)) {
+				fs::remove(destFilePath);
+				std::cout << "Existing file deleted: " << destFilePath << std::endl;
+			}
+			if (fs::exists(destXbmpPath)) {
+				fs::remove(destXbmpPath);
+				std::cout << "Existing file deleted: " << destXbmpPath << std::endl;
+			}
+
+			fs::copy_file(sourcePath, destFilePath, fs::copy_options::overwrite_existing);
+			fs::copy_file(xbmpPath, destXbmpPath, fs::copy_options::overwrite_existing);
+			std::cout << "File copied and renamed to: " << destFilePath << std::endl;
+			return true;
+		}
+		catch (const fs::filesystem_error& e) {
+			std::cerr << "Filesystem error: " << e.what() << std::endl;
+			return false;
+		}
+	}
 bool copyAndRenameFile(const std::string& sourceFile) {
 	try {
 		fs::path sourcePath = "./SKINS/" + sourceFile;
 		fs::path destDir = "./Common/Bilbo/";
 
 		if (!fs::exists(sourcePath)) {
-			std::cerr << "Source file does not exist: " << sourcePath << std::endl;
-			return false;
-		}
+				std::cerr << "Source file does not exist: " << sourcePath << std::endl;
+				return false;
+			}
 
 		std::string fileExtension = sourcePath.extension().string();
 		fs::path destFilePath = destDir / ("BILBO[D]" + fileExtension);
@@ -275,43 +317,88 @@ bool copyAndRenameFile(const std::string& sourceFile) {
 		fs::copy_file(sourcePath, destFilePath, fs::copy_options::overwrite_existing);
 		std::cout << "File copied and renamed to: " << destFilePath << std::endl;
 		return true;
+		}
+		catch (const fs::filesystem_error& e) {
+			std::cerr << "Filesystem error: " << e.what() << std::endl;
+			return false;
+		}
 	}
-	catch (const fs::filesystem_error& e) {
-		std::cerr << "Filesystem error: " << e.what() << std::endl;
-		return false;
-	}
-}
 
-void displaySkinButtons(bool lang)
+void displaySkinButtons(bool lang, string name)
 {
-	fs::path skinsDir = "./SKINS";
-
-	if (!fs::exists(skinsDir)) {
-		ImGui::Text(lang ? "SKINS directory does not exist." : (const char*)u8"папка SKINS не найдена");
-		return;
-	}
-
-	if (fs::is_empty(skinsDir)) {
-		ImGui::Text(lang ? "SKINS directory is empty." : (const char*)u8"папка SKINS пуста.");
-		return;
-	}
-
-	for (const auto& entry : fs::directory_iterator(skinsDir))
+	if (name == "skin")
 	{
-		if (entry.is_regular_file())
+		fs::path skinsDir = "./SKINS";
+
+		if (!fs::exists(skinsDir)) {
+			ImGui::Text(lang ? "SKINS directory does not exist." : (const char*)u8"папка SKINS не найдена");
+			return;
+		}
+
+		if (fs::is_empty(skinsDir)) {
+			ImGui::Text(lang ? "SKINS directory is empty." : (const char*)u8"папка SKINS пуста.");
+			return;
+		}
+
+		for (const auto& entry : fs::directory_iterator(skinsDir))
 		{
-			fs::path filePath = entry.path();
-
-			if (filePath.extension() == ".xbmp" || filePath.extension() == ".XBMP")
+			if (entry.is_regular_file())
 			{
-				std::string fileName = filePath.stem().string();
+				fs::path filePath = entry.path();
 
-				ImGui::Text("%s", fileName.c_str());
-				ImGui::SameLine();
+				if (filePath.extension() == ".xbmp" || filePath.extension() == ".XBMP")
+				{
+					std::string fileName = filePath.stem().string();
 
-				if (ImGui::Button((lang ? "Apply##" : (const char*)u8"Принять##" + fileName).c_str()))
-					copyAndRenameFile(filePath.filename().string());
+					ImGui::Text("%s", fileName.c_str());
+					ImGui::SameLine();
 
+					if (ImGui::Button((lang ? "Apply##" : (const char*)u8"Принять##" + fileName).c_str()))
+						copyAndRenameFile(filePath.filename().string());
+
+				}
+			}
+		}
+	}
+	else if (name == "weapon")
+	{
+		fs::path skinsDir = "./WEAPONS";
+
+		if (!fs::exists(skinsDir)) {
+			ImGui::Text(lang ? "WEAPONS directory does not exist." : (const char*)u8"папка WEAPONS не найдена");
+			return;
+		}
+
+		if (fs::is_empty(skinsDir)) {
+			ImGui::Text(lang ? "WEAPONS directory is empty." : (const char*)u8"папка WEAPONS пуста.");
+			return;
+		}
+
+		for (const auto& entry : fs::directory_iterator(skinsDir))
+		{
+			if (entry.is_regular_file())
+			{
+				fs::path filePath = entry.path();
+
+				if (filePath.extension() == ".xbmp" || filePath.extension() == ".XBMP")
+				{
+					std::string fileName = filePath.stem().string();
+					fs::path filePath1 = filePath.replace_extension(".rgeom");
+					fs::path filePath2 = filePath.replace_extension(".RGEOM");
+
+					ImGui::Text("%s", fileName.c_str());
+					ImGui::SameLine();
+
+					if (filesystem::exists(filePath1) || filesystem::exists(filePath2))
+					{
+						if (ImGui::Button((lang ? "Apply##" : (const char*)u8"Принять##" + fileName).c_str()))
+						{
+							filesystem::path sourceFile = filesystem::exists(filePath1) ? filePath1 : filePath2; //модель
+							copyAndRenameFile(sourceFile.string(), filePath.filename().string());
+						}
+					}
+					else ImGui::Text(lang ? "wdeas" : (const char*)u8"Нет файла формата .rgeom");
+				}
 			}
 		}
 	}
@@ -1255,9 +1342,22 @@ void gui::Render() noexcept
 			(const char*)u8"Перезагрузите уровень или загрузите сохранение после установки скина");
 		ImGui::Text("");
 
-		displaySkinButtons(lang);
+		displaySkinButtons(lang, "skin");
 	}
+	if (ImGui::CollapsingHeader(lang ? "Weaponchanger" : (const char*)u8"Випончейнджер"))
+	{
+		ImGui::Text(lang ? "Restart the level/Load save after weapon selection" :
+			(const char*)u8"Перезагрузите уровень или загрузите сохранение после установки оружия");
+		ImGui::Text("");
 
+		ImGui::RadioButton(lang ? "Staff" : (const char*)u8"Посох", &selected_item, 1);
+		ImGui::SameLine();
+		ImGui::RadioButton(lang ? "Sting" : (const char*)u8"Меч", &selected_item, 2);
+		ImGui::SameLine();
+		ImGui::RadioButton(lang ? "Stone" : (const char*)u8"Камень", &selected_item, 3);
+
+		displaySkinButtons(lang, "weapon");
+	}
 	if (randommod == true) {
 		RandomMod(vremaeffectof);
 	}
