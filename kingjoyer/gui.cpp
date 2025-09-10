@@ -268,7 +268,7 @@ bool copyAndRenameFile(const string& sourceFile, const std::string& xbmpfile) {
 			fs::path destFilePath = destDir / ("STAFF" + fileExtension);
 			if (selected_item == 2) fs::path destFilePath = destDir / ("STING" + fileExtension);
 			else if (selected_item == 3) fs::path destFilePath = destDir / ("THROWINGSTONE" + fileExtension);
-
+			ImGui::Text(to_string(selected_item).c_str());
 			fs::path destXbmpPath = destDir / ("STAFF[D]" + xbmpExtension);
 			if (selected_item == 2) fs::path destFilePath = destDir / ("STING[D]" + xbmpExtension);
 			else if (selected_item == 3) fs::path destFilePath = destDir / ("THROWSTONE[D]" + xbmpExtension);
