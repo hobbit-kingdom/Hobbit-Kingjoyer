@@ -60,6 +60,18 @@
     <ClInclude Include="kingjoyer\MemoryAccess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="kingjoyer\CanKillAll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="kingjoyer\HobbitProcessAnalyzer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="kingjoyer\ProcessAnalyzer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="kingjoyer\ProcessAnalyzerTypeWrapped.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp">
@@ -102,6 +114,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="kingjoyer\MemoryAccess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="kingjoyer\CanKillAll.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

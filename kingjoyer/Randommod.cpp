@@ -21,35 +21,35 @@ void RandomMod(float vremaeffectof)
 {
 	if (vkl == false or timer2 >= vremaeffectof) 
 	{
-		if (random_number == 0) change_1Byte_hobbit((LPVOID)0x00777AA0, 0x01, 0x00);  //невидимый Ѕильбо
-		else if (random_number == 1) change_2Byte_hobbit((LPVOID)0x0075B852, 0x42C8, 0x4396); //медленный Ѕильбо
-		else if (random_number == 2) change_4Byte_hobbit((LPVOID)0x0075B850, 0x453B8000, 0x43960000); //быстрый Ѕильбо
-		else if (random_number == 3) change_4Byte_hobbit((LPVOID)0x0075B850, 0x461C4000, 0x43960000); //—упербыстрый Ѕильбо
+		if (random_number == 0) change_value_hobbit<BYTE>((LPVOID)0x00777AA0, 0x01, 0x00);  //невидимый Ѕильбо
+		else if (random_number == 1) change_value_hobbit<WORD>((LPVOID)0x0075B852, 0x42C8, 0x4396); //медленный Ѕильбо
+		else if (random_number == 2) change_value_hobbit<DWORD>((LPVOID)0x0075B850, 0x453B8000, 0x43960000); //быстрый Ѕильбо
+		else if (random_number == 3) change_value_hobbit<DWORD>((LPVOID)0x0075B850, 0x461C4000, 0x43960000); //—упербыстрый Ѕильбо
 		else if (random_number == 4)
 		{
-			change_1Byte_hobbit((LPVOID)0x00777A8C, 0x01, 0x00); //рендер объектов
-			change_1Byte_hobbit((LPVOID)0x00777A98, 0x01, 0x00); //рендер ландшафта
+			change_value_hobbit<BYTE>((LPVOID)0x00777A8C, 0x01, 0x00); //рендер объектов
+			change_value_hobbit<BYTE>((LPVOID)0x00777A98, 0x01, 0x00); //рендер ландшафта
 		}
-		else if (random_number == 5) change_4Byte_hobbit((LPVOID)0x0075B888, 0x447A0000, 0x453B8000); //высокий прыжок
-		else if (random_number == 6) change_4Byte_hobbit((LPVOID)0x0075B888, 0x42C80000, 0x453B8000); //очень высокий прыжок
-		else if (random_number == 7) change_2Byte_hobbit((LPVOID)0x0077244A, 0x4080, 0x0000); //широкий Ѕильбо
-		else if (random_number == 8) change_1Byte_hobbit((LPVOID)0x0045CA39, 0xD4, 0xD8);//типо диабло
-		else if (random_number == 9) change_2Byte_hobbit((LPVOID)0x00772BF8, 0x0000, 0x4170); //видимость всех объектов через объекты
-		else if (random_number == 10) change_4Byte_hobbit((LPVOID)0x00772BF0, 0x40866666 ,0x3F99999A); //перевернута¤ камера
+		else if (random_number == 5) change_value_hobbit<DWORD>((LPVOID)0x0075B888, 0x447A0000, 0x453B8000); //высокий прыжок
+		else if (random_number == 6) change_value_hobbit<DWORD>((LPVOID)0x0075B888, 0x42C80000, 0x453B8000); //очень высокий прыжок
+		else if (random_number == 7) change_value_hobbit<WORD>((LPVOID)0x0077244A, 0x4080, 0x0000); //широкий Ѕильбо
+		else if (random_number == 8) change_value_hobbit<BYTE>((LPVOID)0x0045CA39, 0xD4, 0xD8);//типо диабло
+		else if (random_number == 9) change_value_hobbit<WORD>((LPVOID)0x00772BF8, 0x0000, 0x4170); //видимость всех объектов через объекты
+		else if (random_number == 10) change_value_hobbit<DWORD>((LPVOID)0x00772BF0, 0x40866666 ,0x3F99999A); //перевернута¤ камера
 		else if (random_number == 11)
 		{
-			change_4Byte_hobbit((LPVOID)0x00772A70, 0x3F800000, 0x42C80000);
-			change_4Byte_hobbit((LPVOID)0x00772B38, 0x3F800000, 0x42C80000);  //первое лицо
-			change_4Byte_hobbit((LPVOID)0x00772B3C, 0x3F800000, 0x43960000);
+			change_value_hobbit<DWORD>((LPVOID)0x00772A70, 0x3F800000, 0x42C80000);
+			change_value_hobbit<DWORD>((LPVOID)0x00772B38, 0x3F800000, 0x42C80000);  //первое лицо
+			change_value_hobbit<DWORD>((LPVOID)0x00772B3C, 0x3F800000, 0x43960000);
 		}
 		else if (random_number == 12)
 		{
-			change_4Byte_hobbit((LPVOID)0x00772A70, 0xC3960000, 0x42C80000);
-			change_4Byte_hobbit((LPVOID)0x00772B38, 0xC3960000, 0x42C80000);  //второе лицо
-			change_4Byte_hobbit((LPVOID)0x00772B3C, 0xC3960000, 0x43960000);
+			change_value_hobbit<DWORD>((LPVOID)0x00772A70, 0xC3960000, 0x42C80000);
+			change_value_hobbit<DWORD>((LPVOID)0x00772B38, 0xC3960000, 0x42C80000);  //второе лицо
+			change_value_hobbit<DWORD>((LPVOID)0x00772B3C, 0xC3960000, 0x43960000);
 		}
-		else if (random_number == 13) change_4Byte_hobbit((LPVOID)0x006E92E8, 0x3F8CCCCD, 0x3F800000); //большой Ѕильбо
-		else if (random_number == 14) change_4Byte_hobbit((LPVOID)0x006E92E8, 0x3F666666, 0x3F800000); //маленький Ѕильбо
+		else if (random_number == 13) change_value_hobbit<DWORD>((LPVOID)0x006E92E8, 0x3F8CCCCD, 0x3F800000); //большой Ѕильбо
+		else if (random_number == 14) change_value_hobbit<DWORD>((LPVOID)0x006E92E8, 0x3F666666, 0x3F800000); //маленький Ѕильбо
 		vkl = !vkl;
 	}
 	if (timer2 >= vremaeffectof) {
