@@ -32,8 +32,7 @@ If you prefer the Trainer to be injected in the game to use it **seamlessly**, u
   - **Skinchanger**: ability to change Bilbos Skin Texture and Props models/textures (Stick, Stone, Sword)
 
 # Video Showcase
-
-[![kinjoyer trainer v2](https://github.com/user-attachments/assets/96f4e212-3c03-4437-ae34-bad5065feaad)](https://www.youtube.com/watch?v=h9z-QWnbRCc)
+[<img width="50%" alt="banner 3" src="https://github.com/user-attachments/assets/96f4e212-3c03-4437-ae34-bad5065feaad" />](https://www.youtube.com/watch?v=h9z-QWnbRCc)
 
 # For Developers
 
